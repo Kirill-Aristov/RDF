@@ -490,12 +490,6 @@ input[type=number]::-webkit-inner-spin-button {
   border-bottom: 5px solid #2c3e50;
 }
 
-#block {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
 table {
   width: auto;
   margin: 20px;
@@ -537,26 +531,4 @@ td input {
   color: #fff;
   border-bottom: 2px solid #fff;
   border-right: 2px solid #fff;
-}
-
-.select {
-  margin: 0;
-  padding: 0;
-  background-color: #000000;
-  color: #FFFFFF;
-  font-size: 28px;
-  border-radius: 12px;
-  padding: 4px 8px;
-  display: inline-block;
-  cursor: pointer;
-}
-
-ul {
-  text-align: center;
-}
-
-li.active {
-  background-color: #A9A9A9;
-  border-radius: 12px;
-  padding: 4px 8px;
 }

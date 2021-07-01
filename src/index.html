@@ -12,8 +12,8 @@
 	<title>Document</title>
 </head>
 
-<body>
-	<div id="block">
+<body onload="createTable()">
+	<!-- <div id="block">
 		<table id="table">
 			<tr>
 				<th> Наименование ТКО </th>
@@ -60,7 +60,7 @@
 				<td><input id="plastic_A"
 						   type="number"></td>
 			</tr>
-			<!-- <tr>
+			<tr>
 				<td>стекло</td>
 				<td><input id="glass_number"
 						   type="number"></td>
@@ -68,8 +68,8 @@
 						   type="number"></td>
 				<td><input id="glass_A"
 						   type="number"></td>
-			</tr> -->
-			<!-- <tr>
+			</tr>
+			<tr>
 				<td>металл</td>
 				<td><input id="metal_number"
 						   type="number"></td>
@@ -95,7 +95,7 @@
 						   type="number"></td>
 				<td><input id="rubber_A"
 						   type="number"></td>
-			</tr> -->
+			</tr>
 			<tr>
 				<td>тестиль</td>
 				<td><input id="textile_number"
@@ -117,12 +117,10 @@
 		</table>
 		<button id="btn">Расчет</button>
 	</div>
-	<main>
-		<div class="main">
 
-		</div>
-	</main>
-	<!-- <select name="Select"
+
+
+	<select name="Select"
 			size="1"
 			id="list">
 		<option value="elections">Добавить</option>
@@ -135,10 +133,45 @@
 		<option value="rubber">резина</option>
 		<option value="textile">текстиль</option>
 		<option value="other">прочее</option>
-	</select> -->
+	</select>
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="js/app.js"></script>
+
+
+	<main>
+		<div class="main">
+
+		</div>
+	</main> -->
+	<select name="Select"
+			size="1"
+			id="list">
+		<option value="elections">Добавить</option>
+		<option value="food">пищевые отходы</option>
+		<option value="paper">бумага</option>
+		<option value="plastic">пластмасса</option>
+		<option value="glass">стекло</option>
+		<option value="metal">металл</option>
+		<option value="wood">дерево</option>
+		<option value="rubber">резина</option>
+		<option value="textile">текстиль</option>
+		<option value="other">прочее</option>
+	</select>
+
+
+
+	<div id="cont"></div> <!-- the container to add the TABLE -->
+
+	<p>
+		<button id="btn"
+				onclick="submit()">Расчет</button>
+	</p>
+
+	<p id='output'></p>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 
 </html>
