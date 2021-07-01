@@ -161,31 +161,41 @@ function createTable() {
 
 let select = document.querySelector("#list").addEventListener('change', function (e) {
 	let selectAnswer = e.target.value;
+	let selectId = "";
 	if (selectAnswer == "glass") {
-		selectAnswer = "стекло";
-		addRow(selectAnswer);
+		selectId = selectAnswer;
+		selectAnswer = "Стекло";
+		addRow(selectAnswer, selectId);
 	} else if (selectAnswer == "food") {
+		selectId = selectAnswer;
 		selectAnswer = "Пищевые отходы";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "paper") {
+		selectId = selectAnswer;
 		selectAnswer = "Бумага";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "plastic") {
+		selectId = selectAnswer;
 		selectAnswer = "Пластик";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "textile") {
+		selectId = selectAnswer;
 		selectAnswer = "Текстиль";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "other") {
+		selectId = selectAnswer;
 		selectAnswer = "Прочее";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "rubber") {
+		selectId = selectAnswer;
 		selectAnswer = "Резина";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "wood") {
+		selectId = selectAnswer;
 		selectAnswer = "Дерево";
 		addRow(selectAnswer);
 	} else if (selectAnswer == "metal") {
+		selectId = selectAnswer;
 		selectAnswer = "Металл";
 		addRow(selectAnswer);
 	}
@@ -202,7 +212,6 @@ let select = document.querySelector("#list").addEventListener('change', function
 		for (let c = 0; c < arrHead.length; c++) {
 			let td = document.createElement('td'); // table definition.
 			td = tr.insertCell(c);
-
 			if (c == 0) { // the first column.
 				// add a button in every new row in the first column.
 				let button = document.createElement('button');
@@ -216,20 +225,23 @@ let select = document.querySelector("#list").addEventListener('change', function
 				td.appendChild(button);
 			} else if (c == 1) {
 				let ele = document.createElement('span');
-				ele.setAttribute('id', 'glassID');
+				ele.setAttribute('id', 'ID' + selectId);
 				ele.textContent = selectAnswer;
 				td.appendChild(ele);
 
 			} else if (c == 2) {
 				let ele2 = document.createElement("input");
+				ele2.setAttribute("id", selectId + "number")
 				ele2.setAttribute("type", "number");
 				td.appendChild(ele2)
 			} else if (c == 3) {
 				let ele3 = document.createElement("input");
+				ele3.setAttribute("id", selectId + "W")
 				ele3.setAttribute("type", "number");
 				td.appendChild(ele3)
 			} else {
 				let ele4 = document.createElement("input");
+				ele4.setAttribute("id", selectId + "A")
 				ele4.setAttribute("type", "number");
 				td.appendChild(ele4)
 
@@ -247,10 +259,31 @@ function removeRow(oButton) {
 // function to extract and submit table data.
 function submit() {
 	console.log("click")
-	let myTab = document.getElementById('empTable');
-	let arrValues = new Array();
+
+	// let numTKO = food + plastic + textile + paper + other;
+
+	// let numW = (((food.number / numTKO) * food.W) + ((plastic.number / numTKO) * plastic.W) + ((textile.number / numTKO) * textile.W) + ((paper.number / numTKO) * paper.W) + ((other.number / numTKO) * other.W)) * 100;
+	// console.log(numW)
+	// let numA = "";
+	// let Q = "";
 
 
 
-	document.getElementById('output').innerHTML = arrValues;
+
+
+	class Rashet {
+		render() {
+			let main = document.getElementById("main");
+			let htmlCatalog = ""
+			htmlCatalog += `
+			<div>Общая масса ТКО: </div>
+			<div>Общая влажность ТКО:$% </div>
+			<div>Общая зольнотсь ТКО:</div>
+			<div>Удельная теплота сгорания: </div>
+			`;
+			main.innerHTML = htmlCatalog;
+		};
+	};
+	const rashetPage = new Rashet();
+	rashetPage.render();
 };
