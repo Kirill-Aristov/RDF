@@ -246,22 +246,10 @@ let select = document.querySelector("#list").addEventListener('change', function
 				td.appendChild(ele4)
 
 			};
-			checkInput()
 
 		}
 	}
 
-	function checkInput() {
-		let cel = document.getElementsByTagName("td");
-		//получение строки
-		for (var t = 0, len = cel.length; t < len; t++) {
-			cel[t].addEventListener("change", () => {
-				
-			})
-
-
-		};
-	}
 });
 
 
@@ -278,9 +266,14 @@ function removeRow(oButton) {
 function submit() {
 
 	let table = document.getElementById("empTable");
+	let cel = document.getElementsByTagName("td");
 	for (let i = 0, row; row = table.rows[i]; i++) {
 		if (i % 2 == 1) {
-
+			for (var t = 0, len = cel.length; t < len; t++) {
+				cel[t].onclick = function check() {
+					console.log(this.innerHTML)
+				}
+			};
 			// let cel = document.getElementsByTagName("td");
 
 			// for (var t = 0, len = cel.length; t < len; t++) {
