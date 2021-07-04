@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet"
+		  href="css/style.css">
+	<title>Document</title>
+</head>
+
+<body onload="createTable()">
+	<!-- <div id="block">
+		<table id="table">
+			<tr>
+				<th> Наименование ТКО </th>
+				<th>масса, Т</th>
+				<th>Влажность</th>
+				<th>Зольность</th>
+			</tr>
+			<tfoot>
+				<td></td>
+				<th>общая масса ТКО
+					<p><span id="m_TKO"></span></p>
+				</th>
+				<th>Влажность
+					<p><span id="m_W"></span></p>
+				</th>
+				<th>Зольность
+					<p><span id="m_A"></span></p>
+				</th>
+			</tfoot>
+			<tr>
+				<td>пищевые отходы</td>
+				<td><input id="food_number"
+						   type="number"></td>
+				<td><input id="food_W"
+						   type="number"></td>
+				<td><input id="food_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>бумага</td>
+				<td><input id="paper_number"
+						   type="number"></td>
+				<td><input id="paper_W"
+						   type="number"></td>
+				<td><input id="paper_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>пластмасса</td>
+				<td><input id="plastic_number"
+						   type="number"></td>
+				<td><input id="plastic_W"
+						   type="number"></td>
+				<td><input id="plastic_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>стекло</td>
+				<td><input id="glass_number"
+						   type="number"></td>
+				<td><input id="glass_W"
+						   type="number"></td>
+				<td><input id="glass_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>металл</td>
+				<td><input id="metal_number"
+						   type="number"></td>
+				<td><input id="metal_W"
+						   type="number"></td>
+				<td><input id="metal_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>дерево</td>
+				<td><input id="wood_number"
+						   type="number"></td>
+				<td><input id="wood_W"
+						   type="number"></td>
+				<td><input id="wood_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>резина</td>
+				<td><input id="rubber_number"
+						   type="number"></td>
+				<td><input id="rubber_W"
+						   type="number"></td>
+				<td><input id="rubber_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>тестиль</td>
+				<td><input id="textile_number"
+						   type="number"></td>
+				<td><input id="textile_W"
+						   type="number"></td>
+				<td><input id="textile_A"
+						   type="number"></td>
+			</tr>
+			<tr>
+				<td>другое</td>
+				<td><input id="other_number"
+						   type="number"></td>
+				<td><input id="other_W"
+						   type="number"></td>
+				<td><input id="other_A"
+						   type="number"></td>
+			</tr>
+		</table>
+		<button id="btn">Расчет</button>
+	</div>
+
+
+
+	<select name="Select"
+			size="1"
+			id="list">
+		<option value="elections">Добавить</option>
+		<option value="food">пищевые отходы</option>
+		<option value="paper">бумага</option>
+		<option value="plastic">пластмасса</option>
+		<option value="glass">стекло</option>
+		<option value="metal">металл</option>
+		<option value="wood">дерево</option>
+		<option value="rubber">резина</option>
+		<option value="textile">текстиль</option>
+		<option value="other">прочее</option>
+	</select>
+
+
+
+	<main>
+		<div class="main">
+
+		</div>
+	</main> -->
+	<select name="Select"
+			size="1"
+			id="list">
+		<option value="elections">Добавить</option>
+		<option value="food">пищевые отходы</option>
+		<option value="paper">бумага</option>
+		<option value="plastic">пластмасса</option>
+		<option value="glass">стекло</option>
+		<option value="metal">металл</option>
+		<option value="wood">дерево</option>
+		<option value="rubber">резина</option>
+		<option value="textile">текстиль</option>
+		<option value="other">прочее</option>
+	</select>
+
+
+
+	<div id="cont"></div> <!-- the container to add the TABLE -->
+
+	<p>
+		<button id="btn"
+				onclick="submit()">Расчет</button>
+	</p>
+
+	<div id='main'></div>
+
+
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
