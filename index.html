@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		  content="IE=edge">
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet"
+		  href="css/style.css">
+	<title>Document</title>
+</head>
+
+<body onload="createTable()">
+
+
+	<select name="Select"
+			size="1"
+			id="list">
+		<option selected
+				value="elections">Добавить</option>
+		<option value="food">пищевые отходы</option>
+		<option value="paper">бумага</option>
+		<option value="plastic">пластмасса</option>
+		<option value="textile">текстиль</option>
+
+	</select>
+
+
+
+	<div id="cont">
+	</div>
+
+	<p>
+		<button id="btn"
+				type="button"
+				onclick="payment()">Расчет</button>
+	</p>
+
+	<div id='main'></div>
+
+
+</body>
+
+
+<script src="js/app.js"></script>
+<script src="js/rashet.js"></script>
+</body>
+
+</html>
