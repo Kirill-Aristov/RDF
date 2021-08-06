@@ -1,8 +1,12 @@
 @import "normalize.scss";
 
-
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
 #list {
-  margin: 30px;
+  margin: 30px 20px 20px 20px;
   background-color: #34495e;
   font-family: Arial;
   text-align: center;
@@ -10,25 +14,8 @@
   padding: 5px;
   font-size: 18px;
   border-bottom: 5px solid #2c3e50;
+  cursor: pointer;
 }
-
-// * {
-//   font: 17px Calibri;
-// }
-
-// table {
-//   width: 70%;
-// }
-
-// table,
-// th,
-// td {
-//   border: solid 1px #DDD;
-//   border-collapse: collapse;
-//   padding: 2px 3px;
-//   text-align: center;
-// }
-
 
 #btn {
   background-color: #34495e;
@@ -42,11 +29,6 @@
   font-size: 18px;
   border-bottom: 5px solid #2c3e50;
 }
-
-// #block {
-//   display: flex;
-// }
-
 
 table {
   width: auto;
@@ -70,7 +52,6 @@ th {
 
 tr,
 td {
-
   font-size: 20px;
   font-weight: 400;
   text-align: center;
@@ -86,33 +67,9 @@ td {
     height: 15px;
     background-color: #000;
     color: #fff;
-
   }
 }
 
-
-// .select {
-//   margin: 0;
-//   padding: 0;
-//   background-color: #000000;
-//   color: #FFFFFF;
-//   font-size: 28px;
-//   border-radius: 12px;
-//   padding: 4px 8px;
-//   display: inline-block;
-//   cursor: pointer;
-// }
-
-// ul {
-
-//   text-align: center;
-// }
-
-// li.active {
-//   background-color: #A9A9A9;
-//   border-radius: 12px;
-//   padding: 4px 8px;
-// }
 #main {
   margin: 20px 10px;
   display: flex;
@@ -121,5 +78,25 @@ td {
   font-size: 18px;
   color: #000;
   font-family: Arial, Helvetica, sans-serif;
+}
+.clearBtn {
+  padding: 3px;
+  color: #000;
+  background-color: #fff;
+  transition: 0.3s all ease-in-out;
+  &:hover {
+    color: #fff;
+    background-color: #000;
+  }
+}
 
+.links {
+  &__theory {
+    & a {
+    }
+  }
+  &__formulas {
+    & a {
+    }
+  }
 }

@@ -2,50 +2,52 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible"
-		  content="IE=edge">
-	<meta name="viewport"
-		  content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet"
-		  href="css/style.css">
-	<title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="css/style.css">
+  <title>Document</title>
 </head>
 
-<body onload="createTable()">
-
-
-	<select name="Select"
-			size="1"
-			id="list">
-		<option selected
-				value="elections">Добавить</option>
-		<option value="food">пищевые отходы</option>
-		<option value="paper">бумага</option>
-		<option value="plastic">пластмасса</option>
-		<option value="textile">текстиль</option>
-
-	</select>
-
-
-
-	<div id="cont">
-	</div>
-
-	<p>
-		<button id="btn"
-				type="button"
-				onclick="payment()">Расчет</button>
-	</p>
-
-	<div id='main'></div>
-
-
+<body>
+  <div class="wrapper">
+    <div class="links">
+      <div class="links__theory">
+        Теория
+        <li><a target="_blank"
+             href="pdf/1.pdf">Методические подходы к геоэкологической оценке технологий обработки
+            твердых
+            коммунальных отходов с получением твердого топлива</a></li>
+        <li><a target="_blank"
+             href="pdf/2.pdf">Технико-экономическая оценка технологий обработки твердых коммунальных
+            отходов для
+            их последующей энергетической утелизации</a></li>
+        <li><a target="_blank"
+             href="pdf/3.pdf">Зависимость качества и количества вторичного топлива от способа
+            выделения и
+            состава исходного потока отходов</a></li>
+      </div>
+      <div class="links__formulas">
+        <a href="#"
+           target="_blank">Формулы используемые при расчете</a>
+      </div>
+    </div>
+    <div id="choice"></div>
+    <div id='main'></div>
+  </div>
 </body>
+<!-- <script src="js/app.js"></script> -->
 
+<script src="js/startProgram.js"></script>
+<script src="js/startCreateTable.js"></script>
+<script src="js/createRows.js"></script>
+<script src="js/addRemoveSelect.js"></script>
+<script src="js/bdTable.js"></script>
+<script src="js/calculation.js"></script>
 
-<script src="js/app.js"></script>
-<script src="js/rashet.js"></script>
 </body>
 
 </html>
