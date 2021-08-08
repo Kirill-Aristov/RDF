@@ -24,4 +24,5 @@ let btn = document.getElementById("btn").addEventListener("click", () => {
     }
   }
   console.log(database)
+  calck(database)
 })
