@@ -1,3 +1,5 @@
 function calck(bd) {
-  console.log(bd)
+  bd.forEach(element => {
+    console.log(element)
+  });
 }

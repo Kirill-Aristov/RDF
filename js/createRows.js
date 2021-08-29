@@ -11,9 +11,9 @@ select.addEventListener("change", function (e) {
 function addRow(selectAnswer) {
   const empTab = document.getElementById('empTable');
   let rowCnt = empTab.rows.length;
-  let tr = empTab.insertRow(rowCnt); 
+  let tr = empTab.insertRow(rowCnt);
   for (let c = 0; c < HeaderTable.length; c++) {
-    let td = document.createElement('td'); 
+    let td = document.createElement('td');
     td = tr.insertCell(c);
     if (c == 0) {
       let button = document.createElement('button');

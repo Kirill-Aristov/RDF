@@ -9,43 +9,76 @@
         content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet"
         href="css/style.css">
+  <link rel="shortcut icon"
+        href="./img/icon/icon.ico"
+        type="image/x-icon">
   <title>RDF</title>
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="links">
-      <div class="links__theory">
-        Теория
-        <li><a target="_blank"
+
+  <div class="container">
+    <h1>Калькулятор для рассчета ...</h1>
+    <div id="choice"></div>
+    <div id='main'></div>
+    <img style="display: none;"
+         class="img-downolad actvie"
+         src="./img/pdf.png"
+         alt="PDF">
+
+    <div class="accordion">
+      <div>
+        <a href="#accordion1"
+           aria-expanded="false"
+           aria-controls="accordion1"
+           class="accordion-title accordionTitle js-accordionTrigger">Теория</a>
+      </div>
+
+      <div class="accordion-content accordionItem is-collapsed"
+           id="accordion1"
+           aria-hidden="true">
+        <li>
+          <a target="_blank"
              href="pdf/1.pdf">Методические подходы к геоэкологической оценке технологий обработки
             твердых
-            коммунальных отходов с получением твердого топлива</a></li>
-        <li><a target="_blank"
+            коммунальных отходов с получением твердого топлива</a>
+        </li>
+        <li>
+          <a target="_blank"
              href="pdf/2.pdf">Технико-экономическая оценка технологий обработки твердых коммунальных
             отходов для
-            их последующей энергетической утелизации</a></li>
-        <li><a target="_blank"
+            их последующей энергетической утелизации</a>
+        </li>
+        <li>
+          <a target="_blank"
              href="pdf/3.pdf">Зависимость качества и количества вторичного топлива от способа
             выделения и
-            состава исходного потока отходов</a></li>
+            состава исходного потока отходов</a>
+        </li>
       </div>
-      <div class="links__formulas">
+      <div>
+        <a href="#accordion2"
+           aria-expanded="false"
+           aria-controls="accordion2"
+           class="accordion-title accordionTitle js-accordionTrigger">
+          Формулы</a>
+      </div>
+      <div class="accordion-content accordionItem is-collapsed"
+           id="accordion2"
+           aria-hidden="true">
         <a href="#"
            target="_blank">Формулы используемые при расчете</a>
       </div>
     </div>
-    <div id="choice"></div>
-    <div id='main'></div>
+   
   </div>
 </body>
-<!-- <script src="js/app.js"></script> -->
-
 <script src="js/startProgram.js"></script>
 <script src="js/startCreateTable.js"></script>
 <script src="js/createRows.js"></script>
 <script src="js/addRemoveSelect.js"></script>
 <script src="js/bdTable.js"></script>
 <script src="js/calculation.js"></script>
+<script src="./js/app.js"></script>
 
 </html>

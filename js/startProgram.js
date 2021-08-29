@@ -1,3 +1,4 @@
+
 class Start {
   constructor(selector) {
     this.food = selector.food
@@ -30,4 +31,3 @@ const start = new Start({
   plastic: "Пластик",
   textile: "Тестиль"
 })
-
