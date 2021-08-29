@@ -1,28 +1,14 @@
 let btn = document.getElementById("btn").addEventListener("click", () => {
+
   let database = []
-  // let num = database.push({ name: "ello", age: "15" })
-  // console.log(database)
-  // console.log(num)
-  var refTab = document.getElementById("empTable")
-
-  for (var i = 1; row = refTab.rows[i]; i++) {
-    row = refTab.rows[i];
-    console.log(row)
-    for (var j = 1; col = row.cells[j]; j++) {
-      // let name = row.cells[j]
-      if (j == 1) {
-        let num = database.push(row.cells[j])
-        console.log(row.cells[j])
-      } else if (j == 2) {
-        console.log(row.cells[j])
-      } else if (j == 3) {
-        console.log(row.cells[j])
-      } else if (j == 4) {
-        console.log(row.cells[j])
-      }
-
-    }
+  const table = document.getElementById("empTable")
+  for (let i = 1; (row = table.rows[i]); i++) {
+    database.push({
+      name: row.cells[1].innerText,
+      massa: Number(row.cells[2].querySelector('input').value),
+      W: Number(row.cells[3].querySelector('input').value),
+      A: Number(row.cells[4].querySelector('input').value)
+    });
   }
-  console.log(database)
   calck(database)
 })

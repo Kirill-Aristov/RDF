@@ -13,7 +13,7 @@ function removeSelect(selectAnswer) {
 }
 function addSelect(getId) {
   let rowId = getId.id
-  let empTable = document.getElementById("empTable")
+  const empTable = document.getElementById("empTable")
   empTable.deleteRow(getId.parentNode.parentNode.rowIndex)
   removeSelect(rowId)
 }
