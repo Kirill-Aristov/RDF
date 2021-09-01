@@ -19,7 +19,21 @@
 
   <div class="container">
     <h1>Калькулятор для рассчета ...</h1>
-    <div id="choice"></div>
+    <div id="choice">
+      <select name="select"
+      size="1"
+      id="list">
+<option selected
+        value="Добавить">Добавить</option>
+<option value="Пищевые отходы">Пищевые отходы</option>
+<option value="Бумага">Бумага</option>
+<option value="Пластик">Пластик</option>
+<option value="Тестиль">Тестиль</option>
+</select>
+<button id="btn"
+        type="button">Расчет</button>
+<div id="table"></div>
+    </div>
     <div id='main'></div>
     <img style="display: none;"
          class="img-downolad actvie"
