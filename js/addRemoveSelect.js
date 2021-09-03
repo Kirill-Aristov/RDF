@@ -11,9 +11,23 @@ function removeSelect(selectAnswer) {
     }
   }
 }
-function addSelect(getId) {
-  let rowId = getId.id
+function RemoveRows(getId) {
+
+  if (getId !== undefined) {
+    const rowId = getId.id
+    removeSelect(rowId)
+  } else {
+    return
+  }
   const empTable = document.getElementById("empTable")
-  empTable.deleteRow(getId.parentNode.parentNode.rowIndex)
-  removeSelect(rowId)
+  const idRows = getId.parentNode.parentNode.rowIndex
+  const numberRows = document.querySelectorAll(".number_id").forEach(element => {
+    if (element.textContent > idRows) {
+      let num = Number(element.textContent)
+      num--
+      element.textContent = num
+    }
+  })
+  empTable.deleteRow(idRows)
+
 }

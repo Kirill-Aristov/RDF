@@ -1,5 +1,5 @@
 let HeaderTable = new Array(); //создание таблицы.
-HeaderTable = ['', 'Название', 'Масса,Т', 'Влажность', 'Зольность'];
+HeaderTable = ["",'№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сух/м, %', 'Теплота сгорание'];
 window.onload = function createTable() {
   const empTable = document.createElement('table');
   empTable.setAttribute('id', 'empTable');
@@ -9,6 +9,7 @@ window.onload = function createTable() {
     const th = document.createElement('th');
     th.innerHTML = HeaderTable[h];
     tr.appendChild(th);
+
   }
 
   const table = document.getElementById('table');
