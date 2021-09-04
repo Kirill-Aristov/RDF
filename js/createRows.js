@@ -15,7 +15,6 @@ const btn_string = document.getElementById("btn_string").addEventListener("click
 function addRow(selectAnswer) {
   const empTab = document.getElementById('empTable');
   let rowCnt = empTab.rows.length;
-  console.log(rowCnt)
   let tr = empTab.insertRow(rowCnt);
   for (let c = 0; c < HeaderTable.length; c++) {
     let td = document.createElement('td');
@@ -37,7 +36,7 @@ function addRow(selectAnswer) {
       const int = document.createElement("input")
       int.setAttribute("class", "input_name")
       if (selectAnswer == undefined) {
-        int.textContent = ""
+        int.value = ""
       } else {
         int.value = selectAnswer
       }
