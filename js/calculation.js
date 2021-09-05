@@ -19,7 +19,6 @@ function calck(bd) {
   //Теплота сгорания переменные
   let heat = 0 // Теплота сгорания 
   let leftHeat = [] //первая часть уравнения
-  let leftHeatPlus = 0 //сложения массива первого уравнения
   /////////////////////////////////////////////////
   bd.forEach(element => {
     //грфик построенния на содержание
@@ -38,7 +37,6 @@ function calck(bd) {
     ////////////////////////////////////////////////////////////
     //Удельная теплота сгорания 
     leftHeat.push(element.massa * (1 - (element.W / 100)) * (1 - (element.A / 100)) * element.Q)
-    leftHeatPlus = leftHeat.reduce(reducerPlus)
     heat = leftHeat.reduce(reducerPlus) - (0.02442 * humidity)
     ////////////////////////////////////////////////////////
   });
