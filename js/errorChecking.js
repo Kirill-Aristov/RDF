@@ -1,62 +1,73 @@
 function error(bd) {
-  let fullMassa = 0
-  let ashContent = []
-  let id = []
+
+  let fullMassa = 0 //содержание
+  let ashContent = [] //зольность
+  let humidity = [] // влажность
+  let id = [] //номер строки
+
   bd.forEach(element => {
     id.push(element.id)
     fullMassa += element.massa
     ashContent.push(element.A)
+    humidity.push(element.W)
   });
-
-  let ashContentError = Math.max.apply(Math, ashContent)
-  let ashContentIndex = ashContent.indexOf(ashContentError)
-
+  let ashContentError = Math.max.apply(Math, ashContent) //максимальное число в массиве у зольности
+  let ashContentIndex = ashContent.indexOf(ashContentError) //индекс максимального чилсва в массиве
+  let humidityError = Math.max.apply(Math, humidity)//максимальное число в массиве у влажности
+  let humidityIndex = humidity.indexOf(humidityError)//индекс максимального чилсва в массиве
   const table = document.getElementById("table")
+  //создание span для Удаление всех span  
   const span = document.createElement("span")
-  span.setAttribute("id", "active")//костыль для удления всех элементов
-  if (fullMassa >= 100) {
-    spanRemove()
-    const spanFullMassa = document.createElement("span")
-    function checkSpanFullMassa() {
-      const check = document.querySelectorAll(".massa_error").forEach(element => {
-        element.remove()
-      })
-    }
-    checkSpanFullMassa()
-    span.setAttribute("class", "massa_error")
-    span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%"
-    span.style.bottom = 60 + (51 * id.length) + "px"
-    table.appendChild(span)
-    span.addEventListener("click", () => {
-      table.removeChild(span)
-    })
+  span.setAttribute("id", "active")
 
-  } else if (ashContentError > 100) {
-    spanRemove()
-    const spanAchContent = document.createElement("span")
-    function checkSpanashContent() {
-      const check = document.querySelectorAll(".achContent_error").forEach(element => {
-        element.remove()
+  if (fullMassa > 100 || fullMassa < 100) {    //проверка на содержание
+    //заполнение остататка "Прочие"
+    if (fullMassa < 100) {
+      addOther(fullMassa, table)
+    } else {
+      spanRemove()
+      span.setAttribute("class", "massa_error")
+      span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%"
+      span.style.bottom = 60 + (51 * id.length) + "px"
+      table.appendChild(span)
+      span.addEventListener("click", () => {
+        table.removeChild(span)
       })
     }
-    checkSpanashContent()
-    span.setAttribute("class", "achContent_error")
-    span.innerText = "Зольность содиржимого не может превышать 100%"
-    span.style.top = (51 * (ashContentIndex + 1)) + "px"
-    table.appendChild(span)
-    span.addEventListener("click", () => {
-      table.removeChild(span)
-    })
-  } else {
-    calck(bd)
-    spanRemove()
   }
-  function spanRemove() {
-    const spanTrue = document.querySelectorAll("#active")
-    console.log(spanTrue.length)
-    for (let i = 0; i < spanTrue.length; i++) {
-      spanTrue[i].remove()
-    }
+  else if (ashContentError > 100) {   //проверка на Зольность
+    const text = "Зольность содержимого не может превышать 100%"
+    checkErorr("achContent_error", ashContentIndex, text)
+  }
+  else if (humidityError > 100) {     //проверка на Влажность
+    const text = "Влажность содержимого не может превышать 100%"
+    checkErorr("humidityError_error", humidityIndex, text)
+  }
+  else {
+    spanRemove()
+    calck(bd)
+  }
 
+  function spanRemove() {
+    const spanActive = document.querySelectorAll("#active")
+    for (let i = 0; i < spanActive.length; i++) {
+      spanActive[i].remove()
+    }
+  }
+
+  function checkErorr(className, index, text) {
+    spanRemove()
+    span.setAttribute("class", className)
+    span.innerText = text
+    span.style.top = (51 * (index + 1)) + "px"
+    table.appendChild(span)
+    span.addEventListener("click", () => {
+      table.removeChild(span)
+    })
   }
 }
+
+
+
+
+

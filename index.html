@@ -18,35 +18,37 @@
 </head>
 
 <body>
+  <datalist id="list_name">
+    <option>Органические отходы</option>
+    <option>Макулатура</option>
+    <option>Полимеры</option>
+    <option>Стекло</option>
+    <option>Металлы</option>
+    <option>Текстиль</option>
+    <option>Дерево</option>
+    <option>Комбинированные материалы</option>
+    <option>Опасные материалы</option>
+    <option>Инертные материалы</option>
+    <option>Прочие</option>
+  </datalist>
   <div class="container">
-    <h1>Калькулятор для рассчета ...</h1>
-
+    <h1>Калькулятор для рассчета </h1>
+    <div class="checkbox">
+      <div class="checkbox-box">
+        <input class="checkbox-box__input"
+               type="checkbox">
+        <span class="checkbox-box__slider check-active"></span>
+      </div>
+      <div class="checkbox-box__text">Автозаполнение включено</div>
+    </div>
     <div id="choice">
       <button id="btn_string">Добавить строку</button>
-      <select name="select"
-              size="1"
-              id="list">
-        <option selected
-                value="Добавить">Добавить</option>
-        <option value="Пищевые отходы">Пищевые отходы</option>
-        <option value="Бумага">Бумага</option>
-        <option value="Пластик">Пластик</option>
-        <option value="Тестиль">Тестиль</option>
-      </select>
       <button id="btn"
               type="button">Расчет</button>
     </div>
     <div id="table">
     </div>
-
     <div id='main'></div>
-
-
-    <img style="display: none;"
-         class="img-downolad actvie"
-         src="./img/pdf.png"
-         alt="PDF">
-
     <div class="accordion">
       <div>
         <a href="#accordion1"
@@ -58,7 +60,6 @@
       <div class="accordion-content accordionItem is-collapsed"
            id="accordion1"
            aria-hidden="true">
-
         <li>
           <a class="arrow-circle"
              target="_blank"
@@ -81,7 +82,6 @@
                       d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
               </g>
             </svg>
-
             Методические подходы к геоэкологической оценке технологий обработки
             твердых
             коммунальных отходов с получением твердого топлива</a>
@@ -108,7 +108,6 @@
                       d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
               </g>
             </svg>
-
             Технико-экономическая оценка технологий обработки твердых коммунальных
             отходов для
             их последующей энергетической утелизации</a>
@@ -135,10 +134,10 @@
                       d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
               </g>
             </svg>
-
             Зависимость качества и количества вторичного топлива от способа
             выделения и
-            состава исходного потока отходов</a>
+            состава исходного потока отходов
+          </a>
         </li>
       </div>
       <div>
@@ -172,8 +171,8 @@
                     d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
             </g>
           </svg>
-
-          Формулы используемые при расчете</a>
+          Формулы используемые при расчете
+        </a>
       </div>
     </div>
 
@@ -186,5 +185,7 @@
 <script src="./js/errorChecking.js"></script>
 <script src="./js/calculation.js"></script>
 <script src="./js/app.js"></script>
+<script src="./js/checkerAutoComplit.js"></script>
+<script src="./js/fullMassaErorr.js"></script>
 
 </html>
