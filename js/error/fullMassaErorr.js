@@ -14,15 +14,29 @@ function addOther(fullMassa, table) {
   </div>
   `
   table.appendChild(div)
+  otherAnswer(div, fullMassa)
+
+}
+function otherAnswer(div, fullMassa) {
   const otherBtn = document.querySelectorAll(".other-btn")
   otherBtn.forEach(e => {
     e.addEventListener("click", () => {
-      if (e.value == "Нет") {
+      (e.value == "Нет") ?
         div.remove()
-      } else {
-
-      }
+        :
+        addRowsOther(fullMassa)
       div.remove()
     })
   })
+}
+function addRowsOther(fullMassa) {
+  lenghtСolumn()
+  const inputName = document.querySelectorAll(".input_name")
+  lastItem(inputName, 1, "Прочее")
+  const inputData = document.querySelectorAll(".input__data")
+  lastItem(inputData, 4, 100 - fullMassa)
+}
+function lastItem(last, id, attribute) {
+  let lastValue = last[last.length - id];
+  lastValue.setAttribute("value", attribute)
 }

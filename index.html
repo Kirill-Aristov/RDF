@@ -19,17 +19,30 @@
 
 <body>
   <datalist id="list_name">
-    <option>Органические отходы</option>
-    <option>Макулатура</option>
-    <option>Полимеры</option>
-    <option>Стекло</option>
-    <option>Металлы</option>
-    <option>Текстиль</option>
-    <option>Дерево</option>
-    <option>Комбинированные материалы</option>
-    <option>Опасные материалы</option>
-    <option>Инертные материалы</option>
-    <option>Прочие</option>
+    <option data-value="OrganicWaste"
+            value="Органические отходы"></option>
+    <option data-value="WastePaper"
+            value="Макулатура"></option>
+    <option data-value="Polymers"
+            value="Полимеры"></option>
+    <option data-value="Glass"
+            value="Стекло"></option>
+    <option data-value="Metals"
+            value="Металлы"></option>
+    <option data-value="Textile"
+            value="Текстиль"></option>
+    <option data-value="Wood"
+            value="Дерево"></option>
+    <option data-value="CombinedMaterials"
+            value="Комбинированные материалы"></option>
+    <option data-value="HazardousMaterials"
+            value="Опасные материалы"></option>
+    <option data-value="OtherMaterials"
+            value="Инертные материалы"></option>
+    <option data-value="Dropout"
+            value="Отсев"></option>
+    <option data-value=""
+            value="Прочие материалы"></option>
   </datalist>
   <div class="container">
     <h1>Калькулятор для рассчета </h1>
@@ -37,7 +50,7 @@
       <div class="checkbox-box">
         <input class="checkbox-box__input"
                type="checkbox">
-        <span class="checkbox-box__slider check-active"></span>
+        <span class="checkbox-box__slider"></span>
       </div>
       <div class="checkbox-box__text">Автозаполнение включено</div>
     </div>
@@ -177,15 +190,22 @@
     </div>
 
   </div>
+  <!-- создание таблицы и управление -->
+  <script src="./js/table/startCreateTable.js"></script>
+  <script src="./js/table/createRows.js"></script>
+  <script src="./js//table/addRemoveSelect.js"></script>
+  <!-- рассчеты -->
+  <script src="./js/calculator/BdTable.js"></script>
+  <script src="./js/calculator/calculator.js"></script>
+  <!-- выявление ошибок -->
+  <script src="./js/error/errorChecking.js"></script>
+  <script src="./js/error/fullMassaErorr.js"></script>
+  <!-- дополнительные скрипты -->
+  <script src="./js/app.js"></script>
+  <!-- автозаполнение ячеек -->
+  <script src="./js/autoFill/autoComplitedCell.js"></script>
+  <script src="./js/autoFill/AutoComplitedBD.js"></script>
+  <script src="./js/autoFill/checkerAutoComplit.js"></script>
 </body>
-<script src="./js/startCreateTable.js"></script>
-<script src="./js/createRows.js"></script>
-<script src="./js/addRemoveSelect.js"></script>
-<script src="./js/bdTable.js"></script>
-<script src="./js/errorChecking.js"></script>
-<script src="./js/calculation.js"></script>
-<script src="./js/app.js"></script>
-<script src="./js/checkerAutoComplit.js"></script>
-<script src="./js/fullMassaErorr.js"></script>
 
 </html>

@@ -1,4 +1,8 @@
-const btn_string = document.getElementById("btn_string").addEventListener("click", () => {
+document.getElementById("btn_string").addEventListener("click", () => {
+  lenghtСolumn()
+  autoCompliteCell()
+})
+function lenghtСolumn() {
   const empTab = document.getElementById('empTable');
   let rowCnt = empTab.rows.length;
   let tr = empTab.insertRow(rowCnt);
@@ -7,7 +11,8 @@ const btn_string = document.getElementById("btn_string").addEventListener("click
     td = tr.insertCell(c);
     checkCell(td, c, rowCnt)
   }
-})
+}
+
 function checkCell(td, c, rowCnt) {
   (c == 0) ?
     tableCellRemove(td)
@@ -15,8 +20,7 @@ function checkCell(td, c, rowCnt) {
       tableCellId(rowCnt, td)
       : (c == 2) ?
         tableCellName(td)
-        :
-        tableCellInput(td)
+        : tableCellInput(td)
 
 }
 function tableCellRemove(td) {
@@ -40,8 +44,9 @@ function tableCellName(td) {
   int.setAttribute("type", "text")
   td.appendChild(int);
 }
-function tableCellInput(td) {
+function tableCellInput(td,) {
   let ele1 = document.createElement("input");
+  ele1.setAttribute("class", "input__data")
   ele1.setAttribute("type", "text")
   td.appendChild(ele1)
 }
