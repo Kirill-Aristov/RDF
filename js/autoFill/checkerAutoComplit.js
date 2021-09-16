@@ -15,7 +15,7 @@ function autoComplete() {
 }
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение выключено"
-  const valueName = document.querySelectorAll(".input_name").forEach((e) => {
+   document.querySelectorAll(".input_name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling)
     console.log("удалилась")
   })

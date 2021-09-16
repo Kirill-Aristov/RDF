@@ -10,11 +10,10 @@ function calck(bd) {
   ////////////////////////////////////////////////
   //Зольность переменные
   let achContent = 0 //общая Зольность ТКО
-  let hundredMinusHumidity = [] //масси данных (100 - влажность)
-  let contentMultipliedAshContent = [] //массив данных Зольность умноженное на содержание
-  let massaArray = []
-  let topFaction = 0; // верхняя строки уравнения
-  let bottomFaction = 0; // нижняя строки уравнения
+  let HMH = [] //масси данных (100 - влажность)
+  let CMAC = [] //массив данных Зольность умноженное на содержание
+  let massaArray = [] //массив содержание
+  let leftFaction = 0; // левое уравнение
   //////////////////////////////////////////////////////
   //Теплота сгорания переменные
   let heat = 0 // Теплота сгорания 
@@ -28,12 +27,11 @@ function calck(bd) {
     humidity = massTimesMoisture.reduce(reducerPlus) / 100
     /////////////////////////////////////
     //Расчёт общей Зольности //////////////////////
-    contentMultipliedAshContent.push(element.massa * element.A)
-    hundredMinusHumidity.push(100 - element.W)
-    topFaction = contentMultipliedAshContent.reduce(function (r, a, i) { return r + a * hundredMinusHumidity[i] }, 0)
+    HMH.push(100 - element.W)
+    CMAC.push(element.massa * element.A)
     massaArray.push(element.massa)
-    bottomFaction = massaArray.reduce(function (r, a, i) { return r + a * hundredMinusHumidity[i] }, 0)
-    achContent = (topFaction / bottomFaction) * (1 - humidity / 100)
+    leftFaction = (CMAC.reduce(function (r, a, i) { return r + a * HMH[i] }, 0)) / (massaArray.reduce(function (r, a, i) { return r + a * HMH[i] }, 0))
+    achContent = leftFaction * (1 - (humidity / 100))
     ////////////////////////////////////////////////////////////
     //Удельная теплота сгорания 
     leftHeat.push(element.massa * (1 - (element.W / 100)) * (1 - (element.A / 100)) * element.Q)
@@ -46,9 +44,9 @@ function calck(bd) {
   
   
   
-  <div>1. Общая влажность ТКО: ${humidity} %</div>
-  <div>2. Общая Зольность ТКО: ${achContent} %</div>
-  <div>3. Удельная теплота сгорания ТКО: ${heat} %</div>
+  <div>1. Общая влажность ТКО: ${humidity.toFixed(2)} %</div>
+  <div>2. Общая Зольность ТКО: ${achContent.toFixed(2)} %</div>
+  <div>3. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} Дж</div>
   `
 
   let jsonData = {
