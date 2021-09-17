@@ -13,8 +13,9 @@ function otherAutoDilling(valueName) {
   for (let i = 0; i < baseAutoComplite.length; i++) {
     if (baseAutoComplite[i].name == valueName.value) {
       console.log(valueName)
-
     }
   }
 
 }
+
+
