@@ -1,5 +1,4 @@
 const baseAutoComplite = [
-
   {
     name: "Органические отходы",
     heatNumber: 18.2

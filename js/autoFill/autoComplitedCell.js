@@ -15,7 +15,9 @@ function otherAutoDilling(valueName) {
       console.log(valueName)
     }
   }
-
+  let inputData = document.querySelectorAll(".input__data").forEach((e) => {
+    console.log(e.value)
+  })
 }
 
 
