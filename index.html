@@ -19,31 +19,20 @@
 
 <body>
   <datalist id="list_name">
-    <option data-value="OrganicWaste"
-            value="Органические отходы"></option>
-    <option data-value="WastePaper"
-            value="Макулатура"></option>
-    <option data-value="Polymers"
-            value="Полимеры"></option>
-    <option data-value="Glass"
-            value="Стекло"></option>
-    <option data-value="Metals"
-            value="Металлы"></option>
-    <option data-value="Textile"
-            value="Текстиль"></option>
-    <option data-value="Wood"
-            value="Дерево"></option>
-    <option data-value="CombinedMaterials"
-            value="Комбинированные материалы"></option>
-    <option data-value="HazardousMaterials"
-            value="Опасные материалы"></option>
-    <option data-value="OtherMaterials"
-            value="Инертные материалы"></option>
-    <option data-value="Dropout"
-            value="Отсев"></option>
-    <option data-value=""
-            value="Прочие материалы"></option>
   </datalist>
+  <template id="list_name__result">
+    <option value="Органические отходы">Органические отходы</option>
+    <option value="Макулатура">Макулатура</option>
+    <option value="Полимеры">Полимеры</option>
+    <option value="Стекло">Стекло</option>
+    <option value="Металлы">Металлы</option>
+    <option value="Текстиль">Текстиль</option>
+    <option value="Дерево">Дерево</option>
+    <option value="Комбинированные материалы">Комбинированные материалы</option>
+    <option value="Опасные материалы">Опасные материалы</option>
+    <option value="Отсев">Отсев</option>
+    <option value="Прочие материалы">Прочие материалы</option>
+  </template>
   <div class="container">
     <h1>Калькулятор для рассчета </h1>
     <div class="checkbox">
@@ -206,6 +195,7 @@
   <script src="./js/error/fullMassaErorr.js"></script>
   <!-- дополнительные скрипты -->
   <script src="./js/app.js"></script>
+  <script src="./js/dataList.js"></script>
   <!-- автозаполнение ячеек -->
   <script src="./js/autoFill/autoComplitedCell.js"></script>
   <script src="./js/autoFill/AutoComplitedBD.js"></script>

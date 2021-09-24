@@ -1,47 +1,47 @@
 const baseAutoComplite = [
   {
-    name: "Органические отходы",
+    name: "органические отходы",
     heatNumber: 18.2
   },
 
   {
-    name: "Макулатура",
+    name: "макулатура",
     heatNumber: 16.9
   },
   {
-    name: "Полимеры",
+    name: "полимеры",
     heatNumber: 27.4
   },
   {
-    name: "Стекло",
+    name: "стекло",
     heatNumber: 0
   },
   {
-    name: "Металлы",
+    name: "металлы",
     heatNumber: 0
   },
   {
-    name: "Текстиль",
+    name: "текстиль",
     heatNumber: 22.6
   },
   {
-    name: "Дерево",
+    name: "дерево",
     heatNumber: 18.9
   },
   {
-    name: "Комбинированные материалы",
+    name: "комбинированные материалы",
     heatNumber: 30
   },
   {
-    name: "Опасные материалы",
+    name: "опасные материалы",
     heatNumber: 20.1
   },
   {
-    name: "Прочие материалы",
+    name: "прочие материалы",
     heatNumber: 30
   },
   {
-    name: "Отсев",
+    name: "отсев",
     heatNumber: 20.1
   },
 ]

@@ -11,13 +11,16 @@ function autoCompliteCell() {
 }
 function otherAutoDilling(valueName) {
   for (let i = 0; i < baseAutoComplite.length; i++) {
-    if (baseAutoComplite[i].name == valueName.value) {
-      console.log(valueName)
+    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+      idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heatNumber)
     }
   }
-  let inputData = document.querySelectorAll(".input__data").forEach((e) => {
-    console.log(e.value)
-  })
+  // let inputData = document.querySelectorAll(".input__data").forEach((e) => {
+  //   console.log(e)
+  // })
+}
+function idRows(id, number) {
+  id.childNodes[6].querySelector("input").value = number
 }
 
 
