@@ -20,11 +20,22 @@ function error(bd) {
   const span = document.createElement("span")
   span.setAttribute("id", "active")
 
-  if (fullMassa > 100 || fullMassa < 100) {    //проверка на содержание
-    //заполнение остататка "Прочие"
+  if (humidityError > 100) {
+    //проверка на Влажность
+    const text = "Влажность содержимого не может превышать 100%"
+    checkErorr("humidityError_error", humidityIndex, text)
+  }
+  else if (ashContentError > 100) {
+    //проверка на Зольность
+    const text = "Зольность содержимого не может превышать 100%"
+    checkErorr("achContent_error", ashContentIndex, text)
+  }
+  else if (fullMassa > 100 || fullMassa < 100) {
+    //проверка на содержание
     if (fullMassa < 100) {
       addOther(fullMassa, table)
     } else {
+      //заполнение остататка "Прочие"
       spanRemove()
       span.setAttribute("class", "massa_error")
       span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%"
@@ -34,14 +45,6 @@ function error(bd) {
         table.removeChild(span)
       })
     }
-  }
-  else if (ashContentError > 100) {   //проверка на Зольность
-    const text = "Зольность содержимого не может превышать 100%"
-    checkErorr("achContent_error", ashContentIndex, text)
-  }
-  else if (humidityError > 100) {     //проверка на Влажность
-    const text = "Влажность содержимого не может превышать 100%"
-    checkErorr("humidityError_error", humidityIndex, text)
   }
   else {
     spanRemove()

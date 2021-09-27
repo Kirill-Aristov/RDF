@@ -7,35 +7,39 @@
         content="IE=edge">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+        crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+          crossorigin="anonymous"></script>
   <link rel="stylesheet"
         href="css/style.css">
   <link rel="shortcut icon"
         href="./img/icon/icon.ico"
         type="image/x-icon">
-  <script type="text/javascript"
-          src="https://www.gstatic.com/charts/loader.js"></script>
+
   <title>RDF</title>
 </head>
 
 <body>
   <datalist id="list_name">
+    <option value="Дерево"></option>
+    <option value="Комбинированные материалы"></option>
+    <option value="Макулатура"></option>
+    <option value="Металлы"></option>
+    <option value="Опасные материалы"></option>
+    <option value="Органические отходы"></option>
+    <option value="Отсев"></option>
+    <option value="Полимеры"></option>
+    <option value="Прочие материалы"></option>
+    <option value="Стекло"></option>
+    <option value="Текстиль"></option>
   </datalist>
-  <template id="list_name__result">
-    <option value="Органические отходы">Органические отходы</option>
-    <option value="Макулатура">Макулатура</option>
-    <option value="Полимеры">Полимеры</option>
-    <option value="Стекло">Стекло</option>
-    <option value="Металлы">Металлы</option>
-    <option value="Текстиль">Текстиль</option>
-    <option value="Дерево">Дерево</option>
-    <option value="Комбинированные материалы">Комбинированные материалы</option>
-    <option value="Опасные материалы">Опасные материалы</option>
-    <option value="Отсев">Отсев</option>
-    <option value="Прочие материалы">Прочие материалы</option>
-  </template>
   <div class="container">
     <h1>Калькулятор для рассчета </h1>
-    <p>в десятичных значениях вместо запятой(",") ставить точку(".")</p>
     <div class="checkbox">
       <div class="checkbox-box">
         <input class="checkbox-box__input"
@@ -52,133 +56,58 @@
     <div id="table">
     </div>
     <div id='main'></div>
-    <div class="accordion">
-      <div>
-        <a href="#accordion1"
-           aria-expanded="false"
-           aria-controls="accordion1"
-           class="accordion-title accordionTitle js-accordionTrigger">Теория</a>
-      </div>
 
-      <div class="accordion-content accordionItem is-collapsed"
-           id="accordion1"
-           aria-hidden="true">
-        <li>
-          <a class="arrow-circle"
-             target="_blank"
-             href="pdf/1.pdf">
-            <svg class="arrow-circle-icon"
-                 xmlns="http://www.w3.org/2000/svg"
-                 width="32"
-                 height="32"
-                 viewBox="0 0 32 32">
-              <g fill="none"
-                 stroke="#337AB7"
-                 stroke-width="1.5"
-                 stroke-linejoin="round"
-                 stroke-miterlimit="10">
-                <circle class="arrow-circle-iconcircle"
-                        cx="16"
-                        cy="16"
-                        r="15.12"></circle>
-                <path class="arrow-circle-icon--arrow"
-                      d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98">
-                </path>
-              </g>
-            </svg>
-            Методические подходы к геоэкологической оценке технологий обработки
-            твердых
-            коммунальных отходов с получением твердого топлива</a>
-        </li>
-        <li>
-          <a class="arrow-circle"
-             target="_blank"
-             href="pdf/2.pdf">
-            <svg class="arrow-circle-icon"
-                 xmlns="http://www.w3.org/2000/svg"
-                 width="32"
-                 height="32"
-                 viewBox="0 0 32 32">
-              <g fill="none"
-                 stroke="#337AB7"
-                 stroke-width="1.5"
-                 stroke-linejoin="round"
-                 stroke-miterlimit="10">
-                <circle class="arrow-circle-iconcircle"
-                        cx="16"
-                        cy="16"
-                        r="15.12"></circle>
-                <path class="arrow-circle-icon--arrow"
-                      d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98">
-                </path>
-              </g>
-            </svg>
-            Технико-экономическая оценка технологий обработки твердых коммунальных
-            отходов для
-            их последующей энергетической утелизации</a>
-        </li>
-        <li>
-          <a class="arrow-circle"
-             target="_blank"
-             href="pdf/3.pdf">
-            <svg class="arrow-circle-icon"
-                 xmlns="http://www.w3.org/2000/svg"
-                 width="32"
-                 height="32"
-                 viewBox="0 0 32 32">
-              <g fill="none"
-                 stroke="#337AB7"
-                 stroke-width="1.5"
-                 stroke-linejoin="round"
-                 stroke-miterlimit="10">
-                <circle class="arrow-circle-iconcircle"
-                        cx="16"
-                        cy="16"
-                        r="15.12"></circle>
-                <path class="arrow-circle-icon--arrow"
-                      d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98">
-                </path>
-              </g>
-            </svg>
-            Зависимость качества и количества вторичного топлива от способа
-            выделения и
-            состава исходного потока отходов
-          </a>
-        </li>
+
+    <div class="accordion"
+         id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+            id="headingTwo">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo">
+            Теория
+          </button>
+        </h2>
+        <div id="collapseTwo"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingTwo"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <a href="pdf/1.pdf">Методические подходы к геоэкологической оценке технологий обработки твердых коммунальных
+              отходов с получением твердого топлива</a>
+            <p></p>
+            <a href="pdf/2.pdf">Технико-экономическая оценка технологий обработки твердых коммунальных отходов для их
+              последующей энергетической утелизации</a>
+            <p></p>
+            <a href="pdf/3.pdf">Зависимость качества и количества вторичного топлива от способа выделения и состава
+              исходного потока отходов</a>
+          </div>
+        </div>
       </div>
-      <div>
-        <a href="#accordion2"
-           aria-expanded="false"
-           aria-controls="accordion2"
-           class="accordion-title accordionTitle js-accordionTrigger">
-          Формулы</a>
-      </div>
-      <div class="accordion-content accordionItem is-collapsed"
-           id="accordion2"
-           aria-hidden="true">
-        <a class="arrow-circle"
-           href="./pdf/formula.pdf"
-           target="_blank">
-          <svg class="arrow-circle-icon"
-               xmlns="http://www.w3.org/2000/svg"
-               width="32"
-               height="32"
-               viewBox="0 0 32 32">
-            <g fill="none"
-               stroke="#337AB7"
-               stroke-width="1.5"
-               stroke-linejoin="round"
-               stroke-miterlimit="10">
-              <circle class="arrow-circle-iconcircle"
-                      cx="16"
-                      cy="16"
-                      r="15.12"></circle>
-              <path class="arrow-circle-icon--arrow"
-                    d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
-            </g>
-          </svg>
-          Формулы используемые при расчете
-        </a>
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+            id="headingThree">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree">
+            Формулы
+          </button>
+        </h2>
+        <div id="collapseThree"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingThree"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <a href="./pdf/formula.pdf">Формулы используемые при расчете</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -196,11 +125,14 @@
   <script src="./js/error/fullMassaErorr.js"></script>
   <!-- дополнительные скрипты -->
   <script src="./js/app.js"></script>
-  <script src="./js/dataList.js"></script>
   <!-- автозаполнение ячеек -->
   <script src="./js/autoFill/autoComplitedCell.js"></script>
   <script src="./js/autoFill/AutoComplitedBD.js"></script>
   <script src="./js/autoFill/checkerAutoComplit.js"></script>
+  <!--гугл диаграмма-->
+  <script type="text/javascript"
+          src="https://www.gstatic.com/charts/loader.js"></script>
+
 </body>
 
 </html>

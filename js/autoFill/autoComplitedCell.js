@@ -15,9 +15,7 @@ function otherAutoDilling(valueName) {
       idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heatNumber)
     }
   }
-  // let inputData = document.querySelectorAll(".input__data").forEach((e) => {
-  //   console.log(e)
-  // })
+
 }
 function idRows(id, number) {
   id.childNodes[6].querySelector("input").value = number

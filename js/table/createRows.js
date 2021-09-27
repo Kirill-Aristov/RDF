@@ -1,7 +1,6 @@
 document.getElementById("btn_string").addEventListener("click", () => {
   lenghtСolumn()
   autoCompliteCell()
-  dataList()
 })
 function lenghtСolumn() {
   const empTab = document.getElementById('empTable');
@@ -43,7 +42,6 @@ function tableCellName(td) {
   int.setAttribute("list", "list_name")
   int.setAttribute("class", "input_name")
   int.setAttribute("type", "text")
-  int.setAttribute("autocomplete", "off")
   td.appendChild(int);
 }
 function tableCellInput(td,) {
