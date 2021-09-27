@@ -182,9 +182,9 @@ select {
    * Correct the inability to style clickable types in iOS and Safari.
    */
 button,
-[type=button],
-[type=reset],
-[type=submit] {
+[type="button"],
+[type="reset"],
+[type="submit"] {
   -webkit-appearance: button;
 }
 
@@ -192,9 +192,9 @@ button,
    * Remove the inner border and padding in Firefox.
    */
 button::-moz-focus-inner,
-[type=button]::-moz-focus-inner,
-[type=reset]::-moz-focus-inner,
-[type=submit]::-moz-focus-inner {
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -203,9 +203,9 @@ button::-moz-focus-inner,
    * Restore the focus styles unset by the previous rule.
    */
 button:-moz-focusring,
-[type=button]:-moz-focusring,
-[type=reset]:-moz-focusring,
-[type=submit]:-moz-focusring {
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -256,8 +256,8 @@ textarea {
    * 1. Add the correct box sizing in IE 10.
    * 2. Remove the padding in IE 10.
    */
-[type=checkbox],
-[type=radio] {
+[type="checkbox"],
+[type="radio"] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   /* 1 */
@@ -268,8 +268,8 @@ textarea {
 /**
    * Correct the cursor style of increment and decrement buttons in Chrome.
    */
-[type=number]::-webkit-inner-spin-button,
-[type=number]::-webkit-outer-spin-button {
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -277,7 +277,7 @@ textarea {
    * 1. Correct the odd appearance in Chrome and Safari.
    * 2. Correct the outline style in Safari.
    */
-[type=search] {
+[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
   outline-offset: -2px;
@@ -287,7 +287,7 @@ textarea {
 /**
    * Remove the inner padding in Chrome and Safari on macOS.
    */
-[type=search]::-webkit-search-decoration {
+[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -505,7 +505,7 @@ input::-webkit-calendar-picker-indicator {
 
 .check-active {
   -webkit-box-shadow: 0 0 1px #2196f3;
-          box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px #2196f3;
   background-color: #2196f3;
 }
 .check-active::before {
@@ -540,11 +540,11 @@ h1 {
   width: 100%;
   margin: 50px 0 30px 0;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 #btn {
@@ -754,7 +754,7 @@ th:nth-child(odd) {
 .accordionTitleActive:before,
 .accordionTitle.is-expanded:before {
   -webkit-transform: rotate(-225deg);
-          transform: rotate(-225deg);
+  transform: rotate(-225deg);
 }
 
 .accordionItem {
@@ -795,26 +795,26 @@ th:nth-child(odd) {
 
 .animateIn {
   -webkit-animation: accordionIn 0.45s normal ease-in-out both 1;
-          animation: accordionIn 0.45s normal ease-in-out both 1;
+  animation: accordionIn 0.45s normal ease-in-out both 1;
 }
 
 .animateOut {
   -webkit-animation: accordionOut 0.45s alternate ease-in-out both 1;
-          animation: accordionOut 0.45s alternate ease-in-out both 1;
+  animation: accordionOut 0.45s alternate ease-in-out both 1;
 }
 
 @-webkit-keyframes accordionIn {
   0% {
     opacity: 0;
     -webkit-transform: scale(0.9) rotateX(-60deg);
-            transform: scale(0.9) rotateX(-60deg);
+    transform: scale(0.9) rotateX(-60deg);
     -webkit-transform-origin: 50% 0;
-            transform-origin: 50% 0;
+    transform-origin: 50% 0;
   }
   100% {
     opacity: 1;
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -822,38 +822,38 @@ th:nth-child(odd) {
   0% {
     opacity: 0;
     -webkit-transform: scale(0.9) rotateX(-60deg);
-            transform: scale(0.9) rotateX(-60deg);
+    transform: scale(0.9) rotateX(-60deg);
     -webkit-transform-origin: 50% 0;
-            transform-origin: 50% 0;
+    transform-origin: 50% 0;
   }
   100% {
     opacity: 1;
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
 }
 @-webkit-keyframes accordionOut {
   0% {
     opacity: 1;
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
   100% {
     opacity: 0;
     -webkit-transform: scale(0.9) rotateX(-60deg);
-            transform: scale(0.9) rotateX(-60deg);
+    transform: scale(0.9) rotateX(-60deg);
   }
 }
 @keyframes accordionOut {
   0% {
     opacity: 1;
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
   }
   100% {
     opacity: 0;
     -webkit-transform: scale(0.9) rotateX(-60deg);
-            transform: scale(0.9) rotateX(-60deg);
+    transform: scale(0.9) rotateX(-60deg);
   }
 }
 .arrow-circle {
@@ -885,7 +885,7 @@ th:nth-child(odd) {
 
 .arrow-circle:hover .arrow-circle-icon {
   -webkit-transform: translate3d(5px, 0, 0);
-          transform: translate3d(5px, 0, 0);
+  transform: translate3d(5px, 0, 0);
 }
 
 .arrow-circle:hover .arrow-circle-iconcircle {
@@ -929,7 +929,7 @@ th:nth-child(odd) {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   background-color: rgba(204, 204, 204, 0.8);
   padding: 10px 20px;
 }
@@ -945,7 +945,7 @@ th:nth-child(odd) {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
-      justify-content: space-around;
+  justify-content: space-around;
   margin-top: 10px;
 }
 
@@ -966,4 +966,10 @@ th:nth-child(odd) {
 
 .remove {
   display: none;
+}
+p {
+  margin-top: 30px;
+  background-color: #c4c4c4;
+  display: inline-block;
+  color: red;
 }

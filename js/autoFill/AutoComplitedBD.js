@@ -3,7 +3,6 @@ const baseAutoComplite = [
     name: "органические отходы",
     heatNumber: 18.2
   },
-
   {
     name: "макулатура",
     heatNumber: 16.9
