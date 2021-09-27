@@ -800,4 +800,6 @@ th:nth-child(odd) {
 
 .accordion {
   margin-top: 50px;
+  width: 400px;
+  display: inline-block;
 }
