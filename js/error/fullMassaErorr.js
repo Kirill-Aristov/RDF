@@ -35,8 +35,10 @@ function addRowsOther(fullMassa) {
   lastItem(inputName, 1, "Прочее")
   const inputData = document.querySelectorAll(".input__data")
   lastItem(inputData, 4, 100 - fullMassa.toFixed(3))
+
 }
 function lastItem(last, id, attribute) {
   let lastValue = last[last.length - id];
-  lastValue.setAttribute("value", attribute)
+  lastValue.value = attribute
+  otherAutoDilling(lastValue)
 }

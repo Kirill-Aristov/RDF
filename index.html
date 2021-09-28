@@ -40,14 +40,14 @@
     <option value="Текстиль"></option>
   </datalist>
   <div class="container">
-    <h1>Калькулятор для рассчета </h1>
-    <div class="checkbox">
-      <div class="checkbox-box">
-        <input class="checkbox-box__input"
+    <h1>Калькулятора для расчета теплоты сгорания ТКО(ТБО)</h1>
+    <div class="checkbox ">
+      <div class="checkbox-box ">
+        <input class="checkbox-box__input "
                type="checkbox">
-        <span class="checkbox-box__slider"></span>
+        <span class="checkbox-box__slider check-active"></span>
       </div>
-      <div class="checkbox-box__text">Автозаполнение выключено</div>
+      <div class="checkbox-box__text">Автозаполнение включено</div>
     </div>
     <div id="choice">
       <button id="btn_string">Добавить строку</button>
@@ -61,6 +61,29 @@
 
     <div class="accordion"
          id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header"
+            id="headingOne">
+          <button class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne">
+            Иструкция по использованию
+          </button>
+        </h2>
+        <div id="collapseOne"
+             class="accordion-collapse collapse"
+             aria-labelledby="headingOne"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <a href="./pdf/instructionsForUse.pdf">Иструкция по использованию</a>
+            <p></p>
+            <a href="./pdf/referenceData.pdf">Справочные данные</a>
+          </div>
+        </div>
+      </div>
       <div class="accordion-item">
         <h2 class="accordion-header"
             id="headingTwo">
@@ -113,6 +136,7 @@
     </div>
 
   </div>
+
   <!-- создание таблицы и управление -->
   <script src="./js/table/startCreateTable.js"></script>
   <script src="./js/table/createRows.js"></script>

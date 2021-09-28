@@ -38,7 +38,7 @@ function calck(bd) {
   
   
   
-  <div>1. Общая влажность ТКО: ${humidity.toFixed(2) / 100} %</div>
+  <div>1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %</div>
   <div>2. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж</div>
   `
   charts(bd, fullMassa)

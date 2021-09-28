@@ -84,7 +84,7 @@ const baseAutoComplite = [
     massa: 18.69,
   },
   {
-    name: ["прочее"],
+    name: "прочее",
     heat: 20.1,
     ashContent: 0,
     humidity: 100,

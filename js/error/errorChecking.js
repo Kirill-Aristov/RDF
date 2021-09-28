@@ -62,7 +62,7 @@ function error(bd) {
     spanRemove()
     span.setAttribute("class", className)
     span.innerText = text
-    span.style.top = (51 * (index + 1)) + "px"
+    span.style.top = (49 * (index + 1)) + "px"
     table.appendChild(span)
     span.addEventListener("click", () => {
       table.removeChild(span)
