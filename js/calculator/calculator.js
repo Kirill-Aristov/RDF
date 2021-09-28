@@ -6,10 +6,12 @@ function calck(bd) {
   /////////////
   //Влажность переменные
   let massTimesMoisture = []// Массив данных влажность умноженная на содержание
-  let humidity // общая Влажность ТКО
+  let humidity = 0 // общая Влажность ТКО
   ////////////////////////////////////////////////
   //Зольность переменные
-
+  let leftAshContentTop = [] //левое уравнение верхней части дроби
+  let leftAshContentBottom = [] //левое уравнение нижней части дроби 
+  let ashContent = 0 //зольность
   //////////////////////////////////////////////////////
   //Теплота сгорания переменные
   let heat = 0 // Теплота сгорания 
@@ -24,7 +26,9 @@ function calck(bd) {
     humidity = massTimesMoisture.reduce(reducerPlus)
     /////////////////////////////////////
     //Расчёт общей Зольности //////////////////////
-
+    leftAshContentTop.push(element.massa * element.A * (100 - element.W))
+    leftAshContentBottom.push(element.massa * (100 - element.W))
+    ashContent = (leftAshContentTop.reduce(reducerPlus) / leftAshContentBottom.reduce(reducerPlus)) * (1 - (humidity / 100 / 100))
     ////////////////////////////////////////////////////////////
     //Удельная теплота сгорания 
     leftHeat.push(element.massa * (1 - element.W / 100) * (1 - element.A / 100) * element.Q)
@@ -34,12 +38,13 @@ function calck(bd) {
   });
   const main = document.getElementById("main")
   main.innerHTML = `
-  <div id="donutchart" style="width: 500px; height: 400px;"></div> 
+  <div id="donutchart" style="width: 700px; height: 400px; cursor: pointer"></div> 
   
   
   
-  <div>1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %</div>
-  <div>2. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж</div>
+  <div>1. Общая влажность ТКО(ТБО): ${(humidity / 100).toFixed(2)} %</div>
+  <div>1.Зольность на рабочию массу ТКО(ТБО): ${ashContent.toFixed(2)} %</div>
+  <div>2. Удельная теплота сгорания ТКО(ТБО): ${heat.toFixed(3)} мДж</div>
   `
   charts(bd, fullMassa)
 }
