@@ -4,10 +4,9 @@ function error(bd) {
   let ashContent = [] //зольность
   let humidity = [] // влажность
   let id = [] //номер строки
-
   bd.forEach(element => {
     id.push(element.id)
-    fullMassa += element.massa
+    fullMassa += element.massa * 1000
     ashContent.push(element.A)
     humidity.push(element.W)
   });
@@ -19,7 +18,6 @@ function error(bd) {
   //создание span для Удаление всех span  
   const span = document.createElement("span")
   span.setAttribute("id", "active")
-
   if (humidityError > 100) {
     //проверка на Влажность
     const text = "Влажность содержимого не может превышать 100%"
@@ -30,15 +28,15 @@ function error(bd) {
     const text = "Зольность содержимого не может превышать 100%"
     checkErorr("achContent_error", ashContentIndex, text)
   }
-  else if (fullMassa > 100 || fullMassa < 100) {
+  else if ((fullMassa / 1000) > 100 || (fullMassa / 1000) < 100) {
     //проверка на содержание
-    if (fullMassa < 100) {
-      addOther(fullMassa, table)
+    if ((fullMassa / 1000) < 100) {
+      addWindow(fullMassa, table)
     } else {
       //заполнение остататка "Прочие"
       spanRemove()
       span.setAttribute("class", "massa_error")
-      span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%"
+      span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa / 1000 + "%"
       span.style.bottom = 60 + (51 * id.length) + "px"
       table.appendChild(span)
       span.addEventListener("click", () => {

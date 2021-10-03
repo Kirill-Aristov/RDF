@@ -433,16 +433,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-/* Hide the list on focus of the input field */
-datalist {
-  display: none;
-}
-
-datalist:hover {
-  display: none;
-}
-
-/* specifically hide the arrow on focus */
 [list]::-webkit-calendar-picker-indicator {
   display: none;
   background-color: inherit;
@@ -453,6 +443,11 @@ input::-webkit-calendar-picker-indicator {
   display: none;
   background-color: inherit;
   opacity: 0;
+}
+
+.divListName {
+  background-color: #000;
+  color: #fff;
 }
 
 .checkbox {
@@ -520,6 +515,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .container {
+  position: relative;
   max-width: 1100px;
   width: 100%;
   min-height: 100%;
@@ -744,14 +740,7 @@ th:nth-child(odd) {
   margin-top: 30px;
 }
 
-#main div {
-  font-size: 16px;
-  color: #000;
-  font-weight: 500;
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-}
-
-.other-container {
+.container-window {
   position: absolute;
   top: 10%;
   left: 50%;
@@ -760,16 +749,14 @@ th:nth-child(odd) {
   background-color: rgba(204, 204, 204, 0.8);
   padding: 10px 20px;
 }
-
-.other-container__text {
+.container-window__text {
   font-size: 15px;
   font-weight: 400;
   line-height: 20px;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   text-align: center;
 }
-
-.other-container__btn {
+.container-window__btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -777,8 +764,7 @@ th:nth-child(odd) {
   justify-content: space-around;
   margin-top: 10px;
 }
-
-.other-btn {
+.container-window .window__btn {
   padding: 10px;
   color: #000;
   font-weight: 600;
@@ -788,8 +774,7 @@ th:nth-child(odd) {
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
 }
-
-.other-btn:hover {
+.container-window .window__btn:hover {
   color: #ccc;
   background-color: #000;
 }
@@ -802,4 +787,12 @@ th:nth-child(odd) {
   margin-top: 50px;
   width: 400px;
   display: inline-block;
+}
+
+.container-calculations div {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  margin: 5px 10px;
 }

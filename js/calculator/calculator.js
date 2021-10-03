@@ -38,13 +38,20 @@ function calck(bd) {
   });
   const main = document.getElementById("main")
   main.innerHTML = `
-  <div id="donutchart" style="width: 700px; height: 400px; cursor: pointer"></div> 
+  <div id="piechart_3d" style="width: 100%; height: 400px; cursor: pointer"></div> 
   
   
-  
-  <div>1. Общая влажность ТКО(ТБО): ${(humidity / 100).toFixed(2)} %</div>
-  <div>1.Зольность на рабочию массу ТКО(ТБО): ${ashContent.toFixed(2)} %</div>
-  <div>2. Удельная теплота сгорания ТКО(ТБО): ${heat.toFixed(3)} мДж</div>
+  <div class="container-calculations">
+    <div>
+      1. Общая влажность ТКО(ТБО): ${(humidity / 100).toFixed(2)} %
+    </div>
+    <div>
+      2. Зольность на рабочию массу ТКО(ТБО): ${ashContent.toFixed(2)} %
+    </div>
+    <div>
+      3. Удельная теплота сгорания ТКО(ТБО): ${heat.toFixed(3)} мДж
+    </div>
+  </div>
   `
   charts(bd, fullMassa)
 }
