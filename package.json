@@ -16,10 +16,11 @@
     "url": "https://github.com/Kirill-Aristov/RDF/issues"
   },
   "homepage": "https://github.com/Kirill-Aristov/RDF#readme",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^10.3.6",
     "browser-sync": "^2.27.5",
     "del": "^6.0.0",
+    "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-file-include": "^2.3.0",
@@ -27,8 +28,5 @@
     "gulp-sass": "^5.0.0",
     "postcss": "^8.3.8",
     "sass": "^1.42.1"
-  },
-  "dependencies": {
-    "glob-parent": "^6.0.2"
   }
 }
