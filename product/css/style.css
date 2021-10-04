@@ -682,10 +682,9 @@ td {
 }
 
 td input {
-  text-align: center;
   color: #000;
   border: 1px solid #000;
-  padding: 4px 3px 4px 3px;
+  padding: 4px 3px 4px 6px;
   width: 80px;
   background-color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
