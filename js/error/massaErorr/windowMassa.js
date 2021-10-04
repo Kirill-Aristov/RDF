@@ -1,4 +1,4 @@
-function addWindow(fullMassa, table) {
+function addWindow(fullMassa) {
   const div = document.createElement("div")
   div.setAttribute("class", "container-window")
   div.innerHTML = `
@@ -23,7 +23,7 @@ function windowAnswer(div, fullMassa) {
       (e.value == "Нет") ?
         div.remove()
         :
-      addRowsWindow(fullMassa)
+        addRowsWindow(fullMassa)
       div.remove()
     })
   })

@@ -54,4 +54,5 @@ function calck(bd) {
   </div>
   `
   charts(bd, fullMassa)
+  main.scrollIntoView()
 }

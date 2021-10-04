@@ -38,11 +38,11 @@ function tableCellId(rowCnt, td) {
   td.appendChild(div);
 }
 function tableCellName(td) {
-  const int = document.createElement("input");
-  int.setAttribute("list", "list_name");
-  int.setAttribute("class", "input_name");
-  int.setAttribute("type", "text");
-  td.appendChild(int);
+  const input = document.createElement("input");
+  input.setAttribute("list", "list_name");
+  input.setAttribute("class", "input_name");
+  input.setAttribute("type", "text");
+  td.appendChild(input);
 }
 function tableCellInput(td,) {
   let ele1 = document.createElement("input");

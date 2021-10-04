@@ -238,7 +238,7 @@ const baseAutoComplite = [
     heat: 0,
   },
   {
-    name: "кожа, резина, обувь",
+    name: "кожа. резина. обувь",
     massa: 0.8,
     humidity: 10.8,
     ashContent: 22.1,

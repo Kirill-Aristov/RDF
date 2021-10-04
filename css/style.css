@@ -611,16 +611,11 @@ h1 {
   cursor: pointer;
 }
 
-#table {
-  position: relative;
-}
-
 #table .humidityError_error,
 #table .achContent_error,
 #table .massa_error {
   cursor: pointer;
   position: absolute;
-  left: 55%;
   background-color: #f7d7da;
   color: red;
   padding: 5px 15px 5px 5px;
@@ -666,15 +661,6 @@ h1 {
 
 #table .massa_error {
   left: 35%;
-}
-
-#table .massa_error::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 15%;
-  border: 10px solid transparent;
-  border-top: 10px solid #f7d7da;
 }
 
 table {

@@ -9,5 +9,4 @@ function RemoveRows(getId) {
     }
   })
   empTable.deleteRow(idRows)
-
 }
