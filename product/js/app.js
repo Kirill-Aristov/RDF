@@ -220,10 +220,11 @@ function checkFullmassaErorr(fullMassa, span, id) {
     return false
   }
   if (fullMassa > 100) {
+    console.log(fullMassa)
     removeErorr();
     span.setAttribute("class", "massa_error");
     span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";
-    span.style.top = -65 + "px";
+    span.style.top = (table.offsetTop - 65) + "px";
     table.appendChild(span);
     span.addEventListener("click", () => {
       table.removeChild(span);

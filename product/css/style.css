@@ -665,6 +665,13 @@ h1 {
 #table .massa_error {
   left: 35%;
 }
+#table .massa_error::after {
+  top: 100%;
+  right: 70%;
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
 
 table {
   border-spacing: 0;
