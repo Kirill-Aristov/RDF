@@ -1,0 +1,16 @@
+@@include("table/startCreateTable.js");
+@@include("table/createRows.js");
+@@include("table/addRemoveSelect.js");
+@@include("calculator/collectDataFromTable.js");
+@@include("calculator/calculator.js");
+@@include("calculator/charts.js");
+@@include("error/achContent/ashContentErorr.js");
+@@include("error/humidityErorr/humidityErorr.js");
+@@include("error/windowErorr.js");
+@@include("error/massaErorr/fullMassaErorr.js");
+@@include("error/massaErorr/windowMassa.js");
+@@include("error/errorChecking.js");
+@@include("error/removeErorr.js");
+@@include("autoFill/autoComplitedCell.js");
+@@include("autoFill/AutoComplitedBD.js");
+@@include("autoFill/checkerAutoComplit.js");
