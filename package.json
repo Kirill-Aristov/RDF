@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Kirill-Aristov/RDF_TEST.git"
+    "url": "git+https://github.com/Kirill-Aristov/RDF.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Kirill-Aristov/RDF_TEST/issues"
+    "url": "https://github.com/Kirill-Aristov/RDF/issues"
   },
-  "homepage": "https://github.com/Kirill-Aristov/RDF_TEST#readme",
+  "homepage": "https://github.com/Kirill-Aristov/RDF#readme",
   "dependencies": {
     "autoprefixer": "^10.3.6",
     "browser-sync": "^2.27.5",
