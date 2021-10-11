@@ -8,11 +8,10 @@ dataList.addEventListener("change", (element) => {
   table.appendChild(tableBody);
   tableBody.appendChild(tr);
   checkNameRows(element.target.value);
-  // checkNumberRows()
+  checkNumberRows()
   includeHeadrSelectChange();
   disableHeadrSelect(element.target.value);
 });
-
 function CreateHeaderTable(tr, element) {
   const td = document.createElement('td');
   td.setAttribute("colspan", 6) //заполнение во всю строку

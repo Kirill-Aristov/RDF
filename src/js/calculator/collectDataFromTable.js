@@ -1,4 +1,4 @@
-let btn = document.getElementById("btn").addEventListener("click", () => {
+const btn = document.getElementById("btn").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
   for (let i = 1; row = table.rows[i]; i++) {

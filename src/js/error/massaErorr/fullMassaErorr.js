@@ -1,11 +1,10 @@
-function checkFullmassaErorr(fullMassa, span, id) {
+function checkFullmassaErorr(fullMassa, span) {
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     addWindow(fullMassa * 1000);
     return false
   }
   if (fullMassa > 100) {
-    console.log(fullMassa)
     removeErorr();
     span.setAttribute("class", "massa_error");
     span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";

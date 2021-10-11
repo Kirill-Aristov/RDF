@@ -1,9 +1,11 @@
-@@include("table/startCreateTable.js");
-@@include("table/createRows.js");
-@@include("table/removeRows.js");
-@@include("table/createHeader.js");
-@@include("table/disableHeadrSelect.js");
-@@include("table/additionalCreateRows.js");
+@@include("table/start/startCreateTable.js");
+@@include("table/create/createRows.js");
+@@include("table/create/createPlusRows/additionalCreateRows.js");
+@@include("table/create/createHeader.js");
+@@include("table/removeRows/removeRows.js");
+@@include("table/removeRows/removeHeaderRows.js");
+@@include("table/removeRows/removeBtnRows.js");
+@@include("table/disableSelect/disableHeadrSelect.js");
 @@include("calculator/collectDataFromTable.js");
 @@include("calculator/calculator.js");
 @@include("calculator/charts.js");
@@ -17,3 +19,4 @@
 @@include("autoFill/autoComplitedCell.js");
 @@include("autoFill/AutoComplitedBD.js");
 @@include("autoFill/checkerAutoComplit.js");
+

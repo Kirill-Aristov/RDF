@@ -91,6 +91,55 @@ function tableCellInput(td) {
 
 
 ;
+function checkNumberRows() {
+  let lastIndexRows;
+  document.querySelectorAll("#headingTable").forEach((e) => {
+    lastIndexRows = e.parentNode.parentNode;
+  });
+  const tableBodyHight = lastIndexRows.offsetTop;
+  createRowsAdditional(tableBodyHight);
+};
+function createRowsAdditional(tableBodyHight) {
+  const table = document.getElementById('empTable');
+  const btnRows = document.createElement("button");
+  btnRows.setAttribute("id", "btn_string");
+  btnRows.style.top = (tableBodyHight) + "px";
+  table.appendChild(btnRows);
+};;
+const dataList = document.getElementById("btn_header")
+dataList.addEventListener("change", (element) => {
+  const table = document.getElementById('empTable');
+  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+  let tr = tableBody.insertRow(-1);
+  CreateRemoveHeaderTable(tr);
+  CreateHeaderTable(tr, element.target.value);
+  table.appendChild(tableBody);
+  tableBody.appendChild(tr);
+  checkNameRows(element.target.value);
+  checkNumberRows()
+  includeHeadrSelectChange();
+  disableHeadrSelect(element.target.value);
+});
+function CreateHeaderTable(tr, element) {
+  const td = document.createElement('td');
+  td.setAttribute("colspan", 6) //заполнение во всю строку
+  const input = document.createElement("input");
+  input.setAttribute("id", "headingTable")
+  input.setAttribute("value", (element == "Пустой заголовок") ? "Введите название" : element); //присваивание название
+  tr.appendChild(td);
+  td.appendChild(input);
+};
+function CreateRemoveHeaderTable(tr) {
+  const td = document.createElement('td');
+  const input = document.createElement("input");
+  input.setAttribute("type", "button");
+  input.setAttribute("class", "clearBtn");
+  input.setAttribute("onclick", "removeHeaderRows(this.parentNode.parentNode)");
+  input.setAttribute("tabindex", "-1");
+  tr.appendChild(td);
+  td.appendChild(input);
+};
+;
 function removeRows(getId) {
   let headerTableLenght = document.querySelectorAll("#headingTable").length; // определяет количество заголовков
   const bodyTable = document.getElementById("bodyTable");
@@ -103,6 +152,7 @@ function removeRows(getId) {
   });
   bodyTable.deleteRow(getId - 1);
 };
+;
 function removeHeaderRows(getId) {
   const bodyTable = document.getElementById("bodyTable");
   let dataIdRows = [];// мастоположение всех заголовков индексы
@@ -127,42 +177,11 @@ function removeHeaderRows(getId) {
   };
   bodyTable.deleteRow(getId.rowIndex - 1);
   includeHeadrSelect(getId);
+  removeBtn(getId)
 };;
-const dataList = document.getElementById("btn_header")
-dataList.addEventListener("change", (element) => {
-  const table = document.getElementById('empTable');
-  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-  let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr);
-  CreateHeaderTable(tr, element.target.value);
-  table.appendChild(tableBody);
-  tableBody.appendChild(tr);
-  checkNameRows(element.target.value);
-  // checkNumberRows()
-  includeHeadrSelectChange();
-  disableHeadrSelect(element.target.value);
-});
-
-function CreateHeaderTable(tr, element) {
-  const td = document.createElement('td');
-  td.setAttribute("colspan", 6) //заполнение во всю строку
-  const input = document.createElement("input");
-  input.setAttribute("id", "headingTable")
-  input.setAttribute("value", (element == "Пустой заголовок") ? "Введите название" : element); //присваивание название
-  tr.appendChild(td);
-  td.appendChild(input);
+function removeBtn(getId) {
+  console.log(getId)
 };
-function CreateRemoveHeaderTable(tr) {
-  const td = document.createElement('td');
-  const input = document.createElement("input");
-  input.setAttribute("type", "button");
-  input.setAttribute("class", "clearBtn");
-  input.setAttribute("onclick", "removeHeaderRows(this.parentNode.parentNode)");
-  input.setAttribute("tabindex", "-1");
-  tr.appendChild(td);
-  td.appendChild(input);
-};
-;
 function disableHeadrSelect(element) {
   dataList.getElementsByTagName("option");
   (element != "Пустой заголовок") ? checkHeaderSelect(element, true) : "";
@@ -194,20 +213,7 @@ function checkHeaderSelect(select, boolean) {
     (dataList[i].value == select) ? dataList[i].disabled = boolean : "";
   };
 };;
-// function checkNumberRows() {
-//   console.log("отработала")
-//   let headerTableLenght = document.querySelectorAll("#headingTable").length;
-//   console.log(headerTableLenght)
-//   // createRowsAdditional()
-// }
-
-// function createRowsAdditional() {
-//   const table = document.getElementById('empTable');
-//   const btnRows = document.createElement("button")
-//   btnRows.setAttribute("id", "btn_string");
-//   table.appendChild(btnRows)
-// };
-let btn = document.getElementById("btn").addEventListener("click", () => {
+const btn = document.getElementById("btn").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
   for (let i = 1; row = table.rows[i]; i++) {
@@ -336,14 +342,13 @@ function windowErorr(className, index, text, span) {
     table.removeChild(span);
   });
 };;
-function checkFullmassaErorr(fullMassa, span, id) {
+function checkFullmassaErorr(fullMassa, span) {
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     addWindow(fullMassa * 1000);
     return false
   }
   if (fullMassa > 100) {
-    console.log(fullMassa)
     removeErorr();
     span.setAttribute("class", "massa_error");
     span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";
@@ -812,7 +817,8 @@ function autoComplete() {
 };
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение выключено";
-   document.querySelectorAll(".input_name").forEach((e) => {
+  document.querySelectorAll(".input_name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
   });
 };;
+

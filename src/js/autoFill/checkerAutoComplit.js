@@ -14,7 +14,7 @@ function autoComplete() {
 };
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение выключено";
-   document.querySelectorAll(".input_name").forEach((e) => {
+  document.querySelectorAll(".input_name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
   });
 };
