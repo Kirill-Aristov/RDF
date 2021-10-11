@@ -64,7 +64,7 @@
     <option value="Электронные отходы"></option>
   </datalist>
   <div class="container">
-    <h1>Калькулятора для расчета теплоты сгорания ТКО(ТБО)</h1>
+    <h1>Калькулятора для расчета теплоты сгорания ТКО</h1>
     <div class="checkbox ">
       <div class="checkbox-box ">
         <input class="checkbox-box__input "
@@ -74,7 +74,24 @@
       <div class="checkbox-box__text">Автозаполнение включено</div>
     </div>
     <div id="choice">
-      <button id="btn_string">Добавить строку</button>
+      <select id="btn_header">
+        <option selected="true"
+                disabled="disabled"
+                value="Добавить">Добавить</option>
+        <option value="Органические отходы">Органические отходы</option>
+        <option value="Полимеры">Полимеры</option>
+        <option value="Дерево">Дерево</option>
+        <option value="Макулатура">Макулатура</option>
+        <option value="Текстиль">Текстиль</option>
+        <option value="Металлы">Металлы</option>
+        <option value="Стекло">Стекло</option>
+        <option value="Опасные материалы">Опасные материалы</option>
+        <option value="Инертные материалы">Инертные материалы</option>
+        <option value="Отсев">Отсев</option>
+        <option value="Прочие материалы">Прочие материалы</option>
+        <option value="Комбинированные материалы">Комбинированные материалы</option>
+        <option value="Пустой заголовок">Пустой заголовок</option>
+      </select>
       <button id="btn"
               type="button">Расчет</button>
     </div>

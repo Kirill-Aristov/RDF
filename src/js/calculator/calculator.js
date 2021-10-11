@@ -41,13 +41,13 @@ function calck(bd) {
   <div id="piechart_3d" style="width: 100%; height: 400px; cursor: pointer"></div> 
   <div class="container-calculations">
     <div>
-      1. Общая влажность ТКО(ТБО): ${(humidity / 100).toFixed(2)} %
+      1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %
     </div>
     <div>
-      2. Зольность на рабочию массу ТКО(ТБО): ${ashContent.toFixed(2)} %
+      2. Зольность на рабочию массу ТКО: ${ashContent.toFixed(2)} %
     </div>
     <div>
-      3. Удельная теплота сгорания ТКО(ТБО): ${heat.toFixed(3)} мДж
+      3. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж
     </div>
   </div>
   `;

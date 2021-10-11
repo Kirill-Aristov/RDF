@@ -11,12 +11,10 @@ checkBox.addEventListener("click", () => {
 const checkBoxText = document.querySelector(".checkbox-box__text");
 function autoComplete() {
   checkBoxText.textContent = "Автозаполнение включено";
-  autoCompliteCell();
-}
+};
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение выключено";
    document.querySelectorAll(".input_name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
-    console.log("удалилась");
   });
 };

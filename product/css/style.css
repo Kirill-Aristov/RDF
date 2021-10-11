@@ -564,6 +564,19 @@ h1 {
 }
 
 #btn_string {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 35px;
+  height: 50px;
+  background-color: #42281c;
+  background-image: url(../img/arrow.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#btn_header {
+  cursor: pointer;
   width: 175px;
   padding: 9px;
   font-size: 18px;
@@ -673,6 +686,10 @@ h1 {
           transform: rotate(-90deg);
 }
 
+#empTable {
+  position: relative;
+}
+
 table {
   border-spacing: 0;
   empty-cells: hide;
@@ -730,6 +747,26 @@ th:nth-child(even) {
 
 th:nth-child(odd) {
   background: #e6ae74;
+}
+
+#headingTable {
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  cursor: pointer;
+  -webkit-transition: 0.3s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+}
+#headingTable:hover {
+  color: #42281c;
 }
 
 #main {

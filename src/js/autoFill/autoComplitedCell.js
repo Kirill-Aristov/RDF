@@ -1,4 +1,4 @@
-function autoCompliteCell() {
+function autoCompliteCell(input) {
   if (checkBox.classList.contains("check-active")) {
     const valueName = document.querySelectorAll(".input_name");
     for (let i = 0; i < valueName.length; i++) {
@@ -7,6 +7,7 @@ function autoCompliteCell() {
         otherAutoDilling(valueName[i]);
       });
     };
+    otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
@@ -22,5 +23,4 @@ function idRows(id, heat, ashContent, humidity, massa) {
   id.childNodes[4].querySelector("input").value = humidity;
   id.childNodes[3].querySelector("input").value = massa;
 };
-
 

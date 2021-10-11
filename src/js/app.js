@@ -1,6 +1,9 @@
 @@include("table/startCreateTable.js");
 @@include("table/createRows.js");
-@@include("table/addRemoveSelect.js");
+@@include("table/removeRows.js");
+@@include("table/createHeader.js");
+@@include("table/disableHeadrSelect.js");
+@@include("table/additionalCreateRows.js");
 @@include("calculator/collectDataFromTable.js");
 @@include("calculator/calculator.js");
 @@include("calculator/charts.js");

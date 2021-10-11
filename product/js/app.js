@@ -1,9 +1,12 @@
 let HeaderTable = new Array(); //создание таблицы.
 HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на сухую беззол.м. мДж/кг'];  //Массив шапки таблицы
- function createTable() {
+function createTable() {
   const empTable = document.createElement('table');
   empTable.setAttribute('id', 'empTable'); //id таблицы
-  let tr = empTable.insertRow(-1);
+  const thead = document.createElement("thead");//header таблицы
+  const tbody = document.createElement("tbody");//body таблицы
+  tbody.setAttribute("id", "bodyTable");
+  let tr = thead.insertRow(-1);
   for (let h = 0; h < HeaderTable.length; h++) {
     const th = document.createElement('th');
     th.innerHTML = HeaderTable[h];
@@ -11,93 +14,213 @@ HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Вла
   };
   const table = document.getElementById('table');
   table.appendChild(empTable);
+  empTable.appendChild(thead);
+  empTable.appendChild(tbody);
 };
 createTable();
 
 ;
-document.getElementById("btn_string").addEventListener("click", () => {
-  lenghtСolumn();
-  autoCompliteCell();
-});
-function lenghtСolumn() {
-  const empTab = document.getElementById('empTable');
-  let rowCnt = empTab.rows.length;
-  let tr = empTab.insertRow(rowCnt);
+function checkNameRows(element) {
+  baseAutoComplite.forEach((nameElement) => {
+    if (nameElement.HeaderName == element) {
+      lenghtСolumn(nameElement)
+    };
+  });
+};
+function lenghtСolumn(nameElement) {
+  let headerTableLenght = document.querySelectorAll("#headingTable").length;
+  const bodyTable = document.getElementById('bodyTable');
+  let rowCnt = bodyTable.rows.length;
+  let tr = bodyTable.insertRow(rowCnt);
   for (let c = 0; c < HeaderTable.length; c++) {
     let td = document.createElement('td');
     td = tr.insertCell(c);
-    checkCell(td, c, rowCnt);
+    checkCell(td, c, rowCnt, headerTableLenght, nameElement);
   };
 };
 
-function checkCell(td, c, rowCnt) {
+function checkCell(td, c, rowCnt, headerTableLenght, nameElement) {
   (c == 0) ?
     tableCellRemove(td)
     : (c == 1) ?
-      tableCellId(rowCnt, td)
+      tableCellId(rowCnt, td, headerTableLenght)
       : (c == 2) ?
-        tableCellName(td)
-        : tableCellInput(td)
+        tableCellName(td, nameElement)
+        : (c == 7) ?
+          tableCreateRows()
+          : tableCellInput(td)
 
 };
 function tableCellRemove(td) {
   const input = document.createElement("input");
   input.setAttribute("type", "button");
   input.setAttribute("class", "clearBtn");
-  input.setAttribute("onclick", "RemoveRows(this)");
+  input.setAttribute("onclick", "removeRows(this.parentNode.parentNode.rowIndex)");
   input.setAttribute("tabindex", "-1");
   td.appendChild(input);
 };
-function tableCellId(rowCnt, td) {
+function tableCellId(rowCnt, td, headLenght) {
   const div = document.createElement("div");
-  div.textContent = rowCnt;
+  div.textContent = rowCnt - headLenght + 1;
   div.setAttribute("class", "number_id");
   td.appendChild(div);
 };
-function tableCellName(td) {
+function tableCellName(td, nameElement) {
   const input = document.createElement("input");
   input.setAttribute("list", "list_name");
   input.setAttribute("class", "input_name");
   input.setAttribute("type", "text");
   td.appendChild(input);
+  if (nameElement) {
+    input.value = nameElement.name
+    setTimeout(() => {
+      autoCompliteCell(input)
+    }, 0);
+  }
 };
-function tableCellInput(td,) {
+function tableCellInput(td) {
   let ele1 = document.createElement("input");
   ele1.setAttribute("class", "input__data");
   ele1.setAttribute("type", "text");
   td.appendChild(ele1);
-};
 
+};
 
 
 
 
 
 ;
-function RemoveRows(getId) {
-  const empTable = document.getElementById("empTable");
-  const idRows = getId.parentNode.parentNode.rowIndex;
-  const numberRows = document.querySelectorAll(".number_id").forEach(element => {
-    if (element.textContent > idRows) {
+function removeRows(getId) {
+  let headerTableLenght = document.querySelectorAll("#headingTable").length; // определяет количество заголовков
+  const bodyTable = document.getElementById("bodyTable");
+  document.querySelectorAll(".number_id").forEach(element => {
+    if (element.textContent > getId - headerTableLenght) {
       let num = Number(element.textContent);
       num--;
       element.textContent = num;
     }
   });
-  empTable.deleteRow(idRows);
+  bodyTable.deleteRow(getId - 1);
+};
+function removeHeaderRows(getId) {
+  const bodyTable = document.getElementById("bodyTable");
+  let dataIdRows = [];// мастоположение всех заголовков индексы
+  let closestRight;//ближайшее наибольшее число
+  document.querySelectorAll("#headingTable").forEach((tableHeader) => {
+    dataIdRows.push(tableHeader.parentNode.parentNode.rowIndex);// мастоположение всех заголовков индексы
+  });
+  for (var i = 0; i < dataIdRows.length; i++) { //опряделяет ближайшее наибольшее число
+    if (dataIdRows[i] > getId.rowIndex && (closestRight === undefined || closestRight > dataIdRows[i])) {
+      closestRight = dataIdRows[i];//ближайшее наибольшее число
+    }
+  };
+  if (closestRight == undefined) { //есть ли ближайшее наибольшее число
+    let bodyTableLength = bodyTable.childNodes.length; //длина всей таблицы
+    for (let index = 0; index < (bodyTableLength - getId.rowIndex); index++) {
+      removeRows(bodyTableLength - index);
+    };
+  } else {
+    for (let index = 1; index < (closestRight - getId.rowIndex); index++) {
+      removeRows(closestRight - index);
+    };
+  };
+  bodyTable.deleteRow(getId.rowIndex - 1);
+  includeHeadrSelect(getId);
 };;
+const dataList = document.getElementById("btn_header")
+dataList.addEventListener("change", (element) => {
+  const table = document.getElementById('empTable');
+  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+  let tr = tableBody.insertRow(-1);
+  CreateRemoveHeaderTable(tr);
+  CreateHeaderTable(tr, element.target.value);
+  table.appendChild(tableBody);
+  tableBody.appendChild(tr);
+  checkNameRows(element.target.value);
+  // checkNumberRows()
+  includeHeadrSelectChange();
+  disableHeadrSelect(element.target.value);
+});
+
+function CreateHeaderTable(tr, element) {
+  const td = document.createElement('td');
+  td.setAttribute("colspan", 6) //заполнение во всю строку
+  const input = document.createElement("input");
+  input.setAttribute("id", "headingTable")
+  input.setAttribute("value", (element == "Пустой заголовок") ? "Введите название" : element); //присваивание название
+  tr.appendChild(td);
+  td.appendChild(input);
+};
+function CreateRemoveHeaderTable(tr) {
+  const td = document.createElement('td');
+  const input = document.createElement("input");
+  input.setAttribute("type", "button");
+  input.setAttribute("class", "clearBtn");
+  input.setAttribute("onclick", "removeHeaderRows(this.parentNode.parentNode)");
+  input.setAttribute("tabindex", "-1");
+  tr.appendChild(td);
+  td.appendChild(input);
+};
+;
+function disableHeadrSelect(element) {
+  dataList.getElementsByTagName("option");
+  (element != "Пустой заголовок") ? checkHeaderSelect(element, true) : "";
+  dataList.value = "Добавить";
+};
+function includeHeadrSelectChange() {
+  document.querySelectorAll("#headingTable").forEach((head) => {
+    head.addEventListener("click", (lastName) => {
+      let headerLastNames = lastName.target.value;//запоминает последние название
+      head.addEventListener("change", (FersName) => {
+        if (FersName.target.value != headerLastNames) { //верно если имена не совподают
+          checkHeaderSelect(headerLastNames, false);
+        }
+      });
+    });
+  });
+};
+function includeHeadrSelect(element) {
+  element.childNodes.forEach(e => {
+    select = e.querySelector("input").value;
+    if (select != "") {
+      checkHeaderSelect(select, false);
+    }
+  });
+};
+function checkHeaderSelect(select, boolean) {
+  dataList.getElementsByTagName("option");
+  for (let i = 0; i < dataList.length; i++) {
+    (dataList[i].value == select) ? dataList[i].disabled = boolean : "";
+  };
+};;
+// function checkNumberRows() {
+//   console.log("отработала")
+//   let headerTableLenght = document.querySelectorAll("#headingTable").length;
+//   console.log(headerTableLenght)
+//   // createRowsAdditional()
+// }
+
+// function createRowsAdditional() {
+//   const table = document.getElementById('empTable');
+//   const btnRows = document.createElement("button")
+//   btnRows.setAttribute("id", "btn_string");
+//   table.appendChild(btnRows)
+// };
 let btn = document.getElementById("btn").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
   for (let i = 1; row = table.rows[i]; i++) {
-    database.push({
-      id: row.cells[1].innerText,
-      name: row.cells[2].querySelector('input').value,
-      massa: Number(row.cells[3].querySelector('input').value.replace(/,/g, ".")),//содержание
-      W: Number(row.cells[4].querySelector('input').value.replace(/,/g, ".")),//влажность
-      A: Number(row.cells[5].querySelector('input').value.replace(/,/g, ".")),//зольность
-      Q: Number(row.cells[6].querySelector('input').value.replace(/,/g, "."))//теплота сгорания на сух массу
-    });
+    if(row.cells[2]){
+      database.push({
+        id: row.cells[1].innerText,
+        name: row.cells[2].querySelector('.input_name').value,
+        massa: Number(row.cells[3].querySelector('.input__data').value.replace(/,/g, ".")),//содержание
+        W: Number(row.cells[4].querySelector('.input__data').value.replace(/,/g, ".")),//влажность
+        A: Number(row.cells[5].querySelector('.input__data').value.replace(/,/g, ".")),//зольность
+        Q: Number(row.cells[6].querySelector('.input__data').value.replace(/,/g, "."))//теплота сгорания на сух массу
+      });
+    }
   };
   errorCheck(database);
 });
@@ -145,13 +268,13 @@ function calck(bd) {
   <div id="piechart_3d" style="width: 100%; height: 400px; cursor: pointer"></div> 
   <div class="container-calculations">
     <div>
-      1. Общая влажность ТКО(ТБО): ${(humidity / 100).toFixed(2)} %
+      1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %
     </div>
     <div>
-      2. Зольность на рабочию массу ТКО(ТБО): ${ashContent.toFixed(2)} %
+      2. Зольность на рабочию массу ТКО: ${ashContent.toFixed(2)} %
     </div>
     <div>
-      3. Удельная теплота сгорания ТКО(ТБО): ${heat.toFixed(3)} мДж
+      3. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж
     </div>
   </div>
   `;
@@ -241,8 +364,8 @@ function addWindow(fullMassa) {
   <div class="container-window__text">
   Содержание должно быть равным 100%
    <p>ваше содержание = ${fullMassa / 1000}%</p>
-  заполнить недостающие содежаниее "Прочее"
-    <p>"Прочее" = ${(100 * 1000 - fullMassa) / 1000}%</p>
+  заполнить недостающие содежаниее "жидкость(вода)"
+    <p>"жидкость(вода)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
   <div class="container-window__btn">
     <input class="window__btn" type="button" value="Да"></input>
     <input class="window__btn" type="button" value="Нет"></input>
@@ -267,7 +390,7 @@ function windowAnswer(div, fullMassa) {
 function addRowsWindow(fullMassa) {
   lenghtСolumn();
   const inputName = document.querySelectorAll(".input_name");
-  lastItem(inputName, 1, "Прочее");
+  lastItem(inputName, 1, "жидкость(вода)");
   const inputData = document.querySelectorAll(".input__data");
   lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
 };
@@ -309,7 +432,7 @@ function removeErorr() {
     spanActive[i].remove();
   };
 };;
-function autoCompliteCell() {
+function autoCompliteCell(input) {
   if (checkBox.classList.contains("check-active")) {
     const valueName = document.querySelectorAll(".input_name");
     for (let i = 0; i < valueName.length; i++) {
@@ -318,6 +441,7 @@ function autoCompliteCell() {
         otherAutoDilling(valueName[i]);
       });
     };
+    otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
@@ -334,10 +458,10 @@ function idRows(id, heat, ashContent, humidity, massa) {
   id.childNodes[3].querySelector("input").value = massa;
 };
 
-
 ;
 const baseAutoComplite = [
   {
+    HeaderName: "Органические отходы",
     name: "пищевые отходы",
     massa: 21.6,
     humidity: 78.6,
@@ -345,6 +469,7 @@ const baseAutoComplite = [
     heat: 18.2,
   },
   {
+    HeaderName: "Органические отходы",
     name: "растительные отходы",
     massa: 2,
     humidity: 62.4,
@@ -352,104 +477,7 @@ const baseAutoComplite = [
     heat: 18.7,
   },
   {
-    name: "картон крупный",
-    massa: 1.5,
-    humidity: 28.7,
-    ashContent: 10.6,
-    heat: 16.9,
-  },
-  {
-    name: "картон мелкий",
-    massa: 2.5,
-    humidity: 28.4,
-    ashContent: 12.3,
-    heat: 16.9,
-  },
-  {
-    name: "офисная бумага",
-    massa: 0.8,
-    humidity: 23.2,
-    ashContent: 20.4,
-    heat: 16.9,
-  },
-  {
-    name: "газетная бумага",
-    massa: 1.1,
-    humidity: 38.7,
-    ashContent: 7.1,
-    heat: 16.9,
-  },
-  {
-    name: "дерево",
-    massa: 1.1,
-    humidity: 18,
-    ashContent: 5,
-    heat: 18.9,
-  },
-  {
-    name: "комбинированная упаковка (тетрапак)",
-    massa: 0.8,
-    humidity: 21.7,
-    ashContent: 11.7,
-    heat: 30,
-  },
-  {
-    name: "электронные отходы",
-    massa: 0.3,
-    humidity: 3.5,
-    ashContent: 50,
-    heat: 33,
-  },
-  {
-    name: "прочие комбинированные материалы",
-    massa: 0.6,
-    humidity: 3.5,
-    ashContent: 50,
-    heat: 20.1,
-  },
-  {
-    name: "отсев",
-    massa: 18.7,
-    humidity: 55.7,
-    ashContent: 55.7,
-    heat: 20.1,
-  },
-  {
-    name: "черный металл",
-    massa: 0.2,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "жестяная банка",
-    massa: 0.8,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "цветной металл",
-    massa: 0.2,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "алюминиевая банка",
-    massa: 0.2,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "опасные материалы",
-    massa: 0.5,
-    humidity: 3.5,
-    ashContent: 50,
-    heat: 20.1,
-  },
-  {
+    HeaderName: "Полимеры",
     name: "пленка полиэтиленовая",
     massa: 7,
     humidity: 42.9,
@@ -457,6 +485,7 @@ const baseAutoComplite = [
     heat: 27.4,
   },
   {
+    HeaderName: "Полимеры",
     name: "пленка полипропиленовая",
     massa: 1.1,
     humidity: 33.6,
@@ -464,6 +493,7 @@ const baseAutoComplite = [
     heat: 45,
   },
   {
+    HeaderName: "Полимеры",
     name: "металлиз. и многослойная пленка",
     massa: 1,
     humidity: 20.8,
@@ -471,6 +501,7 @@ const baseAutoComplite = [
     heat: 27.4,
   },
   {
+    HeaderName: "Полимеры",
     name: "пэт-бутылка прозрачная",
     massa: 1.5,
     humidity: 4.6,
@@ -478,6 +509,7 @@ const baseAutoComplite = [
     heat: 21,
   },
   {
+    HeaderName: "Полимеры",
     name: "пэт-бутылка зеленая",
     massa: 0.2,
     humidity: 4.6,
@@ -485,6 +517,7 @@ const baseAutoComplite = [
     heat: 21,
   },
   {
+    HeaderName: "Полимеры",
     name: "пэт-бутылка синяя",
     massa: 0.1,
     humidity: 4.6,
@@ -492,6 +525,7 @@ const baseAutoComplite = [
     heat: 21,
   },
   {
+    HeaderName: "Полимеры",
     name: "пэт-бутылка темная",
     massa: 0.3,
     humidity: 4.6,
@@ -499,6 +533,7 @@ const baseAutoComplite = [
     heat: 21,
   },
   {
+    HeaderName: "Полимеры",
     name: "пэ-бутылки",
     massa: 0.9,
     humidity: 2.4,
@@ -506,6 +541,7 @@ const baseAutoComplite = [
     heat: 27.4,
   },
   {
+    HeaderName: "Полимеры",
     name: "полимерная упаковка",
     massa: 1.9,
     humidity: 18.5,
@@ -513,6 +549,7 @@ const baseAutoComplite = [
     heat: 27.4,
   },
   {
+    HeaderName: "Полимеры",
     name: "прочие полимеры",
     massa: 2.7,
     humidity: 8.2,
@@ -520,34 +557,73 @@ const baseAutoComplite = [
     heat: 27.4,
   },
   {
-    name: "стеклотара прозрачная",
-    massa: 3.8,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "стеклотара зеленая и синяя",
+    HeaderName: "Макулатура",
+    name: "картон крупный",
     massa: 1.5,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
+    humidity: 28.7,
+    ashContent: 10.6,
+    heat: 16.9,
   },
   {
-    name: "стеклотара темная",
-    massa: 1.2,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
+    HeaderName: "Макулатура",
+    name: "картон мелкий",
+    massa: 2.5,
+    humidity: 28.4,
+    ashContent: 12.3,
+    heat: 16.9,
   },
   {
-    name: "прочее стекло",
-    massa: 1.3,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
+    HeaderName: "Макулатура",
+    name: "офисная бумага",
+    massa: 0.8,
+    humidity: 23.2,
+    ashContent: 20.4,
+    heat: 16.9,
   },
   {
+    HeaderName: "Макулатура",
+    name: "газетная бумага",
+    massa: 1.1,
+    humidity: 38.7,
+    ashContent: 7.1,
+    heat: 16.9,
+  },
+  {
+    HeaderName: "Макулатура",
+    name: "книги и тетрадки в обложке",
+    massa: 0.3,
+    humidity: 15.2,
+    ashContent: 20.3,
+    heat: 16.9,
+  },
+  {
+    HeaderName: "Макулатура",
+    name: "глянцевая бумага",
+    massa: 0.5,
+    humidity: 17.6,
+    ashContent: 36.2,
+    heat: 16.9,
+  },
+  {
+    HeaderName: "Макулатура",
+    name: "прочая макулатура",
+    massa: 4.6,
+    humidity: 47.1,
+    ashContent: 16.9,
+    heat: 16.9,
+  },
+
+  {
+    HeaderName: "Дерево",
+    name: "дерево",
+    massa: 1.1,
+    humidity: 18,
+    ashContent: 5,
+    heat: 18.9,
+  },
+
+  {
+    HeaderName: "Текстиль",
     name: "одежда",
     massa: 1.5,
     humidity: 27.6,
@@ -555,6 +631,7 @@ const baseAutoComplite = [
     heat: 22.6,
   },
   {
+    HeaderName: "Текстиль",
     name: "прочий текcтиль",
     massa: 1.4,
     humidity: 32.1,
@@ -562,6 +639,105 @@ const baseAutoComplite = [
     heat: 22.6,
   },
   {
+    HeaderName: "Комбинированные материалы",
+    name: "комбинированная упаковка (тетрапак)",
+    massa: 0.8,
+    humidity: 21.7,
+    ashContent: 11.7,
+    heat: 30,
+  },
+  {
+    HeaderName: "Комбинированные материалы",
+    name: "электронные отходы",
+    massa: 0.3,
+    humidity: 3.5,
+    ashContent: 50,
+    heat: 33,
+  },
+  {
+    HeaderName: "Комбинированные материалы",
+    name: "прочие комбинированные материалы",
+    massa: 0.6,
+    humidity: 3.5,
+    ashContent: 50,
+    heat: 20.1,
+  },
+
+  {
+    HeaderName: "Металлы",
+    name: "черный металл",
+    massa: 0.2,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Металлы",
+    name: "жестяная банка",
+    massa: 0.8,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Металлы",
+    name: "цветной металл",
+    massa: 0.2,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Металлы",
+    name: "алюминиевая банка",
+    massa: 0.2,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+
+  {
+    HeaderName: "Стекло",
+    name: "стеклотара прозрачная",
+    massa: 3.8,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Стекло",
+    name: "стеклотара зеленая и синяя",
+    massa: 1.5,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Стекло",
+    name: "стеклотара темная",
+    massa: 1.2,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Стекло",
+    name: "прочее стекло",
+    massa: 1.3,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    HeaderName: "Опасные материалы",
+    name: "опасные материалы",
+    massa: 0.5,
+    humidity: 3.5,
+    ashContent: 50,
+    heat: 20.1,
+  },
+  {
+    HeaderName: "Инертные материалы",
     name: "строительные отходы",
     massa: 1.9,
     humidity: 4.4,
@@ -569,13 +745,24 @@ const baseAutoComplite = [
     heat: 0,
   },
   {
+    HeaderName: "Инертные материалы",
     name: "прочие инертные материалы",
-    massa: 1.4,
-    humidity: 32.1,
-    ashContent: 5.6,
+    massa: 3,
+    humidity: 8.7,
+    ashContent: 100,
     heat: 0,
   },
   {
+    HeaderName: "Отсев",
+    name: "отсев",
+    massa: 18.7,
+    humidity: 55.7,
+    ashContent: 55.7,
+    heat: 20.1,
+  },
+
+  {
+    HeaderName: "Прочие материалы",
     name: "кожа, резина, обувь",
     massa: 0.8,
     humidity: 10.8,
@@ -583,6 +770,7 @@ const baseAutoComplite = [
     heat: 30,
   },
   {
+    HeaderName: "Прочие материалы",
     name: "подгузники одноразовые",
     massa: 4.7,
     humidity: 65.4,
@@ -590,12 +778,22 @@ const baseAutoComplite = [
     heat: 20.6,
   },
   {
+    HeaderName: "Прочие материалы",
     name: "прочее",
-    heat: 20.1,
-    ashContent: 0,
+    massa: 3.6,
     humidity: 100,
-  }
+    ashContent: 0,
+    heat: 20.1,
+  },
+  {
+    name: "жидкость(вода)",
+    humidity: 100,
+    ashContent: 0,
+    heat: 0,
+  },
 ];
+
+
 
 ;
 const checkBox = document.querySelector(".checkbox-box__slider");
@@ -611,12 +809,10 @@ checkBox.addEventListener("click", () => {
 const checkBoxText = document.querySelector(".checkbox-box__text");
 function autoComplete() {
   checkBoxText.textContent = "Автозаполнение включено";
-  autoCompliteCell();
-}
+};
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение выключено";
    document.querySelectorAll(".input_name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
-    console.log("удалилась");
   });
 };;
