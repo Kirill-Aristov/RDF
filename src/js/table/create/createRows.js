@@ -24,8 +24,7 @@ function checkCell(td, c, rowCnt, headerTableLenght, nameElement) {
       tableCellId(rowCnt, td, headerTableLenght)
       : (c == 2) ?
         tableCellName(td, nameElement)
-        : (c == 7) ?
-          tableCreateRows()
+        : (c == 7) ? ""
           : tableCellInput(td)
 
 };
@@ -61,7 +60,6 @@ function tableCellInput(td) {
   ele1.setAttribute("class", "input__data");
   ele1.setAttribute("type", "text");
   td.appendChild(ele1);
-
 };
 
 

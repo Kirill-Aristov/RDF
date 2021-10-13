@@ -1,5 +1,5 @@
 let HeaderTable = new Array(); //создание таблицы.
-HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на сухую беззол.м. мДж/кг'];  //Массив шапки таблицы
+HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на сухую беззол.м. мДж/кг',""];  //Массив шапки таблицы
 function createTable() {
   const empTable = document.createElement('table');
   empTable.setAttribute('id', 'empTable'); //id таблицы
@@ -46,8 +46,7 @@ function checkCell(td, c, rowCnt, headerTableLenght, nameElement) {
       tableCellId(rowCnt, td, headerTableLenght)
       : (c == 2) ?
         tableCellName(td, nameElement)
-        : (c == 7) ?
-          tableCreateRows()
+        : (c == 7) ? ""
           : tableCellInput(td)
 
 };
@@ -83,7 +82,6 @@ function tableCellInput(td) {
   ele1.setAttribute("class", "input__data");
   ele1.setAttribute("type", "text");
   td.appendChild(ele1);
-
 };
 
 
@@ -91,32 +89,20 @@ function tableCellInput(td) {
 
 
 ;
-function checkNumberRows() {
-  let lastIndexRows;
-  document.querySelectorAll("#headingTable").forEach((e) => {
-    lastIndexRows = e.parentNode.parentNode;
-  });
-  const tableBodyHight = lastIndexRows.offsetTop;
-  createRowsAdditional(tableBodyHight);
-};
-function createRowsAdditional(tableBodyHight) {
-  const table = document.getElementById('empTable');
-  const btnRows = document.createElement("button");
-  btnRows.setAttribute("id", "btn_string");
-  btnRows.style.top = (tableBodyHight) + "px";
-  table.appendChild(btnRows);
+function createRowsAdditional(btn) {
+  console.log(btn)
 };;
 const dataList = document.getElementById("btn_header")
 dataList.addEventListener("change", (element) => {
   const table = document.getElementById('empTable');
   const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
   let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr);
-  CreateHeaderTable(tr, element.target.value);
+  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+  CreateHeaderTable(tr, element.target.value);// сам заголовок 6 строк
+  CreateHeaderBtn(tr) //создать дополнительную строку перед заголовком
   table.appendChild(tableBody);
   tableBody.appendChild(tr);
   checkNameRows(element.target.value);
-  checkNumberRows()
   includeHeadrSelectChange();
   disableHeadrSelect(element.target.value);
 });
@@ -139,6 +125,12 @@ function CreateRemoveHeaderTable(tr) {
   tr.appendChild(td);
   td.appendChild(input);
 };
+function CreateHeaderBtn(tr) {
+  const btnRows = document.createElement("button");
+  btnRows.setAttribute("id", "btn_string");
+  btnRows.setAttribute("onclick", "createRowsAdditional(this)");
+  tr.appendChild(btnRows);
+}
 ;
 function removeRows(getId) {
   let headerTableLenght = document.querySelectorAll("#headingTable").length; // определяет количество заголовков

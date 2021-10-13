@@ -1,6 +1,6 @@
 @@include("table/start/startCreateTable.js");
 @@include("table/create/createRows.js");
-@@include("table/create/createPlusRows/additionalCreateRows.js");
+@@include("table/create/createPlusRows/createRowsAdditional.js");
 @@include("table/create/createHeader.js");
 @@include("table/removeRows/removeRows.js");
 @@include("table/removeRows/removeHeaderRows.js");

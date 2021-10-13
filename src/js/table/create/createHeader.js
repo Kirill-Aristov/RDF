@@ -3,12 +3,12 @@ dataList.addEventListener("change", (element) => {
   const table = document.getElementById('empTable');
   const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
   let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr);
-  CreateHeaderTable(tr, element.target.value);
+  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+  CreateHeaderTable(tr, element.target.value);// сам заголовок 6 строк
+  CreateHeaderBtn(tr) //создать дополнительную строку перед заголовком
   table.appendChild(tableBody);
   tableBody.appendChild(tr);
   checkNameRows(element.target.value);
-  checkNumberRows()
   includeHeadrSelectChange();
   disableHeadrSelect(element.target.value);
 });
@@ -31,3 +31,9 @@ function CreateRemoveHeaderTable(tr) {
   tr.appendChild(td);
   td.appendChild(input);
 };
+function CreateHeaderBtn(tr) {
+  const btnRows = document.createElement("button");
+  btnRows.setAttribute("id", "btn_string");
+  btnRows.setAttribute("onclick", "createRowsAdditional(this)");
+  tr.appendChild(btnRows);
+}
