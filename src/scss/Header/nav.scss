@@ -1,0 +1,52 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(63, 11, 222, 0.8);
+  align-items: center;
+  .navigation {
+    display: flex;
+    a {
+      font-size: 16px;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 10px;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #fff;
+        transition: 0.4s all;
+      }
+      &:hover {
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .registration {
+    display: flex;
+    align-items: center;
+    button {
+      margin: 10px;
+      padding: 10px;
+      color: rgba(63, 11, 222, 0.9);
+      font-size: 16px;
+      font-weight: 700;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #fff;
+      border-radius: 5px;
+      transition: 0.3s all;
+      border: 2px solid transparent;
+      &:hover {
+        border: 2px solid #fff;
+        background-color: rgba(63, 11, 222, 0.9);
+        color: #fff;
+      }
+    }
+  }
+}

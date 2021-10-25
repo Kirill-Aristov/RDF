@@ -10,7 +10,7 @@ let path = {
     pdf: project_folder + "/pdf/",
   },
   src: {
-    html: source_folder + "/index.html",
+    html: [source_folder + "/*.html", "!" + source_folder + "/hmtl/**/*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/app.js",
     img: source_folder + "/img/**/*.{jpg,png,svg,gif,ico,webp,mp4}",
@@ -107,22 +107,22 @@ exports.default = watch;
 
 
 
-var globParent = require('glob-parent');
+// var globParent = require('glob-parent');
 
-globParent('path/to/*.js'); // 'path/to'
-globParent('/root/path/to/*.js'); // '/root/path/to'
-globParent('/*.js'); // '/'
-globParent('*.js'); // '.'
-globParent('**/*.js'); // '.'
-globParent('path/{to,from}'); // 'path'
-globParent('path/!(to|from)'); // 'path'
-globParent('path/?(to|from)'); // 'path'
-globParent('path/+(to|from)'); // 'path'
-globParent('path/*(to|from)'); // 'path'
-globParent('path/@(to|from)'); // 'path'
-globParent('path/**/*'); // 'path'
+// globParent('path/to/*.js'); // 'path/to'
+// globParent('/root/path/to/*.js'); // '/root/path/to'
+// globParent('/*.js'); // '/'
+// globParent('*.js'); // '.'
+// globParent('**/*.js'); // '.'
+// globParent('path/{to,from}'); // 'path'
+// globParent('path/!(to|from)'); // 'path'
+// globParent('path/?(to|from)'); // 'path'
+// globParent('path/+(to|from)'); // 'path'
+// globParent('path/*(to|from)'); // 'path'
+// globParent('path/@(to|from)'); // 'path'
+// globParent('path/**/*'); // 'path'
 
-// if provided a non-glob path, returns the nearest dir
-globParent('path/foo/bar.js'); // 'path/foo'
-globParent('path/foo/'); // 'path/foo'
-globParent('path/foo'); // 'path' (see issue #3 for details)
+// // if provided a non-glob path, returns the nearest dir
+// globParent('path/foo/bar.js'); // 'path/foo'
+// globParent('path/foo/'); // 'path/foo'
+// globParent('path/foo'); // 'path' (see issue #3 for details)

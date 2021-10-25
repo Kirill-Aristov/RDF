@@ -1,0 +1,29 @@
+#btn {
+  width: 130px;
+  padding: 9px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #fff;
+  background-color: rgba(63, 11, 222, 0.9);
+  border-radius: 5px;
+}
+.btn-secondary {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  color: #fff;
+  background-color: rgba(63, 11, 222, 0.9);
+  &:hover {
+    color: #fff;
+    background-color: rgba(63, 11, 222, 0.9);
+  }
+}
+.btn {
+  border: none;
+  padding: 5px 10px;
+}
+.dropdown:nth-child(2) {
+  margin: 0 40px;
+}

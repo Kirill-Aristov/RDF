@@ -8,13 +8,14 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
   <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
           crossorigin="anonymous"></script>
+
   <link rel="stylesheet"
         href="css/style.css">
   <link rel="shortcut icon"
@@ -24,183 +25,33 @@
   <title>RDF</title>
 </head>
 
-<body>
-  <datalist id="list_name">
-    <option value="Алюминиевая банка"></option>
-    <option value="Газетная бумага"></option>
-    <option value="Дерево"></option>
-    <option value="Жестяная банка"></option>
-    <option value="Картон крупный"></option>
-    <option value="Картон мелкий"></option>
-    <option value="Кожа, резина, обувь"></option>
-    <option value="Комбинированная упаковка (тетрапак)"></option>
-    <option value="Металлиз. и многослойная пленка"></option>
-    <option value="Одежда"></option>
-    <option value="Опасные материалы"></option>
-    <option value="Отсев"></option>
-    <option value="Офисная бумага"></option>
-    <option value="Пищевые отходы"></option>
-    <option value="Пленка полипропиленовая"></option>
-    <option value="Пленка полиэтиленовая"></option>
-    <option value="Подгузники одноразовые"></option>
-    <option value="Полимерная упаковка"></option>
-    <option value="Прочее стекло"></option>
-    <option value="Прочие инертные материалы"></option>
-    <option value="Прочие комбинированные материалы"></option>
-    <option value="Прочие полимеры"></option>
-    <option value="Прочий текcтиль"></option>
-    <option value="ПЭ-бутылки"></option>
-    <option value="ПЭТ-бутылка зеленая"></option>
-    <option value="ПЭТ-бутылка прозрачная"></option>
-    <option value="ПЭТ-бутылка синяя"></option>
-    <option value="ПЭТ-бутылка темная"></option>
-    <option value="Растительные отходы"></option>
-    <option value="Стеклотара зеленая и синяя"></option>
-    <option value="Стеклотара прозрачная"></option>
-    <option value="Стеклотара темная"></option>
-    <option value="Строительные отходы"></option>
-    <option value="Цветной металл"></option>
-    <option value="Черный металл"></option>
-    <option value="Электронные отходы"></option>
-  </datalist>
+<body style="position: relative;">
+  @@include("./html/Main/Calculator/datalist.html")
   <div class="container">
-    <h1>Калькулятора для расчета теплоты сгорания ТКО</h1>
-    <div class="checkbox ">
-      <div class="checkbox-box ">
-        <input class="checkbox-box__input "
-               type="checkbox">
-        <span class="checkbox-box__slider check-active"></span>
+    <header>
+      @@include("./html/Header/Header.html")
+    </header>
+    <main id="main-container">
+      <!-- @@include("./html/Main/Calculator/scientificPublications/publications.html") -->
+      <div class="help-container">
+        @@include("./html/Main/Calculator/checkbox.html")
+        @@include("./html/Main/Calculator/accordion.html")
       </div>
-      <div class="checkbox-box__text">Автозаполнение включено</div>
-    </div>
-    <div id="choice">
-      <select id="btn_header">
-        <option selected="true"
-                disabled="disabled"
-                value="Добавить">Добавить</option>
-        <option value="Органические отходы">Органические отходы</option>
-        <option value="Полимеры">Полимеры</option>
-        <option value="Дерево">Дерево</option>
-        <option value="Макулатура">Макулатура</option>
-        <option value="Текстиль">Текстиль</option>
-        <option value="Металлы">Металлы</option>
-        <option value="Стекло">Стекло</option>
-        <option value="Опасные материалы">Опасные материалы</option>
-        <option value="Инертные материалы">Инертные материалы</option>
-        <option value="Отсев">Отсев</option>
-        <option value="Прочие материалы">Прочие материалы</option>
-        <option value="Комбинированные материалы">Комбинированные материалы</option>
-        <option value="Пустой заголовок">Пустой заголовок</option>
-      </select>
-      <button id="btn"
-              type="button">Расчет</button>
-    </div>
-    <div id="table">
-    </div>
-    <div id='main'></div>
-
-
-    <div class="accordion"
-         id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingOne">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="false"
-                  aria-controls="collapseOne">
-            Иструкция по использованию
-          </button>
-        </h2>
-        <div id="collapseOne"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingOne"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="./pdf/instructionsForUse.pdf">Иструкция по использованию</a>
-            <p></p>
-            <a href="./pdf/referenceData.pdf">Справочные данные</a>
-          </div>
-        </div>
+      <div id="choice">
+        @@include("./html/Main/Calculator/readyTables.html")
+        @@include("./html/Main/Calculator/select.html")
+        <button id="btn"
+                type="button"
+                value="Расчет">
+          Расчет
+        </button>
       </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingTwo">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo">
-            Формулы
-          </button>
-        </h2>
-        <div id="collapseTwo"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingTwo"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="./pdf/formula.pdf">Формулы используемые при расчете</a>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingThree">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree">
-            Теория
-          </button>
-        </h2>
-        <div id="collapseThree"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingThree"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="pdf/1.pdf">Методические подходы к геоэкологической оценке технологий обработки твердых коммунальных
-              отходов с получением твердого топлива</a>
-            <p></p>
-            <a href="pdf/2.pdf">Технико-экономическая оценка технологий обработки твердых коммунальных отходов для их
-              последующей энергетической утелизации</a>
-            <p></p>
-            <a href="pdf/3.pdf">Зависимость качества и количества вторичного топлива от способа выделения и состава
-              исходного потока отходов</a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
+      <div id="table"></div>
+      <div id='main'></div>
+    </main>
   </div>
-
-  <!-- создание таблицы и управление -->
-  <!-- <script src="./js/table/startCreateTable.js"></script>
-  <script src="./js/table/createRows.js"></script>
-  <script src="./js//table/addRemoveSelect.js"></script> -->
-  <!-- рассчеты -->
-  <!-- <script src="./js/calculator/collectDataFromTable.js"></script>
-  <script src="./js/calculator/calculator.js"></script>
-  <script src="./js/calculator/charts.js"></script> -->
-  <!-- выявление ошибок -->
-  <!-- <script src="./js/error/achContent/ashContentErorr.js"></script>
-  <script src="./js/error/humidityErorr/humidityErorr.js"></script>
-  <script src="./js/error/windowErorr.js"></script>
-  <script src="./js/error/massaErorr/fullMassaErorr.js"></script>
-  <script src="./js/error/massaErorr/windowMassa.js"></script>
-  <script src="./js/error/errorChecking.js"></script>
-  <script src="./js/error/removeErorr.js"></script> -->
-  <!-- дополнительные скрипты -->
+  <!-- скрипты -->
   <script src="./js/app.js"></script>
-  <!-- автозаполнение ячеек -->
-  <!-- <script src="./js/autoFill/autoComplitedCell.js"></script>
-  <script src="./js/autoFill/AutoComplitedBD.js"></script>
-  <script src="./js/autoFill/checkerAutoComplit.js"></script> -->
   <!--гугл диаграмма-->
   <script type="text/javascript"
           src="https://www.gstatic.com/charts/loader.js"></script>

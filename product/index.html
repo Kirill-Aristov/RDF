@@ -8,13 +8,14 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
   <!--bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
         crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
           crossorigin="anonymous"></script>
+
   <link rel="stylesheet"
         href="css/style.css">
   <link rel="shortcut icon"
@@ -24,183 +25,170 @@
   <title>RDF</title>
 </head>
 
-<body>
+<body style="position: relative;">
   <datalist id="list_name">
-    <option value="Алюминиевая банка"></option>
-    <option value="Газетная бумага"></option>
-    <option value="Дерево"></option>
-    <option value="Жестяная банка"></option>
-    <option value="Картон крупный"></option>
-    <option value="Картон мелкий"></option>
-    <option value="Кожа, резина, обувь"></option>
-    <option value="Комбинированная упаковка (тетрапак)"></option>
-    <option value="Металлиз. и многослойная пленка"></option>
-    <option value="Одежда"></option>
-    <option value="Опасные материалы"></option>
-    <option value="Отсев"></option>
-    <option value="Офисная бумага"></option>
-    <option value="Пищевые отходы"></option>
-    <option value="Пленка полипропиленовая"></option>
-    <option value="Пленка полиэтиленовая"></option>
-    <option value="Подгузники одноразовые"></option>
-    <option value="Полимерная упаковка"></option>
-    <option value="Прочее стекло"></option>
-    <option value="Прочие инертные материалы"></option>
-    <option value="Прочие комбинированные материалы"></option>
-    <option value="Прочие полимеры"></option>
-    <option value="Прочий текcтиль"></option>
-    <option value="ПЭ-бутылки"></option>
-    <option value="ПЭТ-бутылка зеленая"></option>
-    <option value="ПЭТ-бутылка прозрачная"></option>
-    <option value="ПЭТ-бутылка синяя"></option>
-    <option value="ПЭТ-бутылка темная"></option>
-    <option value="Растительные отходы"></option>
-    <option value="Стеклотара зеленая и синяя"></option>
-    <option value="Стеклотара прозрачная"></option>
-    <option value="Стеклотара темная"></option>
-    <option value="Строительные отходы"></option>
-    <option value="Цветной металл"></option>
-    <option value="Черный металл"></option>
-    <option value="Электронные отходы"></option>
-  </datalist>
+  <option value="алюминиевая банка"></option>
+  <option value="газетная бумага"></option>
+  <option value="дерево"></option>
+  <option value="жестяная банка"></option>
+  <option value="картон крупный"></option>
+  <option value="картон мелкий"></option>
+  <option value="кожа, резина, обувь"></option>
+  <option value="комбинированная упаковка (тетрапак)"></option>
+  <option value="металлиз. и многослойная пленка"></option>
+  <option value="одежда"></option>
+  <option value="опасные материалы"></option>
+  <option value="отсев"></option>
+  <option value="офисная бумага"></option>
+  <option value="пищевые отходы"></option>
+  <option value="пленка полипропиленовая"></option>
+  <option value="пленка полиэтиленовая"></option>
+  <option value="подгузники одноразовые"></option>
+  <option value="полимерная упаковка"></option>
+  <option value="прочее стекло"></option>
+  <option value="прочие инертные материалы"></option>
+  <option value="прочие комбинированные материалы"></option>
+  <option value="прочие полимеры"></option>
+  <option value="прочий текcтиль"></option>
+  <option value="пэ-бутылки"></option>
+  <option value="пэт-бутылка зеленая"></option>
+  <option value="пэт-бутылка прозрачная"></option>
+  <option value="пэт-бутылка синяя"></option>
+  <option value="пэт-бутылка темная"></option>
+  <option value="растительные отходы"></option>
+  <option value="стеклотара зеленая и синяя"></option>
+  <option value="стеклотара прозрачная"></option>
+  <option value="стеклотара темная"></option>
+  <option value="строительные отходы"></option>
+  <option value="цветной металл"></option>
+  <option value="черный металл"></option>
+  <option value="электронные отходы"></option>
+</datalist>
   <div class="container">
-    <h1>Калькулятора для расчета теплоты сгорания ТКО</h1>
-    <div class="checkbox ">
-      <div class="checkbox-box ">
-        <input class="checkbox-box__input "
-               type="checkbox">
-        <span class="checkbox-box__slider check-active"></span>
-      </div>
-      <div class="checkbox-box__text">Автозаполнение включено</div>
-    </div>
-    <div id="choice">
-      <select id="btn_header">
-        <option selected="true"
-                disabled="disabled"
-                value="Добавить">Добавить</option>
-        <option value="Органические отходы">Органические отходы</option>
-        <option value="Полимеры">Полимеры</option>
-        <option value="Дерево">Дерево</option>
-        <option value="Макулатура">Макулатура</option>
-        <option value="Текстиль">Текстиль</option>
-        <option value="Металлы">Металлы</option>
-        <option value="Стекло">Стекло</option>
-        <option value="Опасные материалы">Опасные материалы</option>
-        <option value="Инертные материалы">Инертные материалы</option>
-        <option value="Отсев">Отсев</option>
-        <option value="Прочие материалы">Прочие материалы</option>
-        <option value="Комбинированные материалы">Комбинированные материалы</option>
-        <option value="Пустой заголовок">Пустой заголовок</option>
-      </select>
-      <button id="btn"
-              type="button">Расчет</button>
-    </div>
-    <div id="table">
-    </div>
-    <div id='main'></div>
-
-
-    <div class="accordion"
-         id="accordionExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingOne">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="false"
-                  aria-controls="collapseOne">
-            Иструкция по использованию
-          </button>
-        </h2>
-        <div id="collapseOne"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingOne"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="./pdf/instructionsForUse.pdf">Иструкция по использованию</a>
-            <p></p>
-            <a href="./pdf/referenceData.pdf">Справочные данные</a>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingTwo">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo">
-            Формулы
-          </button>
-        </h2>
-        <div id="collapseTwo"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingTwo"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="./pdf/formula.pdf">Формулы используемые при расчете</a>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header"
-            id="headingThree">
-          <button class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree">
-            Теория
-          </button>
-        </h2>
-        <div id="collapseThree"
-             class="accordion-collapse collapse"
-             aria-labelledby="headingThree"
-             data-bs-parent="#accordionExample">
-          <div class="accordion-body">
-            <a href="pdf/1.pdf">Методические подходы к геоэкологической оценке технологий обработки твердых коммунальных
-              отходов с получением твердого топлива</a>
-            <p></p>
-            <a href="pdf/2.pdf">Технико-экономическая оценка технологий обработки твердых коммунальных отходов для их
-              последующей энергетической утелизации</a>
-            <p></p>
-            <a href="pdf/3.pdf">Зависимость качества и количества вторичного топлива от способа выделения и состава
-              исходного потока отходов</a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <header>
+      <nav class="nav">
+  <div class="navigation">
+    <a href="#">RDF-топливо калькулятор</a>
+    <a href="#">Научные публикации</a>
   </div>
-
-  <!-- создание таблицы и управление -->
-  <!-- <script src="./js/table/startCreateTable.js"></script>
-  <script src="./js/table/createRows.js"></script>
-  <script src="./js//table/addRemoveSelect.js"></script> -->
-  <!-- рассчеты -->
-  <!-- <script src="./js/calculator/collectDataFromTable.js"></script>
-  <script src="./js/calculator/calculator.js"></script>
-  <script src="./js/calculator/charts.js"></script> -->
-  <!-- выявление ошибок -->
-  <!-- <script src="./js/error/achContent/ashContentErorr.js"></script>
-  <script src="./js/error/humidityErorr/humidityErorr.js"></script>
-  <script src="./js/error/windowErorr.js"></script>
-  <script src="./js/error/massaErorr/fullMassaErorr.js"></script>
-  <script src="./js/error/massaErorr/windowMassa.js"></script>
-  <script src="./js/error/errorChecking.js"></script>
-  <script src="./js/error/removeErorr.js"></script> -->
-  <!-- дополнительные скрипты -->
+  <div class="registration">
+    <!-- <button class="btnModal">Войти</button>
+    <button class="btnModal">Регистрация</button> -->
+  </div>
+</nav>
+    </header>
+    <main id="main-container">
+      
+      <div class="help-container">
+        <div class="checkbox">
+  <div class="checkbox-box ">
+    <input class="checkbox-box__input"
+           type="checkbox">
+    <span class="checkbox-box__slider check-active"></span>
+  </div>
+  <div class="checkbox-box__text">Автозаполнение справочными данными включено</div>
+</div>
+        <div class="accordion"
+     id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header"
+        id="headingTwo">
+      <button class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo">
+        Помощь
+      </button>
+    </h2>
+    <div id="collapseTwo"
+         class="accordion-collapse collapse"
+         aria-labelledby="headingTwo"
+         data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <a target="_blank"
+           href="../pdf/instructionsForUse.pdf">Инструкция по применению</a>
+        <a target="_blank"
+           href="../pdf/referenceData.pdf">Справочные данные</a>
+        <a target="_blank"
+           href="../pdf/formula.pdf">Формулы</a>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+      <div id="choice">
+        <div id="readyTables">
+  <div class="dropdown">
+    <div class="btn btn-secondary dropdown-toggle"
+         type="button"
+         id="dropdownMenuButton1"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+      Готовые таблицы
+    </div>
+    <ul class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item"
+           data-list="42"
+           href="#">Полный компонетный состав (42 компонента)</a></li>
+      <li><a class="dropdown-item"
+           data-list="13"
+           href="#">Не полный компонетный состав(13 компонентов)</a></li>
+    </ul>
+  </div>
+</div>
+        <div class="dropdown">
+    <div class="btn btn-secondary dropdown-toggle"
+         type="button"
+         id="dropdownMenuButton1"
+         data-bs-toggle="dropdown"
+         aria-expanded="false">
+      Добавить
+    </div>
+    <ul class="dropdown-menu"
+        aria-labelledby="dropdownMenuButton1">
+      <li><a class="dropdown-item"
+           href="#">Органические отходы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Полимеры</a></li>
+      <li><a class="dropdown-item"
+           href="#">Дерево</a></li>
+      <li><a class="dropdown-item"
+           href="#">Макулатура</a></li>
+      <li><a class="dropdown-item"
+           href="#">Текстиль</a></li>
+      <li><a class="dropdown-item"
+           href="#">Металлы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Стекло</a></li>
+      <li><a class="dropdown-item"
+           href="#">Опасные материалы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Инертные материалы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Отсев</a></li>
+      <li><a class="dropdown-item"
+           href="#">Прочие материалы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Комбинированные материалы</a></li>
+      <li><a class="dropdown-item"
+           href="#">Пустой заголовок</a></li>
+    </ul>
+  </div>
+        <button id="btn"
+                type="button"
+                value="Расчет">
+          Расчет
+        </button>
+      </div>
+      <div id="table"></div>
+      <div id='main'></div>
+    </main>
+  </div>
+  <!-- скрипты -->
   <script src="./js/app.js"></script>
-  <!-- автозаполнение ячеек -->
-  <!-- <script src="./js/autoFill/autoComplitedCell.js"></script>
-  <script src="./js/autoFill/AutoComplitedBD.js"></script>
-  <script src="./js/autoFill/checkerAutoComplit.js"></script> -->
   <!--гугл диаграмма-->
   <script type="text/javascript"
           src="https://www.gstatic.com/charts/loader.js"></script>

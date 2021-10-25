@@ -4,7 +4,7 @@ const baseAutoComplite = [
     name: "пищевые отходы",
     massa: 21.6,
     humidity: 78.6,
-    ashContent: 62.4,
+    ashContent: 17.3,
     heat: 18.2,
   },
   {
@@ -325,7 +325,7 @@ const baseAutoComplite = [
     heat: 20.1,
   },
   {
-    name: "жидкость(вода)",
+    name: "прочее(остаток)",
     humidity: 100,
     ashContent: 0,
     heat: 0,

@@ -1,6 +1,6 @@
 function autoCompliteCell(input) {
   if (checkBox.classList.contains("check-active")) {
-    const valueName = document.querySelectorAll(".input_name");
+    const valueName = document.querySelectorAll(".input__name");
     for (let i = 0; i < valueName.length; i++) {
       valueName[i].removeEventListener("change", otherAutoDilling);
       valueName[i].addEventListener("change", () => {

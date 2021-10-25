@@ -1,5 +1,5 @@
 let HeaderTable = new Array(); //создание таблицы.
-HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на сухую беззол.м. мДж/кг',""];  //Массив шапки таблицы
+HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на с/без.м., мДж/кг', ""];  //Массив шапки таблицы
 function createTable() {
   const empTable = document.createElement('table');
   empTable.setAttribute('id', 'empTable'); //id таблицы
@@ -20,98 +20,116 @@ function createTable() {
 createTable();
 
 ;
-function checkNameRows(element) {
+function checkNameRows(item) {
   baseAutoComplite.forEach((nameElement) => {
-    if (nameElement.HeaderName == element) {
+    if (nameElement.HeaderName == item) {
       lenghtСolumn(nameElement)
     };
   });
 };
-function lenghtСolumn(nameElement) {
-  let headerTableLenght = document.querySelectorAll("#headingTable").length;
+function lenghtСolumn(nameElement, rowsId) {
   const bodyTable = document.getElementById('bodyTable');
-  let rowCnt = bodyTable.rows.length;
-  let tr = bodyTable.insertRow(rowCnt);
+  let tr = bodyTable.insertRow(rowsId);
   for (let c = 0; c < HeaderTable.length; c++) {
     let td = document.createElement('td');
     td = tr.insertCell(c);
-    checkCell(td, c, rowCnt, headerTableLenght, nameElement);
+    checkCell(td, c, nameElement);
   };
+  numberRows();
 };
 
-function checkCell(td, c, rowCnt, headerTableLenght, nameElement) {
+function checkCell(td, c, nameElement) {
   (c == 0) ?
     tableCellRemove(td)
     : (c == 1) ?
-      tableCellId(rowCnt, td, headerTableLenght)
+      tableCellId(td)
       : (c == 2) ?
         tableCellName(td, nameElement)
-        : (c == 7) ? ""
+        : (c == 7) ?
+          ""
           : tableCellInput(td)
 
 };
 function tableCellRemove(td) {
-  const input = document.createElement("input");
-  input.setAttribute("type", "button");
-  input.setAttribute("class", "clearBtn");
-  input.setAttribute("onclick", "removeRows(this.parentNode.parentNode.rowIndex)");
-  input.setAttribute("tabindex", "-1");
-  td.appendChild(input);
+  const attribute = [
+    ["class", "clearBtn"],
+    ["type", "button"],
+    ["tabindex", "-1"],
+    ["onclick", "removeRows(this.parentNode.parentNode.rowIndex)"]
+  ];
+  cellAtributes(attribute, "input", td);
 };
-function tableCellId(rowCnt, td, headLenght) {
-  const div = document.createElement("div");
-  div.textContent = rowCnt - headLenght + 1;
-  div.setAttribute("class", "number_id");
-  td.appendChild(div);
+function tableCellId(td) {
+  const attribute = [
+    ["id", "number_id"],
+  ];
+  cellAtributes(attribute, "div", td);
 };
 function tableCellName(td, nameElement) {
-  const input = document.createElement("input");
-  input.setAttribute("list", "list_name");
-  input.setAttribute("class", "input_name");
-  input.setAttribute("type", "text");
-  td.appendChild(input);
-  if (nameElement) {
-    input.value = nameElement.name
-    setTimeout(() => {
-      autoCompliteCell(input)
-    }, 0);
-  }
+  const attribute = [
+    ["class", "input__name"],
+    ["type", "text"],
+    ["list", "list_name"],
+    ["value", nameElement ? nameElement.name : ""]
+  ];
+  cellAtributes(attribute, "input", td);
 };
 function tableCellInput(td) {
-  let ele1 = document.createElement("input");
-  ele1.setAttribute("class", "input__data");
-  ele1.setAttribute("type", "text");
-  td.appendChild(ele1);
+  const attribute = [
+    ["class", "input__data"],
+    ["type", "text"],
+  ];
+  cellAtributes(attribute, "input", td);
 };
 
-
+function cellAtributes(attribute, teg, td) {
+  let tegName = document.createElement(teg);
+  for (let index = 0; index < attribute.length; index++) {
+    tegName.setAttribute(attribute[index][0], attribute[index][1]);
+  };
+  td.appendChild(tegName);
+  setTimeout(() => {
+    if (tegName.getAttribute("value") !== null) {
+      autoCompliteCell(tegName);
+    }
+  }, 0);
+};
 
 
 
 ;
-function createRowsAdditional(btn) {
-  console.log(btn)
-};;
-const dataList = document.getElementById("btn_header")
-dataList.addEventListener("change", (element) => {
-  const table = document.getElementById('empTable');
-  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-  let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-  CreateHeaderTable(tr, element.target.value);// сам заголовок 6 строк
-  CreateHeaderBtn(tr) //создать дополнительную строку перед заголовком
-  table.appendChild(tableBody);
-  tableBody.appendChild(tr);
-  checkNameRows(element.target.value);
-  includeHeadrSelectChange();
-  disableHeadrSelect(element.target.value);
-});
-function CreateHeaderTable(tr, element) {
+function createRowsAdditional(element) {
+  let rowsId = element.parentNode.parentNode.rowIndex;
+  lenghtСolumn("", rowsId)
+};
+function rowsPlusNumber(rowNumber) {
+  document.querySelectorAll("#number_id").forEach(element => {
+    if (element.textContent >= rowNumber) {
+      let num = Number(element.textContent);
+      num++;
+      element.textContent = num;
+    }
+  });
+};
+const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
+  item.addEventListener("click", () => {
+    const table = document.getElementById('empTable');
+    const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+    let tr = tableBody.insertRow(-1);
+    CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+    CreateHeaderTable(tr, item.textContent);// сам заголовок 6 строк
+    CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+    table.appendChild(tableBody);
+    tableBody.appendChild(tr);
+    checkNameRows(item.textContent); //проверка выбранного именни
+  });
+})
+function CreateHeaderTable(tr, item) {
   const td = document.createElement('td');
   td.setAttribute("colspan", 6) //заполнение во всю строку
   const input = document.createElement("input");
   input.setAttribute("id", "headingTable")
-  input.setAttribute("value", (element == "Пустой заголовок") ? "Введите название" : element); //присваивание название
+  input.setAttribute("value", (item == "Пустой заголовок") ? "Введите название" : item); //присваивание название
   tr.appendChild(td);
   td.appendChild(input);
 };
@@ -125,99 +143,75 @@ function CreateRemoveHeaderTable(tr) {
   tr.appendChild(td);
   td.appendChild(input);
 };
-function CreateHeaderBtn(tr) {
-  const btnRows = document.createElement("button");
-  btnRows.setAttribute("id", "btn_string");
-  btnRows.setAttribute("onclick", "createRowsAdditional(this)");
-  tr.appendChild(btnRows);
-}
-;
-function removeRows(getId) {
-  let headerTableLenght = document.querySelectorAll("#headingTable").length; // определяет количество заголовков
-  const bodyTable = document.getElementById("bodyTable");
-  document.querySelectorAll(".number_id").forEach(element => {
-    if (element.textContent > getId - headerTableLenght) {
-      let num = Number(element.textContent);
-      num--;
-      element.textContent = num;
+function CreateBtnRowsPlus(tr) {
+  const td = document.createElement('td');
+  const button = document.createElement("button");
+  button.setAttribute("class", "rows-btn__plus")
+  button.setAttribute("type", "button")
+  button.setAttribute("onclick", "createRowsAdditional(this)") //навешивание события на клик кнопки для добавления строки
+  button.textContent = "Добавить строку"
+  tr.appendChild(td);
+  td.appendChild(button);
+};
+function numberRows() {
+  let numberRows = document.querySelectorAll("#number_id")
+  for (let index = 0; index < (numberRows.length + 1); index++) {
+    if (numberRows[index] != undefined) {
+      numberRows[index].textContent = index + 1
     }
-  });
+  }
+};
+function removeRows(getId) {
   bodyTable.deleteRow(getId - 1);
+  numberRows()
 };
 ;
 function removeHeaderRows(getId) {
   const bodyTable = document.getElementById("bodyTable");
   let dataIdRows = [];// мастоположение всех заголовков индексы
+  let getIdIndex = getId.rowIndex;//индекс выбранной строки
   let closestRight;//ближайшее наибольшее число
   document.querySelectorAll("#headingTable").forEach((tableHeader) => {
     dataIdRows.push(tableHeader.parentNode.parentNode.rowIndex);// мастоположение всех заголовков индексы
   });
   for (var i = 0; i < dataIdRows.length; i++) { //опряделяет ближайшее наибольшее число
-    if (dataIdRows[i] > getId.rowIndex && (closestRight === undefined || closestRight > dataIdRows[i])) {
+    if (dataIdRows[i] > getIdIndex && (closestRight === undefined || closestRight > dataIdRows[i])) {
       closestRight = dataIdRows[i];//ближайшее наибольшее число
     }
   };
-  if (closestRight == undefined) { //есть ли ближайшее наибольшее число
+  if (closestRight === undefined) { //есть ли ближайшее наибольшее число
     let bodyTableLength = bodyTable.childNodes.length; //длина всей таблицы
-    for (let index = 0; index < (bodyTableLength - getId.rowIndex); index++) {
-      removeRows(bodyTableLength - index);
+    for (let index = 0; index <= bodyTableLength; index++) {
+      if (getIdIndex > bodyTableLength - index) {
+        return
+      }
+      removeRows(bodyTableLength - index)
     };
   } else {
-    for (let index = 1; index < (closestRight - getId.rowIndex); index++) {
-      removeRows(closestRight - index);
+    for (let index = 0; index <= (closestRight - getIdIndex); index++) {
+      if (closestRight - index == getIdIndex) {
+        return
+      }
+      removeRows(closestRight - index - 1)
     };
   };
-  bodyTable.deleteRow(getId.rowIndex - 1);
-  includeHeadrSelect(getId);
-  removeBtn(getId)
 };;
-function removeBtn(getId) {
-  console.log(getId)
-};
-function disableHeadrSelect(element) {
-  dataList.getElementsByTagName("option");
-  (element != "Пустой заголовок") ? checkHeaderSelect(element, true) : "";
-  dataList.value = "Добавить";
-};
-function includeHeadrSelectChange() {
-  document.querySelectorAll("#headingTable").forEach((head) => {
-    head.addEventListener("click", (lastName) => {
-      let headerLastNames = lastName.target.value;//запоминает последние название
-      head.addEventListener("change", (FersName) => {
-        if (FersName.target.value != headerLastNames) { //верно если имена не совподают
-          checkHeaderSelect(headerLastNames, false);
-        }
-      });
-    });
-  });
-};
-function includeHeadrSelect(element) {
-  element.childNodes.forEach(e => {
-    select = e.querySelector("input").value;
-    if (select != "") {
-      checkHeaderSelect(select, false);
-    }
-  });
-};
-function checkHeaderSelect(select, boolean) {
-  dataList.getElementsByTagName("option");
-  for (let i = 0; i < dataList.length; i++) {
-    (dataList[i].value == select) ? dataList[i].disabled = boolean : "";
-  };
-};;
+;
 const btn = document.getElementById("btn").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
   for (let i = 1; row = table.rows[i]; i++) {
-    if(row.cells[2]){
-      database.push({
-        id: row.cells[1].innerText,
-        name: row.cells[2].querySelector('.input_name').value,
-        massa: Number(row.cells[3].querySelector('.input__data').value.replace(/,/g, ".")),//содержание
-        W: Number(row.cells[4].querySelector('.input__data').value.replace(/,/g, ".")),//влажность
-        A: Number(row.cells[5].querySelector('.input__data').value.replace(/,/g, ".")),//зольность
-        Q: Number(row.cells[6].querySelector('.input__data').value.replace(/,/g, "."))//теплота сгорания на сух массу
-      });
+    if (row.cells[2].querySelector('.input__name') !== null) {
+      if (row.cells[2].querySelector('.input__name').value !== "") {
+        database.push({
+          id: row.cells[1].innerText,
+          name: row.cells[2].querySelector('.input__name').value,
+          massa: Number(row.cells[3].querySelector('.input__data').value.replace(/,/g, ".")),//содержание
+          W: Number(row.cells[4].querySelector('.input__data').value.replace(/,/g, ".")),//влажность
+          A: Number(row.cells[5].querySelector('.input__data').value.replace(/,/g, ".")),//зольность
+          Q: Number(row.cells[6].querySelector('.input__data').value.replace(/,/g, "."))//теплота сгорания на сух массу
+        });
+      }
     }
   };
   errorCheck(database);
@@ -361,8 +355,8 @@ function addWindow(fullMassa) {
   <div class="container-window__text">
   Содержание должно быть равным 100%
    <p>ваше содержание = ${fullMassa / 1000}%</p>
-  заполнить недостающие содежаниее "жидкость(вода)"
-    <p>"жидкость(вода)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
+  заполнить недостающие содежаниее "прочее(остаток)"
+    <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
   <div class="container-window__btn">
     <input class="window__btn" type="button" value="Да"></input>
     <input class="window__btn" type="button" value="Нет"></input>
@@ -386,8 +380,8 @@ function windowAnswer(div, fullMassa) {
 };
 function addRowsWindow(fullMassa) {
   lenghtСolumn();
-  const inputName = document.querySelectorAll(".input_name");
-  lastItem(inputName, 1, "жидкость(вода)");
+  const inputName = document.querySelectorAll(".input__name");
+  lastItem(inputName, 1, "прочее(остаток)");
   const inputData = document.querySelectorAll(".input__data");
   lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
 };
@@ -429,40 +423,13 @@ function removeErorr() {
     spanActive[i].remove();
   };
 };;
-function autoCompliteCell(input) {
-  if (checkBox.classList.contains("check-active")) {
-    const valueName = document.querySelectorAll(".input_name");
-    for (let i = 0; i < valueName.length; i++) {
-      valueName[i].removeEventListener("change", otherAutoDilling);
-      valueName[i].addEventListener("change", () => {
-        otherAutoDilling(valueName[i]);
-      });
-    };
-    otherAutoDilling(input);
-  }
-};
-function otherAutoDilling(valueName) {
-  for (let i = 0; i < baseAutoComplite.length; i++) {
-    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-      idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
-    }
-  };
-};
-function idRows(id, heat, ashContent, humidity, massa) {
-  id.childNodes[6].querySelector("input").value = heat;
-  id.childNodes[5].querySelector("input").value = ashContent;
-  id.childNodes[4].querySelector("input").value = humidity;
-  id.childNodes[3].querySelector("input").value = massa;
-};
-
-;
 const baseAutoComplite = [
   {
     HeaderName: "Органические отходы",
     name: "пищевые отходы",
     massa: 21.6,
     humidity: 78.6,
-    ashContent: 62.4,
+    ashContent: 17.3,
     heat: 18.2,
   },
   {
@@ -783,7 +750,7 @@ const baseAutoComplite = [
     heat: 20.1,
   },
   {
-    name: "жидкость(вода)",
+    name: "прочее(остаток)",
     humidity: 100,
     ashContent: 0,
     heat: 0,
@@ -791,6 +758,33 @@ const baseAutoComplite = [
 ];
 
 
+
+;
+function autoCompliteCell(input) {
+  if (checkBox.classList.contains("check-active")) {
+    const valueName = document.querySelectorAll(".input__name");
+    for (let i = 0; i < valueName.length; i++) {
+      valueName[i].removeEventListener("change", otherAutoDilling);
+      valueName[i].addEventListener("change", () => {
+        otherAutoDilling(valueName[i]);
+      });
+    };
+    otherAutoDilling(input);
+  }
+};
+function otherAutoDilling(valueName) {
+  for (let i = 0; i < baseAutoComplite.length; i++) {
+    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+      idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
+    }
+  };
+};
+function idRows(id, heat, ashContent, humidity, massa) {
+  id.childNodes[6].querySelector("input").value = heat;
+  id.childNodes[5].querySelector("input").value = ashContent;
+  id.childNodes[4].querySelector("input").value = humidity;
+  id.childNodes[3].querySelector("input").value = massa;
+};
 
 ;
 const checkBox = document.querySelector(".checkbox-box__slider");
@@ -805,12 +799,38 @@ checkBox.addEventListener("click", () => {
 });
 const checkBoxText = document.querySelector(".checkbox-box__text");
 function autoComplete() {
-  checkBoxText.textContent = "Автозаполнение включено";
+  checkBoxText.textContent = "Автозаполнение справочными данными включено";
 };
 function autoCompleteRemove() {
-  checkBoxText.textContent = "Автозаполнение выключено";
-  document.querySelectorAll(".input_name").forEach((e) => {
+  checkBoxText.textContent = "Автозаполнение справочными данными выключено";
+
+  document.querySelectorAll(".input__name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
   });
 };;
+// const modal = document.querySelector(".modal");
+// const modalClose = document.querySelector(".modal-close");
+// const modalReg = document.querySelector(".modal-registration__reg");
+// const modalEntrance = document.querySelector(".modal-registration__entrance");
+// const btnOpenModal = document.querySelectorAll(".btnModal").forEach((element) => {
+//   element.addEventListener("click", () => {
+//     modalReg.classList.remove("blockModal");
+//     modalEntrance.classList.remove("blockModal");
+//     if (element.textContent.toLowerCase() == "войти") {
+//       modal.classList.add("activemodal");
+//       modalReg.classList.add("blockModal");
+//     } else {
+//       modal.classList.add("activemodal");
+//       modalEntrance.classList.add("blockModal");
+//     };
+//   });
+// });
+// modal.addEventListener("click", (e) => {
+//   if (e.target == modal) {
+//     modal.classList.remove("activemodal");
+//   }
+// });
+// modalClose.addEventListener("click", (e) => {
+//   modal.classList.remove("activemodal");
+// });;
 

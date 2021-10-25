@@ -1,23 +1,22 @@
-const dataList = document.getElementById("btn_header")
-dataList.addEventListener("change", (element) => {
-  const table = document.getElementById('empTable');
-  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-  let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-  CreateHeaderTable(tr, element.target.value);// сам заголовок 6 строк
-  CreateHeaderBtn(tr) //создать дополнительную строку перед заголовком
-  table.appendChild(tableBody);
-  tableBody.appendChild(tr);
-  checkNameRows(element.target.value);
-  includeHeadrSelectChange();
-  disableHeadrSelect(element.target.value);
-});
-function CreateHeaderTable(tr, element) {
+const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
+  item.addEventListener("click", () => {
+    const table = document.getElementById('empTable');
+    const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+    let tr = tableBody.insertRow(-1);
+    CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+    CreateHeaderTable(tr, item.textContent);// сам заголовок 6 строк
+    CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+    table.appendChild(tableBody);
+    tableBody.appendChild(tr);
+    checkNameRows(item.textContent); //проверка выбранного именни
+  });
+})
+function CreateHeaderTable(tr, item) {
   const td = document.createElement('td');
   td.setAttribute("colspan", 6) //заполнение во всю строку
   const input = document.createElement("input");
   input.setAttribute("id", "headingTable")
-  input.setAttribute("value", (element == "Пустой заголовок") ? "Введите название" : element); //присваивание название
+  input.setAttribute("value", (item == "Пустой заголовок") ? "Введите название" : item); //присваивание название
   tr.appendChild(td);
   td.appendChild(input);
 };
@@ -31,9 +30,13 @@ function CreateRemoveHeaderTable(tr) {
   tr.appendChild(td);
   td.appendChild(input);
 };
-function CreateHeaderBtn(tr) {
-  const btnRows = document.createElement("button");
-  btnRows.setAttribute("id", "btn_string");
-  btnRows.setAttribute("onclick", "createRowsAdditional(this)");
-  tr.appendChild(btnRows);
+function CreateBtnRowsPlus(tr) {
+  const td = document.createElement('td');
+  const button = document.createElement("button");
+  button.setAttribute("class", "rows-btn__plus")
+  button.setAttribute("type", "button")
+  button.setAttribute("onclick", "createRowsAdditional(this)") //навешивание события на клик кнопки для добавления строки
+  button.textContent = "Добавить строку"
+  tr.appendChild(td);
+  td.appendChild(button);
 }

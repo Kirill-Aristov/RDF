@@ -6,8 +6,8 @@ function addWindow(fullMassa) {
   <div class="container-window__text">
   Содержание должно быть равным 100%
    <p>ваше содержание = ${fullMassa / 1000}%</p>
-  заполнить недостающие содежаниее "жидкость(вода)"
-    <p>"жидкость(вода)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
+  заполнить недостающие содежаниее "прочее(остаток)"
+    <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
   <div class="container-window__btn">
     <input class="window__btn" type="button" value="Да"></input>
     <input class="window__btn" type="button" value="Нет"></input>
@@ -31,8 +31,8 @@ function windowAnswer(div, fullMassa) {
 };
 function addRowsWindow(fullMassa) {
   lenghtСolumn();
-  const inputName = document.querySelectorAll(".input_name");
-  lastItem(inputName, 1, "жидкость(вода)");
+  const inputName = document.querySelectorAll(".input__name");
+  lastItem(inputName, 1, "прочее(остаток)");
   const inputData = document.querySelectorAll(".input__data");
   lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
 };
