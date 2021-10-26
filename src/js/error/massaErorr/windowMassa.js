@@ -33,8 +33,10 @@ function addRowsWindow(fullMassa) {
   lenghtСolumn();
   const inputName = document.querySelectorAll(".input__name");
   lastItem(inputName, 1, "прочее(остаток)");
-  const inputData = document.querySelectorAll(".input__data");
-  lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
+  const inputData = document.querySelectorAll(".input__data")
+  setTimeout(() => {
+    lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
+  }, 0);
 };
 function lastItem(last, id, attribute) {
   let lastValue = last[last.length - id];

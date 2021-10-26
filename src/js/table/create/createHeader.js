@@ -1,16 +1,19 @@
 const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
-    const table = document.getElementById('empTable');
-    const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-    let tr = tableBody.insertRow(-1);
-    CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-    CreateHeaderTable(tr, item.textContent);// сам заголовок 6 строк
-    CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
-    table.appendChild(tableBody);
-    tableBody.appendChild(tr);
-    checkNameRows(item.textContent); //проверка выбранного именни
+    CreateHeader(item.textContent)
   });
 })
+function CreateHeader(item) {
+  const table = document.getElementById('empTable');
+  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+  let tr = tableBody.insertRow(-1);
+  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+  CreateHeaderTable(tr, item);// сам заголовок 6 строк
+  CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+  table.appendChild(tableBody);
+  tableBody.appendChild(tr);
+  checkNameRows(item); //проверка выбранного именни
+}
 function CreateHeaderTable(tr, item) {
   const td = document.createElement('td');
   td.setAttribute("colspan", 6) //заполнение во всю строку

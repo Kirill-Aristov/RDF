@@ -20,4 +20,5 @@
 @@include("./autoFill/autoComplitedCell.js");
 @@include("./autoFill/checkBox/checkerAutoComplit.js");
 @@include("./registration/reg.js");
+@@include("./dropdownMenu.js");
 

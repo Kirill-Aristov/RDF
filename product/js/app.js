@@ -39,7 +39,7 @@ function lenghtСolumn(nameElement, rowsId) {
 };
 
 function checkCell(td, c, nameElement) {
-  (c == 0) ?
+    (c == 0) ?
     tableCellRemove(td)
     : (c == 1) ?
       tableCellId(td)
@@ -113,17 +113,20 @@ function rowsPlusNumber(rowNumber) {
 };
 const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
-    const table = document.getElementById('empTable');
-    const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-    let tr = tableBody.insertRow(-1);
-    CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-    CreateHeaderTable(tr, item.textContent);// сам заголовок 6 строк
-    CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
-    table.appendChild(tableBody);
-    tableBody.appendChild(tr);
-    checkNameRows(item.textContent); //проверка выбранного именни
+    CreateHeader(item.textContent)
   });
 })
+function CreateHeader(item) {
+  const table = document.getElementById('empTable');
+  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
+  let tr = tableBody.insertRow(-1);
+  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+  CreateHeaderTable(tr, item);// сам заголовок 6 строк
+  CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+  table.appendChild(tableBody);
+  tableBody.appendChild(tr);
+  checkNameRows(item); //проверка выбранного именни
+}
 function CreateHeaderTable(tr, item) {
   const td = document.createElement('td');
   td.setAttribute("colspan", 6) //заполнение во всю строку
@@ -382,8 +385,10 @@ function addRowsWindow(fullMassa) {
   lenghtСolumn();
   const inputName = document.querySelectorAll(".input__name");
   lastItem(inputName, 1, "прочее(остаток)");
-  const inputData = document.querySelectorAll(".input__data");
-  lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
+  const inputData = document.querySelectorAll(".input__data")
+  setTimeout(() => {
+    lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
+  }, 0);
 };
 function lastItem(last, id, attribute) {
   let lastValue = last[last.length - id];
@@ -833,4 +838,22 @@ function autoCompleteRemove() {
 // modalClose.addEventListener("click", (e) => {
 //   modal.classList.remove("activemodal");
 // });;
+document.querySelectorAll(".dropdown-item__ready").forEach(e => {
+  e.addEventListener("click", () => {
+    let data = [];
+    let newData;
+    if (e.dataset.value == 40) {
+      baseAutoComplite.forEach(element => {
+        data.push(element.HeaderName)
+      })
+      newData = [...new Set(data)].filter((x) => {
+        return x !== undefined;
+      })
+      newData.forEach(item => {
+        CreateHeader(item)
+      })
+    }
+  })
+})
+;
 

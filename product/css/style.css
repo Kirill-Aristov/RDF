@@ -685,6 +685,10 @@ input::-webkit-calendar-picker-indicator {
   color: #fff;
   background-color: rgba(63, 11, 222, 0.9);
 }
+.btn-secondary:focus {
+  color: #fff;
+  background-color: rgba(63, 11, 222, 0.9);
+}
 
 .btn {
   border: none;
@@ -693,6 +697,24 @@ input::-webkit-calendar-picker-indicator {
 
 .dropdown:nth-child(2) {
   margin: 0 40px;
+}
+
+.dropdown-item__ready {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-item__ready:hover {
+  color: #1e2125;
+  background-color: #e9ecef;
 }
 
 #empTable {
