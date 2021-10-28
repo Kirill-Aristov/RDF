@@ -747,7 +747,8 @@ table {
   border-spacing: 0;
   empty-cells: hide;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 750px;
+  width: 100%;
   text-align: center;
   border-collapse: inherit;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -857,8 +858,26 @@ th:nth-child(odd) {
   width: 65px;
 }
 
-#table .humidityError_error,
-#table .achContent_error,
+#active {
+  position: absolute;
+}
+
+.alert {
+  cursor: pointer;
+  background-color: #f8d7da;
+  position: relative;
+  padding: 15px 5px;
+  margin: 0;
+}
+.alert::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  right: 100%;
+  border: 10px solid transparent;
+  border-right: 18px solid #f8d7da;
+}
+
 #table .massa_error {
   cursor: pointer;
   position: absolute;
@@ -870,21 +889,19 @@ th:nth-child(odd) {
   font-size: 14px;
   font-weight: 400;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  left: 35%;
 }
-
-#table .humidityError_error::after,
-#table .achContent_error::after,
 #table .massa_error::after {
   content: "";
   position: absolute;
-  top: 15%;
-  right: 100%;
   border: 10px solid transparent;
   border-right: 10px solid #f7d7da;
+  top: 100%;
+  right: 70%;
+  -webkit-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
-
-#table .humidityError_error::before,
-#table .achContent_error::before,
 #table .massa_error::before {
   content: "";
   position: absolute;
@@ -897,32 +914,13 @@ th:nth-child(odd) {
   height: 15px;
 }
 
-#table .achContent_error {
-  left: 69%;
-}
-
-#table .humidityError_error {
-  left: 55%;
-}
-
-#table .massa_error {
-  left: 35%;
-}
-#table .massa_error::after {
-  top: 100%;
-  right: 70%;
-  -webkit-transform: rotate(-90deg);
-      -ms-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-}
-
 .container-window {
   position: absolute;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
-  background-color: rgba(204, 204, 204, 0.8);
+  background-color: rgba(204, 204, 204, 0.9);
   padding: 10px 20px;
 }
 .container-window__text {
@@ -954,10 +952,6 @@ th:nth-child(odd) {
 .container-window .window__btn:hover {
   color: #ccc;
   background-color: #000;
-}
-
-.remove {
-  display: none;
 }
 
 .modal {

@@ -300,76 +300,48 @@ function charts(bd, fullMassa) {
     chart.draw(data, options);
   }
 };
-function checkAshContentErorr(ashContent, span) {
-  let ashContentMax = Math.max.apply(Math, ashContent); //максимальное число в массиве у зольности
-  let ashContentIndex = ashContent.indexOf(ashContentMax); //индекс максимального чилсва в массиве
-  if (ashContentMax > 100) {
-    const text = "Зольность содержимого не может превышать 100%";
-    windowErorr("achContent_error", ashContentIndex, text, span);
-    return false
-  }
-  return true
-};;
-function checkHumidityErorr(humidity, span) {
-  let humidityMax = Math.max.apply(Math, humidity);//максимальное число в массиве у влажности
-  let humidityIndex = humidity.indexOf(humidityMax);//индекс максимального числа в массиве
-  if (humidityMax > 100) {
-    const text = "Влажность содержимого не может превышать 100%";
-    windowErorr("humidityError_error", humidityIndex, text, span);
-    return false
-  }
-  return true
-};;
-function windowErorr(className, index, text, span) {
-  removeErorr();
-  span.setAttribute("class", className);
-  span.innerText = text;
-  span.style.top = (table.offsetTop + 5 + 50 * (index + 1)) + "px";
-  table.appendChild(span);
-  span.scrollIntoView();
-  span.addEventListener("click", () => {
-    table.removeChild(span);
-  });
-};;
-function checkFullmassaErorr(fullMassa, span) {
-  const table = document.getElementById("table");
-  if (fullMassa < 100) {
-    addWindow(fullMassa * 1000);
-    return false
-  }
-  if (fullMassa > 100) {
+function windowHumidityAshCsontent(inputData) {
+  if (inputData) {
     removeErorr();
-    span.setAttribute("class", "massa_error");
-    span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";
-    span.style.top = (table.offsetTop - 65) + "px";
-    table.appendChild(span);
+    const span = document.createElement("span");
+    let topPosition = inputData.parentNode.offsetTop;
+    let leftPosition = inputData.parentNode.offsetLeft;
+    const text = "Не может превышать 100%";
+    span.innerHTML = `
+    <span id="active" style="top:${topPosition + "px"} ; left:${93 + leftPosition + "px"};">
+      <div class="alert alert-danger" role="alert">
+         ${text}
+      </div>
+    </span>
+      `
+    const tableBody = document.getElementById("bodyTable");
+    tableBody.appendChild(span);
     span.addEventListener("click", () => {
-      table.removeChild(span);
+      span.remove()
     });
     return false
+  } else {
+    return true
   }
-  return true
-};;
-function addWindow(fullMassa) {
+};
+
+function massaWindowErorr(fullMassa) {
   const div = document.createElement("div");
   div.setAttribute("class", "container-window");
-  div.style.top = table.offsetTop + "px"
+  div.style.top = table.offsetTop + "px";
   div.innerHTML = `
-  <div class="container-window__text">
-  Содержание должно быть равным 100%
-   <p>ваше содержание = ${fullMassa / 1000}%</p>
-  заполнить недостающие содежаниее "прочее(остаток)"
-    <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
-  <div class="container-window__btn">
-    <input class="window__btn" type="button" value="Да"></input>
-    <input class="window__btn" type="button" value="Нет"></input>
-  </div>
-  </div>
-  `;
+    <div class="container-window__text">
+    Содержание должно быть равным 100%
+     <p>ваше содержание = ${fullMassa / 1000}%</p>
+    заполнить недостающие содежаниее "прочее(остаток)"
+      <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
+    <div class="container-window__btn">
+      <input class="window__btn" type="button" value="Да"></input>
+      <input class="window__btn" type="button" value="Нет"></input>
+    </div>
+    </div>
+    `;
   table.appendChild(div);
-  windowAnswer(div, fullMassa);
-};
-function windowAnswer(div, fullMassa) {
   const windowBtn = document.querySelectorAll(".window__btn");
   windowBtn.forEach(e => {
     e.addEventListener("click", () => {
@@ -380,7 +352,7 @@ function windowAnswer(div, fullMassa) {
       div.remove();
     });
   });
-};
+}
 function addRowsWindow(fullMassa) {
   lenghtСolumn();
   const inputName = document.querySelectorAll(".input__name");
@@ -394,33 +366,19 @@ function lastItem(last, id, attribute) {
   let lastValue = last[last.length - id];
   lastValue.value = attribute;
   otherAutoDilling(lastValue);
-};
-;
-function errorCheck(bd) {
-  let fullMassa = 0; //содержание
-  let ashContent = []; //зольность
-  let humidity = []; // влажность
-  let id = []; //номер строки
-  bd.forEach(element => {
-    id.push(element.id);
-    fullMassa += element.massa * 1000;
-    ashContent.push(element.A);
-    humidity.push(element.W);
-  });
-  //создание span для Удаление всех span  
-  const span = document.createElement("span");
-  span.setAttribute("id", "active");
-
-  if (checkAshContentErorr(ashContent, span) && checkHumidityErorr(humidity, span) && checkFullmassaErorr(fullMassa / 1000, span, id)) {
+};;
+function errorCheck(database) {
+  let inputData;
+  document.querySelectorAll(".input__data").forEach(element => {
+    if (element.value > 100) {
+      inputData = element
+    }
+  })
+  if (checkFullmassaErorr(database) && windowHumidityAshCsontent(inputData)) {
     removeErorr();
-    calck(bd);
+    calck(database);
   }
-};
-
-
-
-
-
+}
 ;
 function removeErorr() {
   const spanActive = document.querySelectorAll("#active");
@@ -428,6 +386,98 @@ function removeErorr() {
     spanActive[i].remove();
   };
 };;
+function windowHumidityAshCsontent(inputData) {
+  if (inputData) {
+    removeErorr();
+    const span = document.createElement("span");
+    let topPosition = inputData.parentNode.offsetTop;
+    let leftPosition = inputData.parentNode.offsetLeft;
+    const text = "Не может превышать 100%";
+    span.innerHTML = `
+    <span id="active" style="top:${topPosition + "px"} ; left:${93 + leftPosition + "px"};">
+      <div class="alert alert-danger" role="alert">
+         ${text}
+      </div>
+    </span>
+      `
+    const tableBody = document.getElementById("bodyTable");
+    tableBody.appendChild(span);
+    span.addEventListener("click", () => {
+      span.remove()
+    });
+    return false
+  } else {
+    return true
+  }
+};
+
+function massaWindowErorr(fullMassa) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "container-window");
+  div.style.top = table.offsetTop + "px";
+  div.innerHTML = `
+    <div class="container-window__text">
+    Содержание должно быть равным 100%
+     <p>ваше содержание = ${fullMassa / 1000}%</p>
+    заполнить недостающие содежаниее "прочее(остаток)"
+      <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
+    <div class="container-window__btn">
+      <input class="window__btn" type="button" value="Да"></input>
+      <input class="window__btn" type="button" value="Нет"></input>
+    </div>
+    </div>
+    `;
+  table.appendChild(div);
+  const windowBtn = document.querySelectorAll(".window__btn");
+  windowBtn.forEach(e => {
+    e.addEventListener("click", () => {
+      (e.value == "Нет") ?
+        div.remove()
+        :
+        addRowsWindow(fullMassa);
+      div.remove();
+    });
+  });
+}
+function addRowsWindow(fullMassa) {
+  lenghtСolumn();
+  const inputName = document.querySelectorAll(".input__name");
+  lastItem(inputName, 1, "прочее(остаток)");
+  const inputData = document.querySelectorAll(".input__data")
+  setTimeout(() => {
+    lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
+  }, 0);
+};
+function lastItem(last, id, attribute) {
+  let lastValue = last[last.length - id];
+  lastValue.value = attribute;
+  otherAutoDilling(lastValue);
+};;
+function checkFullmassaErorr(database) {
+  let fullMassa = 0; //содержание
+  database.forEach(element => {
+    fullMassa += element.massa * 1000 / 1000;
+  });
+  const table = document.getElementById("table");
+  if (fullMassa < 100) {
+    massaWindowErorr(fullMassa * 1000);
+    return false
+  }
+  if (fullMassa > 100) {
+    removeErorr();
+    const span = document.createElement("span");
+    span.setAttribute("class", "massa_error");
+    span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";
+    span.style.top = (table.offsetTop - 65) + "px";
+    table.appendChild(span);
+    span.addEventListener("click", () => {
+      table.removeChild(span);
+    });
+    return false
+  }
+  return true
+};
+;
 const baseAutoComplite = [
   {
     HeaderName: "Органические отходы",
@@ -581,7 +631,6 @@ const baseAutoComplite = [
     ashContent: 16.9,
     heat: 16.9,
   },
-
   {
     HeaderName: "Дерево",
     name: "дерево",
@@ -590,7 +639,6 @@ const baseAutoComplite = [
     ashContent: 5,
     heat: 18.9,
   },
-
   {
     HeaderName: "Текстиль",
     name: "одежда",
@@ -631,7 +679,6 @@ const baseAutoComplite = [
     ashContent: 50,
     heat: 20.1,
   },
-
   {
     HeaderName: "Металлы",
     name: "черный металл",
@@ -664,7 +711,6 @@ const baseAutoComplite = [
     ashContent: 100,
     heat: 0,
   },
-
   {
     HeaderName: "Стекло",
     name: "стеклотара прозрачная",
@@ -762,7 +808,92 @@ const baseAutoComplite = [
   },
 ];
 
-
+const dataListBD = [
+  {
+    name: "органические отходы",
+    massa: 23.63,
+    humidity: 77.2,
+    ashContent: 17.5,
+    heat: 18.2,
+  },
+  {
+    name: "макулатура",
+    massa: 11.31,
+    humidity: 25.6,
+    ashContent: 15.3,
+    heat: 16.9,
+  },
+  {
+    name: "полимеры",
+    massa: 16.71,
+    humidity: 25.6,
+    ashContent: 6.9,
+    heat: 27.4,
+  },
+  {
+    name: "стекло",
+    massa: 7.65,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "металлы",
+    massa: 1.4,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "текстиль",
+    massa: 2.92,
+    humidity: 29.7,
+    ashContent: 5.2,
+    heat: 22.6,
+  },
+  {
+    name: "дерево",
+    massa: 1.08,
+    humidity: 17.7,
+    ashContent: 4.9,
+    heat: 18.9,
+  },
+  {
+    name: "комбинированные материалы",
+    massa: 1.67,
+    humidity: 11.9,
+    ashContent: 32.4,
+    heat: 30,
+  },
+  {
+    name: "опасные материалы",
+    massa: 0.45,
+    humidity: 3.5,
+    ashContent: 50,
+    heat: 20.1,
+  },
+  {
+    name: "инертные материалы",
+    massa: 4.95,
+    humidity: 7,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "прочие материалы",
+    massa: 9.11,
+    humidity: 35.9,
+    ashContent: 27.3,
+    heat: 30,
+  },
+  {
+    name: "отсев",
+    massa: 18.69,
+    humidity: 55.7,
+    ashContent: 55.8,
+    heat: 20.1,
+  },
+];
 
 ;
 function autoCompliteCell(input) {
@@ -855,5 +986,6 @@ document.querySelectorAll(".dropdown-item__ready").forEach(e => {
     }
   })
 })
+;
 ;
 

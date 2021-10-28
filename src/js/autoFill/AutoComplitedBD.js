@@ -151,7 +151,6 @@ const baseAutoComplite = [
     ashContent: 16.9,
     heat: 16.9,
   },
-
   {
     HeaderName: "Дерево",
     name: "дерево",
@@ -160,7 +159,6 @@ const baseAutoComplite = [
     ashContent: 5,
     heat: 18.9,
   },
-
   {
     HeaderName: "Текстиль",
     name: "одежда",
@@ -201,7 +199,6 @@ const baseAutoComplite = [
     ashContent: 50,
     heat: 20.1,
   },
-
   {
     HeaderName: "Металлы",
     name: "черный металл",
@@ -234,7 +231,6 @@ const baseAutoComplite = [
     ashContent: 100,
     heat: 0,
   },
-
   {
     HeaderName: "Стекло",
     name: "стеклотара прозрачная",
@@ -332,5 +328,90 @@ const baseAutoComplite = [
   },
 ];
 
-
+const dataListBD = [
+  {
+    name: "органические отходы",
+    massa: 23.63,
+    humidity: 77.2,
+    ashContent: 17.5,
+    heat: 18.2,
+  },
+  {
+    name: "макулатура",
+    massa: 11.31,
+    humidity: 25.6,
+    ashContent: 15.3,
+    heat: 16.9,
+  },
+  {
+    name: "полимеры",
+    massa: 16.71,
+    humidity: 25.6,
+    ashContent: 6.9,
+    heat: 27.4,
+  },
+  {
+    name: "стекло",
+    massa: 7.65,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "металлы",
+    massa: 1.4,
+    humidity: 3.5,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "текстиль",
+    massa: 2.92,
+    humidity: 29.7,
+    ashContent: 5.2,
+    heat: 22.6,
+  },
+  {
+    name: "дерево",
+    massa: 1.08,
+    humidity: 17.7,
+    ashContent: 4.9,
+    heat: 18.9,
+  },
+  {
+    name: "комбинированные материалы",
+    massa: 1.67,
+    humidity: 11.9,
+    ashContent: 32.4,
+    heat: 30,
+  },
+  {
+    name: "опасные материалы",
+    massa: 0.45,
+    humidity: 3.5,
+    ashContent: 50,
+    heat: 20.1,
+  },
+  {
+    name: "инертные материалы",
+    massa: 4.95,
+    humidity: 7,
+    ashContent: 100,
+    heat: 0,
+  },
+  {
+    name: "прочие материалы",
+    massa: 9.11,
+    humidity: 35.9,
+    ashContent: 27.3,
+    heat: 30,
+  },
+  {
+    name: "отсев",
+    massa: 18.69,
+    humidity: 55.7,
+    ashContent: 55.8,
+    heat: 20.1,
+  },
+];
 
