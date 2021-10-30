@@ -39,7 +39,7 @@ function lenghtСolumn(nameElement, rowsId) {
 };
 
 function checkCell(td, c, nameElement) {
-    (c == 0) ?
+  (c == 0) ?
     tableCellRemove(td)
     : (c == 1) ?
       tableCellId(td)
@@ -110,10 +110,16 @@ function rowsPlusNumber(rowNumber) {
       element.textContent = num;
     }
   });
-};
-const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
+}
+document.querySelector("#btn-row").addEventListener("click", () => {
+  lenghtСolumn("", 0)
+});
+document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
-    CreateHeader(item.textContent)
+    if (!item.classList.contains("strike")) {
+      CreateHeader(item.textContent)
+    }
+    disableHeaderSelect(item)
   });
 })
 function CreateHeader(item) {
@@ -170,6 +176,7 @@ function removeRows(getId) {
 };
 ;
 function removeHeaderRows(getId) {
+  swutchedHeaderSelect(getId.childNodes[1].childNodes[0].value)
   const bodyTable = document.getElementById("bodyTable");
   let dataIdRows = [];// мастоположение всех заголовков индексы
   let getIdIndex = getId.rowIndex;//индекс выбранной строки
@@ -199,7 +206,36 @@ function removeHeaderRows(getId) {
     };
   };
 };;
-;
+function disableHeaderSelect(nameElement) {
+  if (nameElement.textContent === "Пустой заголовок") {
+    return
+  } else {
+    nameElement.classList.add("strike")
+    checkHeaderSeleck()
+  }
+}
+function swutchedHeaderSelect(nameElement) {
+  document.querySelectorAll(".dropdown-item").forEach(item => {
+    if (nameElement == item.textContent) {
+      item.classList.remove("strike")
+    }
+  })
+}
+function checkHeaderSeleck() {
+  let prevName;
+  let postName;
+  document.querySelectorAll("#headingTable").forEach(item => {
+    item.addEventListener("click", () => {
+      prevName = item.value
+    })
+    item.addEventListener("change", () => {
+      postName = item.value
+      if (prevName != postName) {
+        swutchedHeaderSelect(prevName)
+      }
+    })
+  })
+};
 const btn = document.getElementById("btn").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
@@ -806,93 +842,90 @@ const baseAutoComplite = [
     ashContent: 0,
     heat: 0,
   },
-];
-
-const dataListBD = [
-  {
-    name: "органические отходы",
-    massa: 23.63,
-    humidity: 77.2,
-    ashContent: 17.5,
-    heat: 18.2,
-  },
-  {
-    name: "макулатура",
-    massa: 11.31,
-    humidity: 25.6,
-    ashContent: 15.3,
-    heat: 16.9,
-  },
-  {
-    name: "полимеры",
-    massa: 16.71,
-    humidity: 25.6,
-    ashContent: 6.9,
-    heat: 27.4,
-  },
-  {
-    name: "стекло",
-    massa: 7.65,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "металлы",
-    massa: 1.4,
-    humidity: 3.5,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "текстиль",
-    massa: 2.92,
-    humidity: 29.7,
-    ashContent: 5.2,
-    heat: 22.6,
-  },
-  {
-    name: "дерево",
-    massa: 1.08,
-    humidity: 17.7,
-    ashContent: 4.9,
-    heat: 18.9,
-  },
-  {
-    name: "комбинированные материалы",
-    massa: 1.67,
-    humidity: 11.9,
-    ashContent: 32.4,
-    heat: 30,
-  },
-  {
-    name: "опасные материалы",
-    massa: 0.45,
-    humidity: 3.5,
-    ashContent: 50,
-    heat: 20.1,
-  },
-  {
-    name: "инертные материалы",
-    massa: 4.95,
-    humidity: 7,
-    ashContent: 100,
-    heat: 0,
-  },
-  {
-    name: "прочие материалы",
-    massa: 9.11,
-    humidity: 35.9,
-    ashContent: 27.3,
-    heat: 30,
-  },
-  {
-    name: "отсев",
-    massa: 18.69,
-    humidity: 55.7,
-    ashContent: 55.8,
-    heat: 20.1,
-  },
+  // {
+  //   nameThree: "органические отходы",
+  //   massa: 23.63,
+  //   humidity: 77.2,
+  //   ashContent: 17.5,
+  //   heat: 18.2,
+  // },
+  // {
+  //   nameThree: "макулатура",
+  //   massa: 11.31,
+  //   humidity: 25.6,
+  //   ashContent: 15.3,
+  //   heat: 16.9,
+  // },
+  // {
+  //   nameThree: "полимеры",
+  //   massa: 16.71,
+  //   humidity: 25.6,
+  //   ashContent: 6.9,
+  //   heat: 27.4,
+  // },
+  // {
+  //   nameThree: "стекло",
+  //   massa: 7.65,
+  //   humidity: 3.5,
+  //   ashContent: 100,
+  //   heat: 0,
+  // },
+  // {
+  //   nameThree: "металлы",
+  //   massa: 1.4,
+  //   humidity: 3.5,
+  //   ashContent: 100,
+  //   heat: 0,
+  // },
+  // {
+  //   nameThree: "текстиль",
+  //   massa: 2.92,
+  //   humidity: 29.7,
+  //   ashContent: 5.2,
+  //   heat: 22.6,
+  // },
+  // {
+  //   nameThree: "дерево",
+  //   massa: 1.08,
+  //   humidity: 17.7,
+  //   ashContent: 4.9,
+  //   heat: 18.9,
+  // },
+  // {
+  //   nameThree: "комбинированные материалы",
+  //   massa: 1.67,
+  //   humidity: 11.9,
+  //   ashContent: 32.4,
+  //   heat: 30,
+  // },
+  // {
+  //   nameThree: "опасные материалы",
+  //   massa: 0.45,
+  //   humidity: 3.5,
+  //   ashContent: 50,
+  //   heat: 20.1,
+  // },
+  // {
+  //   nameThree: "инертные материалы",
+  //   massa: 4.95,
+  //   humidity: 7,
+  //   ashContent: 100,
+  //   heat: 0,
+  // },
+  // {
+  //   nameThree: "прочие материалы",
+  //   massa: 9.11,
+  //   humidity: 35.9,
+  //   ashContent: 27.3,
+  //   heat: 30,
+  // },
+  // {
+  //   nameThree: "отсев",
+  //   massa: 18.69,
+  //   humidity: 55.7,
+  //   ashContent: 55.8,
+  //   heat: 20.1,
+  // },
 ];
 
 ;
@@ -905,15 +938,17 @@ function autoCompliteCell(input) {
         otherAutoDilling(valueName[i]);
       });
     };
+  }
+  if(input){
     otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
-  for (let i = 0; i < baseAutoComplite.length; i++) {
-    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-      idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
-    }
-  };
+ for (let i = 0; i < baseAutoComplite.length; i++) {
+      if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+        idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
+      }
+    };
 };
 function idRows(id, heat, ashContent, humidity, massa) {
   id.childNodes[6].querySelector("input").value = heat;
@@ -983,7 +1018,7 @@ document.querySelectorAll(".dropdown-item__ready").forEach(e => {
       newData.forEach(item => {
         CreateHeader(item)
       })
-    }
+    } 
   })
 })
 ;

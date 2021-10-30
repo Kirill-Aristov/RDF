@@ -5,7 +5,7 @@
 @@include("./table/numberRows.js");
 @@include("./table/removeRows/removeRows.js");
 @@include("./table/removeRows/removeHeaderRows.js");
-@@include("./table/disableSelect/disableHeadrSelect.js");
+@@include("./table/disableSelect/HeadrSelect.js");
 @@include("./calculator/collectDataFromTable.js");
 @@include("./calculator/calculator.js");
 @@include("./calculator/charts.js");
@@ -18,6 +18,6 @@
 @@include("./autoFill/autoComplitedCell.js");
 @@include("./autoFill/checkBox/checkerAutoComplit.js");
 @@include("./registration/reg.js");
-@@include("./dropdownMenu.js");
+@@include("./readyTable.js");
 @@include("./animationTable.js");
 

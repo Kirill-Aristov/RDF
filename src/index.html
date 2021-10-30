@@ -36,16 +36,20 @@
       <div class="help-container">
         @@include("./html/Main/Calculator/checkbox.html")
         @@include("./html/Main/Calculator/accordion.html")
-      </div>
-      <div id="choice" >
-        @@include("./html/Main/Calculator/readyTables.html")
-        @@include("./html/Main/Calculator/select.html")
-        <button id="btn"
-                type="button"
-                value="Расчет">
-          Расчет
-        </button>
-      </div>
+      </div> 
+        <div id="choice">
+          @@include("./html/Main/Calculator/readyTables.html")
+          <button id="btn"
+                  type="button"
+                  value="Расчет">
+            Расчет
+          </button>
+          @@include("./html/Main/Calculator/select.html")
+          <button id="btn-row"
+                  type="button"
+                  value="Добавить строку">Добавить строку
+          </button>
+        </div>
       <div id="table"></div>
       <div id='main'></div>
     </main>

@@ -1,7 +1,7 @@
 .checkbox {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: inline-flex;
   align-items: center;
 }
 .checkbox-box {
@@ -18,9 +18,10 @@
 .checkbox-box__text {
   width: 100%;
   line-height: 35px;
-  margin: 0 20px;
+  margin: 0 0px 0 20px;
   font-weight: 500;
   font-size: 18px;
+  line-height: 20px;
 }
 .checkbox-box__slider {
   position: absolute;
@@ -54,4 +55,30 @@
 .check-active::before {
   -webkit-transform: translateX(26px);
   transform: translateX(26px);
+}
+@media (max-width: 825px) {
+  .checkbox-box__text {
+    font-size: 14px;
+    margin: 0 0 0 10px;
+    width: 220px;
+  }
+  .checkbox-box {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 26px;
+  }
+  .checkbox-box__slider {
+    width: 40px;
+    height: 26px;
+    &::before {
+      height: 20px;
+      width: 20px;
+      bottom: 3px;
+    }
+  }
+  .check-active::before {
+    -webkit-transform: translateX(14px);
+    transform: translateX(14px);
+  }
 }

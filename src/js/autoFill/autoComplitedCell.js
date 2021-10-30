@@ -7,15 +7,17 @@ function autoCompliteCell(input) {
         otherAutoDilling(valueName[i]);
       });
     };
+  }
+  if(input){
     otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
-  for (let i = 0; i < baseAutoComplite.length; i++) {
-    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-      idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
-    }
-  };
+ for (let i = 0; i < baseAutoComplite.length; i++) {
+      if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+        idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
+      }
+    };
 };
 function idRows(id, heat, ashContent, humidity, massa) {
   id.childNodes[6].querySelector("input").value = heat;

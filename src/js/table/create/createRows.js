@@ -17,7 +17,7 @@ function lenghtСolumn(nameElement, rowsId) {
 };
 
 function checkCell(td, c, nameElement) {
-    (c == 0) ?
+  (c == 0) ?
     tableCellRemove(td)
     : (c == 1) ?
       tableCellId(td)

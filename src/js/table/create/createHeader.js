@@ -1,6 +1,9 @@
-const dataList = document.querySelectorAll(".dropdown-item").forEach(item => {
+document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
-    CreateHeader(item.textContent)
+    if (!item.classList.contains("strike")) {
+      CreateHeader(item.textContent)
+    }
+    disableHeaderSelect(item)
   });
 })
 function CreateHeader(item) {

@@ -1,5 +1,5 @@
 .accordion {
-  display: inline-block;
+  display: block;
   width: 300px;
   &-item {
     position: relative;
@@ -60,4 +60,18 @@
   background-image: none;
   transform: rotate(180deg);
   border-bottom: 10px solid #000;
+}
+@media (max-width: 825px) {
+  .accordion {
+    width: 150px;
+    &-button {
+      font-size: 14px;
+    }
+    &-body {
+      padding: 10px 8px;
+      a {
+        font-size: 14px;
+      }
+    }
+  }
 }

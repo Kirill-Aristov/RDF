@@ -11,3 +11,6 @@ function rowsPlusNumber(rowNumber) {
     }
   });
 }
+document.querySelector("#btn-row").addEventListener("click", () => {
+  lenghtСolumn("", 0)
+})
