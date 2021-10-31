@@ -1018,7 +1018,7 @@ document.querySelectorAll(".dropdown-item__ready").forEach(e => {
       newData.forEach(item => {
         CreateHeader(item)
       })
-    } 
+    }
   })
 })
 ;
