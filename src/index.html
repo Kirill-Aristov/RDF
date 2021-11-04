@@ -34,22 +34,11 @@
     <main id="main-container">
       <!-- @@include("./html/Main/Calculator/scientificPublications/publications.html") -->
       <div class="help-container">
-        @@include("./html/Main/Calculator/checkbox.html")
-        @@include("./html/Main/Calculator/accordion.html")
-      </div> 
-        <div id="choice">
-          @@include("./html/Main/Calculator/readyTables.html")
-          <button id="btn"
-                  type="button"
-                  value="Расчет">
-            Расчет
-          </button>
-          @@include("./html/Main/Calculator/select.html")
-          <button id="btn-row"
-                  type="button"
-                  value="Добавить строку">Добавить строку
-          </button>
-        </div>
+        @@include("./html/Main/Calculator/helpContainer/helpContainer.html")
+      </div>
+      <div id="choice">
+        @@include("./html/Main/Calculator/blockButton/blockButton.html")
+      </div>
       <div id="table"></div>
       <div id='main'></div>
     </main>

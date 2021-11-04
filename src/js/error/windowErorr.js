@@ -14,6 +14,7 @@ function windowHumidityAshCsontent(inputData) {
       `
     const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
+    span.scrollIntoView()
     span.addEventListener("click", () => {
       span.remove()
     });

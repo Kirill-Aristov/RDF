@@ -19,7 +19,10 @@ function createTable() {
 };
 createTable();
 
-;
+const screenWidth = window.innerWidth
+if (screenWidth < 600) {
+  alert("пожалуйста переведите экран смартфона в горизонтальное положение \n данный сайт не поддерживается на разрешениях ниже 600px")
+};
 function checkNameRows(item) {
   baseAutoComplite.forEach((nameElement) => {
     if (nameElement.HeaderName == item) {
@@ -236,7 +239,7 @@ function checkHeaderSeleck() {
     })
   })
 };
-const btn = document.getElementById("btn").addEventListener("click", () => {
+document.getElementById("btn-payment").addEventListener("click", () => {
   let database = [];
   const table = document.getElementById("empTable");
   for (let i = 1; row = table.rows[i]; i++) {
@@ -352,6 +355,7 @@ function windowHumidityAshCsontent(inputData) {
       `
     const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
+    span.scrollIntoView()
     span.addEventListener("click", () => {
       span.remove()
     });
@@ -438,6 +442,7 @@ function windowHumidityAshCsontent(inputData) {
       `
     const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
+    span.scrollIntoView()
     span.addEventListener("click", () => {
       span.remove()
     });
