@@ -8,62 +8,72 @@ function checkNameRows(item) {
 function lenghtСolumn(nameElement, rowsId) {
   const bodyTable = document.getElementById('bodyTable');
   let tr = bodyTable.insertRow(rowsId);
-  for (let c = 0; c < HeaderTable.length; c++) {
+  for (let c = 0; c < 8; c++) {
     let td = document.createElement('td');
     td = tr.insertCell(c);
-    checkCell(td, c, nameElement);
+    (c == 0) ?
+      tableCellRemove(td)
+      : (c == 1) ?
+        tableCellId(td)
+        : (c == 2) ?
+          tableCellName(td, nameElement)
+          : (c == 7) ?
+            ""
+            : tableCellInput(td)
   };
   numberRows();
 };
 
-function checkCell(td, c, nameElement) {
-  (c == 0) ?
-    tableCellRemove(td)
-    : (c == 1) ?
-      tableCellId(td)
-      : (c == 2) ?
-        tableCellName(td, nameElement)
-        : (c == 7) ?
-          ""
-          : tableCellInput(td)
-
-};
 function tableCellRemove(td) {
-  const attribute = [
-    ["class", "clearBtn"],
-    ["type", "button"],
-    ["tabindex", "-1"],
-    ["onclick", "removeRows(this.parentNode.parentNode.rowIndex)"]
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type", "tabindex", "onclick"
+    ],
+    value: [
+      "clearBtn", "button", "-1", "removeRows(this.parentNode.parentNode.rowIndex)"
+    ],
+  }
+
+  cellAtributes(properties, "input", td);
 };
 function tableCellId(td) {
-  const attribute = [
-    ["id", "number_id"],
-  ];
-  cellAtributes(attribute, "div", td);
+  const properties = {
+    attribute: [
+      "id"
+    ],
+    value: [
+      "number_id"
+    ],
+  }
+  cellAtributes(properties, "div", td);
 };
 function tableCellName(td, nameElement) {
-  const attribute = [
-    ["class", "input__name"],
-    ["type", "text"],
-    ["list", "list_name"],
-    ["value", nameElement ? nameElement.name : ""]
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type", "list", "value",
+    ],
+    value: [
+      "input__name", "text", "list_name", nameElement ? nameElement.name : "",
+    ],
+  }
+  cellAtributes(properties, "input", td);
 };
 function tableCellInput(td) {
-  const attribute = [
-    ["class", "input__data"],
-    ["type", "text"],
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type",
+    ],
+    value: [
+      "input__data", "text",
+    ],
+  }
+  cellAtributes(properties, "input", td);
 };
 
-function cellAtributes(attribute, teg, td) {
+function cellAtributes(properties, teg, td) {
   let tegName = document.createElement(teg);
-  for (let index = 0; index < attribute.length; index++) {
-    tegName.setAttribute(attribute[index][0], attribute[index][1]);
+  for (let index = 0; index < properties.value.length; index++) {
+    tegName.setAttribute(properties.attribute[index], properties.value[index]);
   };
   td.appendChild(tegName);
   setTimeout(() => {

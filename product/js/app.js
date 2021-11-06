@@ -1,24 +1,5 @@
-let HeaderTable = new Array(); //создание таблицы.
-HeaderTable = ["", '№', 'Название', 'Содержание, %', 'Влажность, %', 'Зольность на сухую м. %', 'Теплота сгорания на с/без.м., мДж/кг', ""];  //Массив шапки таблицы
-function createTable() {
-  const empTable = document.createElement('table');
-  empTable.setAttribute('id', 'empTable'); //id таблицы
-  const thead = document.createElement("thead");//header таблицы
-  const tbody = document.createElement("tbody");//body таблицы
-  tbody.setAttribute("id", "bodyTable");
-  let tr = thead.insertRow(-1);
-  for (let h = 0; h < HeaderTable.length; h++) {
-    const th = document.createElement('th');
-    th.innerHTML = HeaderTable[h];
-    tr.appendChild(th);
-  };
-  const table = document.getElementById('table');
-  table.appendChild(empTable);
-  empTable.appendChild(thead);
-  empTable.appendChild(tbody);
-};
-createTable();
-
+const table = document.getElementById('empTable'); //таблица
+const tableBody = document.getElementById("bodyTable"); // тело таблицы;
 const screenWidth = window.innerWidth
 if (screenWidth < 600) {
   alert("пожалуйста переведите экран смартфона в горизонтальное положение \n данный сайт не поддерживается на разрешениях ниже 600px")
@@ -33,62 +14,72 @@ function checkNameRows(item) {
 function lenghtСolumn(nameElement, rowsId) {
   const bodyTable = document.getElementById('bodyTable');
   let tr = bodyTable.insertRow(rowsId);
-  for (let c = 0; c < HeaderTable.length; c++) {
+  for (let c = 0; c < 8; c++) {
     let td = document.createElement('td');
     td = tr.insertCell(c);
-    checkCell(td, c, nameElement);
+    (c == 0) ?
+      tableCellRemove(td)
+      : (c == 1) ?
+        tableCellId(td)
+        : (c == 2) ?
+          tableCellName(td, nameElement)
+          : (c == 7) ?
+            ""
+            : tableCellInput(td)
   };
   numberRows();
 };
 
-function checkCell(td, c, nameElement) {
-  (c == 0) ?
-    tableCellRemove(td)
-    : (c == 1) ?
-      tableCellId(td)
-      : (c == 2) ?
-        tableCellName(td, nameElement)
-        : (c == 7) ?
-          ""
-          : tableCellInput(td)
-
-};
 function tableCellRemove(td) {
-  const attribute = [
-    ["class", "clearBtn"],
-    ["type", "button"],
-    ["tabindex", "-1"],
-    ["onclick", "removeRows(this.parentNode.parentNode.rowIndex)"]
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type", "tabindex", "onclick"
+    ],
+    value: [
+      "clearBtn", "button", "-1", "removeRows(this.parentNode.parentNode.rowIndex)"
+    ],
+  }
+
+  cellAtributes(properties, "input", td);
 };
 function tableCellId(td) {
-  const attribute = [
-    ["id", "number_id"],
-  ];
-  cellAtributes(attribute, "div", td);
+  const properties = {
+    attribute: [
+      "id"
+    ],
+    value: [
+      "number_id"
+    ],
+  }
+  cellAtributes(properties, "div", td);
 };
 function tableCellName(td, nameElement) {
-  const attribute = [
-    ["class", "input__name"],
-    ["type", "text"],
-    ["list", "list_name"],
-    ["value", nameElement ? nameElement.name : ""]
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type", "list", "value",
+    ],
+    value: [
+      "input__name", "text", "list_name", nameElement ? nameElement.name : "",
+    ],
+  }
+  cellAtributes(properties, "input", td);
 };
 function tableCellInput(td) {
-  const attribute = [
-    ["class", "input__data"],
-    ["type", "text"],
-  ];
-  cellAtributes(attribute, "input", td);
+  const properties = {
+    attribute: [
+      "class", "type",
+    ],
+    value: [
+      "input__data", "text",
+    ],
+  }
+  cellAtributes(properties, "input", td);
 };
 
-function cellAtributes(attribute, teg, td) {
+function cellAtributes(properties, teg, td) {
   let tegName = document.createElement(teg);
-  for (let index = 0; index < attribute.length; index++) {
-    tegName.setAttribute(attribute[index][0], attribute[index][1]);
+  for (let index = 0; index < properties.value.length; index++) {
+    tegName.setAttribute(properties.attribute[index], properties.value[index]);
   };
   td.appendChild(tegName);
   setTimeout(() => {
@@ -120,21 +111,67 @@ document.querySelector("#btn-row").addEventListener("click", () => {
 document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
     if (!item.classList.contains("strike")) {
+    //   let tr = tableBody.insertRow(-1)
+    //   const createHeader = new CreateHeader(item.textContent)
+    //   tr.innerHTML += `
+    //  ${createHeader.CreateRemoveHeaderTable()} 
+    //  ${createHeader.CreateHeaderRows()}
+    //  ${createHeader.CreateBtnRowsPlus()}
+    //   `;
       CreateHeader(item.textContent)
+      // checkNameRows(item.textContent);
+      disableHeaderSelect(item)
     }
-    disableHeaderSelect(item)
   });
 })
-function CreateHeader(item) {
-  const table = document.getElementById('empTable');
-  const tableBody = document.getElementById("bodyTable"); //создание внутренних заголовков
-  let tr = tableBody.insertRow(-1);
-  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-  CreateHeaderTable(tr, item);// сам заголовок 6 строк
-  CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
-  table.appendChild(tableBody);
-  tableBody.appendChild(tr);
-  checkNameRows(item); //проверка выбранного именни
+
+// class CreateHeader {
+//   constructor(item) {
+//     this.item = item;
+//   }
+//   CreateRemoveHeaderTable() {
+//     return `
+//       <td>
+//           <input
+//            type="button" 
+//            class="clearBtn" 
+//            tabindex="-1" 
+//            onclick="removeHeaderRows(this.parentNode.parentNode)">
+//       </td>
+//           `
+//   }
+//   CreateHeaderRows() {
+//     return `
+//       <td 
+//       colspan=6>
+//           <input 
+//           id="headingTable"
+//           value="${this.item}" >
+//       </td>
+//           `
+//   }
+//   CreateBtnRowsPlus() {
+//     return `
+//       <td>
+//          <button 
+//           class="rows-btn__plus"
+//           type="button"
+//           onclick="createRowsAdditional(this)">
+//            Добавить строку
+//            </button>
+//       </td>
+//           `
+//   }
+// }
+function CreateBtnRowsPlus(tr) {
+  const td = document.createElement('td');
+  const button = document.createElement("button");
+  button.setAttribute("class", "rows-btn__plus")
+  button.setAttribute("type", "button")
+  button.setAttribute("onclick", "createRowsAdditional(this)") //навешивание события на клик кнопки для добавления строки
+  button.textContent = "Добавить строку"
+  tr.appendChild(td);
+  td.appendChild(button);
 }
 function CreateHeaderTable(tr, item) {
   const td = document.createElement('td');
@@ -145,6 +182,15 @@ function CreateHeaderTable(tr, item) {
   tr.appendChild(td);
   td.appendChild(input);
 };
+function CreateHeader(item) {
+  let tr = tableBody.insertRow(-1);
+  table.appendChild(tableBody);
+  tableBody.appendChild(tr);
+  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
+  CreateHeaderTable(tr, item);// сам заголовок 6 строк
+  CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+  checkNameRows(item); //проверка выбранного именни
+}
 function CreateRemoveHeaderTable(tr) {
   const td = document.createElement('td');
   const input = document.createElement("input");
@@ -155,16 +201,10 @@ function CreateRemoveHeaderTable(tr) {
   tr.appendChild(td);
   td.appendChild(input);
 };
-function CreateBtnRowsPlus(tr) {
-  const td = document.createElement('td');
-  const button = document.createElement("button");
-  button.setAttribute("class", "rows-btn__plus")
-  button.setAttribute("type", "button")
-  button.setAttribute("onclick", "createRowsAdditional(this)") //навешивание события на клик кнопки для добавления строки
-  button.textContent = "Добавить строку"
-  tr.appendChild(td);
-  td.appendChild(button);
-};
+
+
+
+;
 function numberRows() {
   let numberRows = document.querySelectorAll("#number_id")
   for (let index = 0; index < (numberRows.length + 1); index++) {
@@ -179,6 +219,7 @@ function removeRows(getId) {
 };
 ;
 function removeHeaderRows(getId) {
+  console.log(getId.childNodes[1].childNodes[0])
   swutchedHeaderSelect(getId.childNodes[1].childNodes[0].value)
   const bodyTable = document.getElementById("bodyTable");
   let dataIdRows = [];// мастоположение всех заголовков индексы
@@ -218,6 +259,7 @@ function disableHeaderSelect(nameElement) {
   }
 }
 function swutchedHeaderSelect(nameElement) {
+  console.log(nameElement)
   document.querySelectorAll(".dropdown-item").forEach(item => {
     if (nameElement == item.textContent) {
       item.classList.remove("strike")
@@ -944,22 +986,22 @@ function autoCompliteCell(input) {
       });
     };
   }
-  if(input){
+  if (input) {
     otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
- for (let i = 0; i < baseAutoComplite.length; i++) {
-      if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-        idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
-      }
-    };
+  for (let i = 0; i < baseAutoComplite.length; i++) {
+    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+      idRows(valueName.parentNode.parentNode, baseAutoComplite[i])
+    }
+  };
 };
-function idRows(id, heat, ashContent, humidity, massa) {
-  id.childNodes[6].querySelector("input").value = heat;
-  id.childNodes[5].querySelector("input").value = ashContent;
-  id.childNodes[4].querySelector("input").value = humidity;
-  id.childNodes[3].querySelector("input").value = massa;
+function idRows(id, { heat, ashContent, humidity, massa }) {
+  id.childNodes[3].querySelector("input").value = massa; //клетка массы
+  id.childNodes[4].querySelector("input").value = humidity;//клетка влажности
+  id.childNodes[5].querySelector("input").value = ashContent;//клетка зольности
+  id.childNodes[6].querySelector("input").value = heat;//клетка теплоты сгорания
 };
 
 ;
@@ -984,31 +1026,6 @@ function autoCompleteRemove() {
     e.removeEventListener("change", otherAutoDilling);
   });
 };;
-// const modal = document.querySelector(".modal");
-// const modalClose = document.querySelector(".modal-close");
-// const modalReg = document.querySelector(".modal-registration__reg");
-// const modalEntrance = document.querySelector(".modal-registration__entrance");
-// const btnOpenModal = document.querySelectorAll(".btnModal").forEach((element) => {
-//   element.addEventListener("click", () => {
-//     modalReg.classList.remove("blockModal");
-//     modalEntrance.classList.remove("blockModal");
-//     if (element.textContent.toLowerCase() == "войти") {
-//       modal.classList.add("activemodal");
-//       modalReg.classList.add("blockModal");
-//     } else {
-//       modal.classList.add("activemodal");
-//       modalEntrance.classList.add("blockModal");
-//     };
-//   });
-// });
-// modal.addEventListener("click", (e) => {
-//   if (e.target == modal) {
-//     modal.classList.remove("activemodal");
-//   }
-// });
-// modalClose.addEventListener("click", (e) => {
-//   modal.classList.remove("activemodal");
-// });;
 document.querySelectorAll(".dropdown-item__ready").forEach(e => {
   e.addEventListener("click", () => {
     let data = [];
@@ -1026,6 +1043,5 @@ document.querySelectorAll(".dropdown-item__ready").forEach(e => {
     }
   })
 })
-;
 ;
 

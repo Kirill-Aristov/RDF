@@ -8,21 +8,21 @@ function autoCompliteCell(input) {
       });
     };
   }
-  if(input){
+  if (input) {
     otherAutoDilling(input);
   }
 };
 function otherAutoDilling(valueName) {
- for (let i = 0; i < baseAutoComplite.length; i++) {
-      if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-        idRows(valueName.parentNode.parentNode, baseAutoComplite[i].heat, baseAutoComplite[i].ashContent, baseAutoComplite[i].humidity, baseAutoComplite[i].massa)
-      }
-    };
+  for (let i = 0; i < baseAutoComplite.length; i++) {
+    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
+      idRows(valueName.parentNode.parentNode, baseAutoComplite[i])
+    }
+  };
 };
-function idRows(id, heat, ashContent, humidity, massa) {
-  id.childNodes[6].querySelector("input").value = heat;
-  id.childNodes[5].querySelector("input").value = ashContent;
-  id.childNodes[4].querySelector("input").value = humidity;
-  id.childNodes[3].querySelector("input").value = massa;
+function idRows(id, { heat, ashContent, humidity, massa }) {
+  id.childNodes[3].querySelector("input").value = massa; //клетка массы
+  id.childNodes[4].querySelector("input").value = humidity;//клетка влажности
+  id.childNodes[5].querySelector("input").value = ashContent;//клетка зольности
+  id.childNodes[6].querySelector("input").value = heat;//клетка теплоты сгорания
 };
 

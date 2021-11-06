@@ -1,4 +1,5 @@
-@@include("./table/start/startCreateTable.js");
+@@include("./Const/const.js");
+@@include("./table/checkWidth.js");
 @@include("./table/create/createRows.js");
 @@include("./table/create/createPlusRows/createRowsAdditional.js");
 @@include("./table/create/createHeader.js");
@@ -17,7 +18,5 @@
 @@include("./autoFill/AutoComplitedBD.js");
 @@include("./autoFill/autoComplitedCell.js");
 @@include("./autoFill/checkBox/checkerAutoComplit.js");
-@@include("./registration/reg.js");
 @@include("./readyTable.js");
-@@include("./animationTable.js");
 

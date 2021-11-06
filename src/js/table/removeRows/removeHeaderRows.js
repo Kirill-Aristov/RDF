@@ -1,4 +1,5 @@
 function removeHeaderRows(getId) {
+  console.log(getId.childNodes[1].childNodes[0])
   swutchedHeaderSelect(getId.childNodes[1].childNodes[0].value)
   const bodyTable = document.getElementById("bodyTable");
   let dataIdRows = [];// мастоположение всех заголовков индексы

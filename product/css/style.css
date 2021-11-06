@@ -806,7 +806,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .dropdown-item.strike {
-  cursor: not-allowed;
+  pointer-events: none;
   position: relative;
 }
 .dropdown-item.strike::after {
@@ -874,7 +874,6 @@ table {
 }
 
 td {
-  width: 70px;
   text-align: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -884,16 +883,17 @@ td {
 }
 
 td input {
-  width: 100%;
+  width: 80px;
   height: 30px;
   text-align: center;
   background-color: #fff;
 }
 
 th {
+  width: 150px;
   font-size: 14px;
   font-weight: 600;
-  padding: 7px 10px;
+  padding: 7px 4px;
   color: #fff;
   border-bottom: 1px solid #fff;
   border-top-left-radius: 10px;
@@ -901,7 +901,7 @@ th {
 }
 
 td:nth-child(1) {
-  width: 19px;
+  width: 20px;
   background-color: transparent;
   border: none;
 }
@@ -914,14 +914,6 @@ th:nth-child(even) {
   background: rgba(63, 11, 222, 0.8);
   border-right: 1px solid #fff;
   border-left: 1px solid #fff;
-}
-
-th:nth-child(7) {
-  width: 140px;
-}
-
-th:nth-child(6) {
-  width: 120px;
 }
 
 th:nth-child(odd) {

@@ -26,6 +26,7 @@
 </head>
 
 <body>
+  
   <datalist id="list_name">
   <option value="алюминиевая банка"></option>
   <option value="газетная бумага"></option>
@@ -176,7 +177,23 @@
   </button>
 </div>
       </div>
-      <div id="table"></div>
+      <div id="table">
+        <table id="empTable">
+  <thead>
+    <tr>
+      <th></th>
+      <th>№</th>
+      <th>Название</th>
+      <th>Содержание, %</th>
+      <th>Влажность, %</th>
+      <th>Зольность на сухую м. %</th>
+      <th>Теплота сгорания на с/без.м., мДж/кг</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="bodyTable"></tbody>
+</table>
+      </div>
       <div id='main'></div>
     </main>
   </div>
