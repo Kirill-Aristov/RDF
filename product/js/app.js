@@ -304,16 +304,17 @@ function charts(bd, fullMassa) {
 function windowHumidityAshCsontent(inputData) {
   if (inputData) {
     removeErorr();
-    const span = document.createElement("span");
     let topPosition = inputData.parentNode.offsetTop;
     let leftPosition = inputData.parentNode.offsetLeft;
+    const span = document.createElement("span");
+    span.setAttribute("id", "active")
+    span.style.top = topPosition + "px"
+    span.style.left = 93 + leftPosition + "px"
     const text = "Не может превышать 100%";
     span.innerHTML = `
-    <span id="active" style="top:${topPosition + "px"} ; left:${93 + leftPosition + "px"};">
       <div class="alert alert-danger" role="alert">
          ${text}
       </div>
-    </span>
       `
     tableBody.appendChild(span);
     span.scrollIntoView()
@@ -376,7 +377,6 @@ function errorCheck(database) {
     }
   })
   if (checkFullmassaErorr(database) && windowHumidityAshCsontent(inputData)) {
-    console.log("отработала")
     removeErorr();
     calck(database);
   }
@@ -391,16 +391,17 @@ function removeErorr() {
 function windowHumidityAshCsontent(inputData) {
   if (inputData) {
     removeErorr();
-    const span = document.createElement("span");
     let topPosition = inputData.parentNode.offsetTop;
     let leftPosition = inputData.parentNode.offsetLeft;
+    const span = document.createElement("span");
+    span.setAttribute("id", "active")
+    span.style.top = topPosition + "px"
+    span.style.left = 93 + leftPosition + "px"
     const text = "Не может превышать 100%";
     span.innerHTML = `
-    <span id="active" style="top:${topPosition + "px"} ; left:${93 + leftPosition + "px"};">
       <div class="alert alert-danger" role="alert">
          ${text}
       </div>
-    </span>
       `
     tableBody.appendChild(span);
     span.scrollIntoView()
@@ -463,7 +464,6 @@ function checkFullmassaErorr(database) {
     m.push(element.massa * 1000)
   });
   let fullMassa = m.reduce(reducer) / 1000
-  console.log(fullMassa)
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     massaWindowErorr(fullMassa * 1000);

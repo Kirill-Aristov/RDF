@@ -6,7 +6,6 @@ function checkFullmassaErorr(database) {
     m.push(element.massa * 1000)
   });
   let fullMassa = m.reduce(reducer) / 1000
-  console.log(fullMassa)
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     massaWindowErorr(fullMassa * 1000);

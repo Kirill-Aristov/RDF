@@ -1,16 +1,17 @@
 function windowHumidityAshCsontent(inputData) {
   if (inputData) {
     removeErorr();
-    const span = document.createElement("span");
     let topPosition = inputData.parentNode.offsetTop;
     let leftPosition = inputData.parentNode.offsetLeft;
+    const span = document.createElement("span");
+    span.setAttribute("id", "active")
+    span.style.top = topPosition + "px"
+    span.style.left = 93 + leftPosition + "px"
     const text = "Не может превышать 100%";
     span.innerHTML = `
-    <span id="active" style="top:${topPosition + "px"} ; left:${93 + leftPosition + "px"};">
       <div class="alert alert-danger" role="alert">
          ${text}
       </div>
-    </span>
       `
     tableBody.appendChild(span);
     span.scrollIntoView()
