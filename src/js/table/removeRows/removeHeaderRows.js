@@ -1,7 +1,5 @@
 function removeHeaderRows(getId) {
-  console.log(getId.childNodes[1].childNodes[0])
-  swutchedHeaderSelect(getId.childNodes[1].childNodes[0].value)
-  const bodyTable = document.getElementById("bodyTable");
+  swutchedHeaderSelect(getId.childNodes[3].childNodes[1].value)
   let dataIdRows = [];// мастоположение всех заголовков индексы
   let getIdIndex = getId.rowIndex;//индекс выбранной строки
   let closestRight;//ближайшее наибольшее число

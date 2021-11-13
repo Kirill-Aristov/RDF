@@ -6,6 +6,7 @@ function errorCheck(database) {
     }
   })
   if (checkFullmassaErorr(database) && windowHumidityAshCsontent(inputData)) {
+    console.log("отработала")
     removeErorr();
     calck(database);
   }

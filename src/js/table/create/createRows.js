@@ -1,86 +1,62 @@
 function checkNameRows(item) {
   baseAutoComplite.forEach((nameElement) => {
     if (nameElement.HeaderName == item) {
-      lenghtСolumn(nameElement)
+      return lenghtСolumn(nameElement)
     };
   });
 };
 function lenghtСolumn(nameElement, rowsId) {
-  const bodyTable = document.getElementById('bodyTable');
   let tr = bodyTable.insertRow(rowsId);
-  for (let c = 0; c < 8; c++) {
-    let td = document.createElement('td');
-    td = tr.insertCell(c);
-    (c == 0) ?
-      tableCellRemove(td)
-      : (c == 1) ?
-        tableCellId(td)
-        : (c == 2) ?
-          tableCellName(td, nameElement)
-          : (c == 7) ?
-            ""
-            : tableCellInput(td)
-  };
-  numberRows();
-};
-
-function tableCellRemove(td) {
-  const properties = {
-    attribute: [
-      "class", "type", "tabindex", "onclick"
-    ],
-    value: [
-      "clearBtn", "button", "-1", "removeRows(this.parentNode.parentNode.rowIndex)"
-    ],
-  }
-
-  cellAtributes(properties, "input", td);
-};
-function tableCellId(td) {
-  const properties = {
-    attribute: [
-      "id"
-    ],
-    value: [
-      "number_id"
-    ],
-  }
-  cellAtributes(properties, "div", td);
-};
-function tableCellName(td, nameElement) {
-  const properties = {
-    attribute: [
-      "class", "type", "list", "value",
-    ],
-    value: [
-      "input__name", "text", "list_name", nameElement ? nameElement.name : "",
-    ],
-  }
-  cellAtributes(properties, "input", td);
-};
-function tableCellInput(td) {
-  const properties = {
-    attribute: [
-      "class", "type",
-    ],
-    value: [
-      "input__data", "text",
-    ],
-  }
-  cellAtributes(properties, "input", td);
-};
-
-function cellAtributes(properties, teg, td) {
-  let tegName = document.createElement(teg);
-  for (let index = 0; index < properties.value.length; index++) {
-    tegName.setAttribute(properties.attribute[index], properties.value[index]);
-  };
-  td.appendChild(tegName);
+  tr.innerHTML += `
+  ${tableCellRemove()}
+  ${tableCellId()}
+  ${tableCellName(nameElement)}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  `
   setTimeout(() => {
-    if (tegName.getAttribute("value") !== null) {
-      autoCompliteCell(tegName);
-    }
+    autoCompliteCell(tr)
   }, 0);
+  return numberRows();
+};
+function tableCellRemove() {
+  return `
+  <td>
+  <input
+    class="clearBtn"
+    type="button"
+    tabindex="-1"
+    onclick="removeRows(this.parentNode.parentNode.rowIndex)">
+  </td>
+  `
+};
+function tableCellId() {
+  return `
+  <td>
+  <div id="number_id"></div>
+  </td>
+  `
+};
+function tableCellName(nameElement) {
+
+  return `
+  <td>
+  <input 
+    class="input__name"
+    type="text"
+    list="list_name"
+    value="${nameElement ? nameElement.name : ""}">
+  </td>
+  `
+};
+function tableCellInput() {
+  return `
+  <td>
+  <input class="input__data" type="number">
+  </td>
+  `
 };
 
 

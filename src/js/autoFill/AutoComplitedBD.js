@@ -315,7 +315,7 @@ const baseAutoComplite = [
   {
     HeaderName: "Прочие материалы",
     name: "прочее",
-    massa: 3.6,
+    massa: 3.9,
     humidity: 100,
     ashContent: 0,
     heat: 20.1,

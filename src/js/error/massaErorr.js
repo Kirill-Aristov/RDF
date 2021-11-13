@@ -1,8 +1,12 @@
 function checkFullmassaErorr(database) {
-  let fullMassa = 0; //содержание
+  //содержание
+  const reducer = (previousValue, currentValue) => previousValue + currentValue;
+  let m = [];
   database.forEach(element => {
-    fullMassa += element.massa * 1000 / 1000;
+    m.push(element.massa * 1000)
   });
+  let fullMassa = m.reduce(reducer) / 1000
+  console.log(fullMassa)
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     massaWindowErorr(fullMassa * 1000);

@@ -27,7 +27,7 @@
   font-size: 14px;
   font-weight: 400;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  left: 35%;
+  left: 45%;
   &::after {
     content: "";
     position: absolute;
@@ -52,6 +52,7 @@
 .container-window {
   position: absolute;
   left: 50%;
+  top: 0;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   background-color: rgba(204, 204, 204, 0.9);

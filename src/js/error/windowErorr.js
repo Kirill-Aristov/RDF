@@ -12,7 +12,6 @@ function windowHumidityAshCsontent(inputData) {
       </div>
     </span>
       `
-    const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
     span.scrollIntoView()
     span.addEventListener("click", () => {
@@ -27,7 +26,7 @@ function windowHumidityAshCsontent(inputData) {
 function massaWindowErorr(fullMassa) {
   const div = document.createElement("div");
   div.setAttribute("class", "container-window");
-  div.style.top = table.offsetTop + "px";
+  div.style.top = tableBody.offsetTop + "px";
   div.innerHTML = `
     <div class="container-window__text">
     Содержание должно быть равным 100%
@@ -40,7 +39,7 @@ function massaWindowErorr(fullMassa) {
     </div>
     </div>
     `;
-  table.appendChild(div);
+  tableBody.appendChild(div);
   const windowBtn = document.querySelectorAll(".window__btn");
   windowBtn.forEach(e => {
     e.addEventListener("click", () => {

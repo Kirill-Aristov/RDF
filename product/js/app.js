@@ -7,200 +7,123 @@ if (screenWidth < 600) {
 function checkNameRows(item) {
   baseAutoComplite.forEach((nameElement) => {
     if (nameElement.HeaderName == item) {
-      lenghtСolumn(nameElement)
+      return lenghtСolumn(nameElement)
     };
   });
 };
 function lenghtСolumn(nameElement, rowsId) {
-  const bodyTable = document.getElementById('bodyTable');
   let tr = bodyTable.insertRow(rowsId);
-  for (let c = 0; c < 8; c++) {
-    let td = document.createElement('td');
-    td = tr.insertCell(c);
-    (c == 0) ?
-      tableCellRemove(td)
-      : (c == 1) ?
-        tableCellId(td)
-        : (c == 2) ?
-          tableCellName(td, nameElement)
-          : (c == 7) ?
-            ""
-            : tableCellInput(td)
-  };
-  numberRows();
-};
-
-function tableCellRemove(td) {
-  const properties = {
-    attribute: [
-      "class", "type", "tabindex", "onclick"
-    ],
-    value: [
-      "clearBtn", "button", "-1", "removeRows(this.parentNode.parentNode.rowIndex)"
-    ],
-  }
-
-  cellAtributes(properties, "input", td);
-};
-function tableCellId(td) {
-  const properties = {
-    attribute: [
-      "id"
-    ],
-    value: [
-      "number_id"
-    ],
-  }
-  cellAtributes(properties, "div", td);
-};
-function tableCellName(td, nameElement) {
-  const properties = {
-    attribute: [
-      "class", "type", "list", "value",
-    ],
-    value: [
-      "input__name", "text", "list_name", nameElement ? nameElement.name : "",
-    ],
-  }
-  cellAtributes(properties, "input", td);
-};
-function tableCellInput(td) {
-  const properties = {
-    attribute: [
-      "class", "type",
-    ],
-    value: [
-      "input__data", "text",
-    ],
-  }
-  cellAtributes(properties, "input", td);
-};
-
-function cellAtributes(properties, teg, td) {
-  let tegName = document.createElement(teg);
-  for (let index = 0; index < properties.value.length; index++) {
-    tegName.setAttribute(properties.attribute[index], properties.value[index]);
-  };
-  td.appendChild(tegName);
+  tr.innerHTML += `
+  ${tableCellRemove()}
+  ${tableCellId()}
+  ${tableCellName(nameElement)}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  ${tableCellInput()}
+  `
   setTimeout(() => {
-    if (tegName.getAttribute("value") !== null) {
-      autoCompliteCell(tegName);
-    }
+    autoCompliteCell(tr)
   }, 0);
+  return numberRows();
+};
+function tableCellRemove() {
+  return `
+  <td>
+  <input
+    class="clearBtn"
+    type="button"
+    tabindex="-1"
+    onclick="removeRows(this.parentNode.parentNode.rowIndex)">
+  </td>
+  `
+};
+function tableCellId() {
+  return `
+  <td>
+  <div id="number_id"></div>
+  </td>
+  `
+};
+function tableCellName(nameElement) {
+
+  return `
+  <td>
+  <input 
+    class="input__name"
+    type="text"
+    list="list_name"
+    value="${nameElement ? nameElement.name : ""}">
+  </td>
+  `
+};
+function tableCellInput() {
+  return `
+  <td>
+  <input class="input__data" type="number">
+  </td>
+  `
 };
 
 
 
 ;
 function createRowsAdditional(element) {
-  let rowsId = element.parentNode.parentNode.rowIndex;
-  lenghtСolumn("", rowsId)
+  lenghtСolumn("", element)
 };
-function rowsPlusNumber(rowNumber) {
-  document.querySelectorAll("#number_id").forEach(element => {
-    if (element.textContent >= rowNumber) {
-      let num = Number(element.textContent);
-      num++;
-      element.textContent = num;
-    }
-  });
-}
 document.querySelector("#btn-row").addEventListener("click", () => {
   lenghtСolumn("", 0)
 });
 document.querySelectorAll(".dropdown-item").forEach(item => {
   item.addEventListener("click", () => {
     if (!item.classList.contains("strike")) {
-    //   let tr = tableBody.insertRow(-1)
-    //   const createHeader = new CreateHeader(item.textContent)
-    //   tr.innerHTML += `
-    //  ${createHeader.CreateRemoveHeaderTable()} 
-    //  ${createHeader.CreateHeaderRows()}
-    //  ${createHeader.CreateBtnRowsPlus()}
-    //   `;
       CreateHeader(item.textContent)
-      // checkNameRows(item.textContent);
       disableHeaderSelect(item)
     }
   });
 })
-
-// class CreateHeader {
-//   constructor(item) {
-//     this.item = item;
-//   }
-//   CreateRemoveHeaderTable() {
-//     return `
-//       <td>
-//           <input
-//            type="button" 
-//            class="clearBtn" 
-//            tabindex="-1" 
-//            onclick="removeHeaderRows(this.parentNode.parentNode)">
-//       </td>
-//           `
-//   }
-//   CreateHeaderRows() {
-//     return `
-//       <td 
-//       colspan=6>
-//           <input 
-//           id="headingTable"
-//           value="${this.item}" >
-//       </td>
-//           `
-//   }
-//   CreateBtnRowsPlus() {
-//     return `
-//       <td>
-//          <button 
-//           class="rows-btn__plus"
-//           type="button"
-//           onclick="createRowsAdditional(this)">
-//            Добавить строку
-//            </button>
-//       </td>
-//           `
-//   }
-// }
-function CreateBtnRowsPlus(tr) {
-  const td = document.createElement('td');
-  const button = document.createElement("button");
-  button.setAttribute("class", "rows-btn__plus")
-  button.setAttribute("type", "button")
-  button.setAttribute("onclick", "createRowsAdditional(this)") //навешивание события на клик кнопки для добавления строки
-  button.textContent = "Добавить строку"
-  tr.appendChild(td);
-  td.appendChild(button);
-}
-function CreateHeaderTable(tr, item) {
-  const td = document.createElement('td');
-  td.setAttribute("colspan", 6) //заполнение во всю строку
-  const input = document.createElement("input");
-  input.setAttribute("id", "headingTable")
-  input.setAttribute("value", (item == "Пустой заголовок") ? "Введите название" : item); //присваивание название
-  tr.appendChild(td);
-  td.appendChild(input);
-};
 function CreateHeader(item) {
   let tr = tableBody.insertRow(-1);
-  table.appendChild(tableBody);
-  tableBody.appendChild(tr);
-  CreateRemoveHeaderTable(tr); //создание мусорки у зоголовка
-  CreateHeaderTable(tr, item);// сам заголовок 6 строк
-  CreateBtnRowsPlus(tr) //создание кнопки для добавления строки
+  tr.innerHTML += `
+  ${CreateRemoveHeaderTable()}
+  ${CreateHeaderTable(item)}
+  ${CreateBtnRowsPlus()}
+  `
   checkNameRows(item); //проверка выбранного именни
 }
-function CreateRemoveHeaderTable(tr) {
-  const td = document.createElement('td');
-  const input = document.createElement("input");
-  input.setAttribute("type", "button");
-  input.setAttribute("class", "clearBtn");
-  input.setAttribute("onclick", "removeHeaderRows(this.parentNode.parentNode)");
-  input.setAttribute("tabindex", "-1");
-  tr.appendChild(td);
-  td.appendChild(input);
+function CreateHeaderTable(item) {
+  return `
+  <td colspan="6">
+  <input 
+    id="headingTable"
+    value="${item == "Пустой заголовок" ? "Введите название" : item}"
+  >
+  </td>
+        `
 };
+function CreateRemoveHeaderTable() {
+  return `
+  <td>
+  <input
+    type="button"
+    class="clearBtn"
+    onclick="removeHeaderRows(this.parentNode.parentNode)"
+    tabindex="-1">
+  </td>
+  `
+};
+function CreateBtnRowsPlus() {
+  return `
+  <td>
+  <button 
+    class="rows-btn__plus"
+    type="button"
+    onclick="createRowsAdditional(this.parentNode.parentNode.rowIndex)">
+    Добавить строку
+  </button>
+  </td>
+  `
+}
 
 
 
@@ -219,9 +142,7 @@ function removeRows(getId) {
 };
 ;
 function removeHeaderRows(getId) {
-  console.log(getId.childNodes[1].childNodes[0])
-  swutchedHeaderSelect(getId.childNodes[1].childNodes[0].value)
-  const bodyTable = document.getElementById("bodyTable");
+  swutchedHeaderSelect(getId.childNodes[3].childNodes[1].value)
   let dataIdRows = [];// мастоположение всех заголовков индексы
   let getIdIndex = getId.rowIndex;//индекс выбранной строки
   let closestRight;//ближайшее наибольшее число
@@ -259,7 +180,6 @@ function disableHeaderSelect(nameElement) {
   }
 }
 function swutchedHeaderSelect(nameElement) {
-  console.log(nameElement)
   document.querySelectorAll(".dropdown-item").forEach(item => {
     if (nameElement == item.textContent) {
       item.classList.remove("strike")
@@ -395,7 +315,6 @@ function windowHumidityAshCsontent(inputData) {
       </div>
     </span>
       `
-    const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
     span.scrollIntoView()
     span.addEventListener("click", () => {
@@ -410,7 +329,7 @@ function windowHumidityAshCsontent(inputData) {
 function massaWindowErorr(fullMassa) {
   const div = document.createElement("div");
   div.setAttribute("class", "container-window");
-  div.style.top = table.offsetTop + "px";
+  div.style.top = tableBody.offsetTop + "px";
   div.innerHTML = `
     <div class="container-window__text">
     Содержание должно быть равным 100%
@@ -423,7 +342,7 @@ function massaWindowErorr(fullMassa) {
     </div>
     </div>
     `;
-  table.appendChild(div);
+  tableBody.appendChild(div);
   const windowBtn = document.querySelectorAll(".window__btn");
   windowBtn.forEach(e => {
     e.addEventListener("click", () => {
@@ -457,6 +376,7 @@ function errorCheck(database) {
     }
   })
   if (checkFullmassaErorr(database) && windowHumidityAshCsontent(inputData)) {
+    console.log("отработала")
     removeErorr();
     calck(database);
   }
@@ -482,7 +402,6 @@ function windowHumidityAshCsontent(inputData) {
       </div>
     </span>
       `
-    const tableBody = document.getElementById("bodyTable");
     tableBody.appendChild(span);
     span.scrollIntoView()
     span.addEventListener("click", () => {
@@ -497,7 +416,7 @@ function windowHumidityAshCsontent(inputData) {
 function massaWindowErorr(fullMassa) {
   const div = document.createElement("div");
   div.setAttribute("class", "container-window");
-  div.style.top = table.offsetTop + "px";
+  div.style.top = tableBody.offsetTop + "px";
   div.innerHTML = `
     <div class="container-window__text">
     Содержание должно быть равным 100%
@@ -510,7 +429,7 @@ function massaWindowErorr(fullMassa) {
     </div>
     </div>
     `;
-  table.appendChild(div);
+  tableBody.appendChild(div);
   const windowBtn = document.querySelectorAll(".window__btn");
   windowBtn.forEach(e => {
     e.addEventListener("click", () => {
@@ -537,10 +456,14 @@ function lastItem(last, id, attribute) {
   otherAutoDilling(lastValue);
 };;
 function checkFullmassaErorr(database) {
-  let fullMassa = 0; //содержание
+  //содержание
+  const reducer = (previousValue, currentValue) => previousValue + currentValue;
+  let m = [];
   database.forEach(element => {
-    fullMassa += element.massa * 1000 / 1000;
+    m.push(element.massa * 1000)
   });
+  let fullMassa = m.reduce(reducer) / 1000
+  console.log(fullMassa)
   const table = document.getElementById("table");
   if (fullMassa < 100) {
     massaWindowErorr(fullMassa * 1000);
@@ -878,7 +801,7 @@ const baseAutoComplite = [
   {
     HeaderName: "Прочие материалы",
     name: "прочее",
-    massa: 3.6,
+    massa: 3.9,
     humidity: 100,
     ashContent: 0,
     heat: 20.1,
@@ -986,8 +909,8 @@ function autoCompliteCell(input) {
       });
     };
   }
-  if (input) {
-    otherAutoDilling(input);
+  if (input && checkBox.classList.contains("check-active")) {
+    otherAutoDilling(input.childNodes[5].childNodes[1]);
   }
 };
 function otherAutoDilling(valueName) {
@@ -998,10 +921,10 @@ function otherAutoDilling(valueName) {
   };
 };
 function idRows(id, { heat, ashContent, humidity, massa }) {
-  id.childNodes[3].querySelector("input").value = massa; //клетка массы
-  id.childNodes[4].querySelector("input").value = humidity;//клетка влажности
-  id.childNodes[5].querySelector("input").value = ashContent;//клетка зольности
-  id.childNodes[6].querySelector("input").value = heat;//клетка теплоты сгорания
+  id.childNodes[7].querySelector("input").value = massa; //клетка массы
+  id.childNodes[9].querySelector("input").value = humidity;//клетка влажности
+  id.childNodes[11].querySelector("input").value = ashContent;//клетка зольности
+  id.childNodes[13].querySelector("input").value = heat;//клетка теплоты сгорания
 };
 
 ;
@@ -1009,7 +932,7 @@ const checkBox = document.querySelector(".checkbox-box__slider");
 checkBox.addEventListener("click", () => {
   if (!checkBox.classList.contains("check-active")) {
     checkBox.classList.add("check-active");
-    autoComplete(checkBox);
+    autoComplete();
   } else {
     checkBox.classList.remove("check-active");
     autoCompleteRemove();
@@ -1018,10 +941,12 @@ checkBox.addEventListener("click", () => {
 const checkBoxText = document.querySelector(".checkbox-box__text");
 function autoComplete() {
   checkBoxText.textContent = "Автозаполнение справочными данными включено";
+  document.querySelectorAll(".input__name").forEach((e) => {
+    e.addEventListener("change", otherAutoDilling);
+  });
 };
 function autoCompleteRemove() {
   checkBoxText.textContent = "Автозаполнение справочными данными выключено";
-
   document.querySelectorAll(".input__name").forEach((e) => {
     e.removeEventListener("change", otherAutoDilling);
   });

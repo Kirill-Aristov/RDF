@@ -1022,7 +1022,7 @@ th:nth-child(odd) {
   font-size: 14px;
   font-weight: 400;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  left: 35%;
+  left: 45%;
 }
 #table .massa_error::after {
   content: "";
@@ -1050,6 +1050,7 @@ th:nth-child(odd) {
 .container-window {
   position: absolute;
   left: 50%;
+  top: 0;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
