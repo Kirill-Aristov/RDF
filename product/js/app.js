@@ -2,7 +2,7 @@ const table = document.getElementById('empTable'); //таблица
 const tableBody = document.getElementById("bodyTable"); // тело таблицы;
 const screenWidth = window.innerWidth
 if (screenWidth < 600) {
-  alert("пожалуйста переведите экран смартфона в горизонтальное положение \n данный сайт не поддерживается на разрешениях ниже 600px")
+  alert("пожалуйста переведите экран смартфона в горизонтальное положение\nданный сайт не поддерживается на разрешениях ниже 600px")
 };
 function checkNameRows(item) {
   baseAutoComplite.forEach((nameElement) => {

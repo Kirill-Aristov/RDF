@@ -8,7 +8,7 @@
   font-weight: 700;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
   border-radius: 5px;
 }
 .container-button {
@@ -27,14 +27,14 @@
   font-weight: 700;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
   &:hover {
     color: #fff;
-    background-color: rgba(63, 11, 222, 0.9);
+    background-color: rgba(63, 11, 222, 0.8);
   }
   &:focus {
     color: #fff;
-    background-color: rgba(63, 11, 222, 0.9);
+    background-color: rgba(63, 11, 222, 0.8);
   }
 }
 
@@ -61,6 +61,7 @@
     color: #1e2125;
     background-color: #e9ecef;
   }
+
 }
 .dropdown-item {
   cursor: pointer;

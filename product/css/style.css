@@ -535,7 +535,7 @@ input::-webkit-calendar-picker-indicator {
   border: 1px solid transparent;
 }
 .accordion-button {
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
   color: #fff;
   font-size: 18px;
   font-weight: 600;
@@ -572,7 +572,7 @@ input::-webkit-calendar-picker-indicator {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
 }
 .accordion-body a {
   font-size: 18px;
@@ -595,7 +595,7 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .accordion-button:not(.collapsed) {
-  color: rgba(63, 11, 222, 0.9);
+  color: rgba(63, 11, 222, 0.8);
   background-color: #fff;
 }
 
@@ -739,7 +739,7 @@ input::-webkit-calendar-picker-indicator {
   font-weight: 700;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
   border-radius: 5px;
 }
 
@@ -763,15 +763,15 @@ input::-webkit-calendar-picker-indicator {
   font-weight: 700;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
 }
 .btn-secondary:hover {
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
 }
 .btn-secondary:focus {
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.9);
+  background-color: rgba(63, 11, 222, 0.8);
 }
 
 .btn {

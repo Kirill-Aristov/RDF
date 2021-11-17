@@ -15,7 +15,7 @@
     border: 1px solid transparent;
   }
   &-button {
-    background-color: rgba(63, 11, 222, 0.9);
+    background-color: rgba(63, 11, 222, 0.8);
     color: #fff;
     font-size: 18px;
     font-weight: 600;
@@ -42,7 +42,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: rgba(63, 11, 222, 0.9);
+    background-color: rgba(63, 11, 222, 0.8);
     a {
       font-size: 18px;
       font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -62,7 +62,7 @@
   border: 1px solid transparent;
 }
 .accordion-button:not(.collapsed) {
-  color: rgba(63, 11, 222, 0.9);
+  color: rgba(63, 11, 222, 0.8);
   background-color: #fff;
 }
 .accordion-button:not(.collapsed)::after {

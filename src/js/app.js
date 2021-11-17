@@ -1,5 +1,5 @@
 @@include("./Const/const.js");
-@@include("./table/checkWidth.js");
+@@include("./checkWidth.js");
 @@include("./table/create/createRows.js");
 @@include("./table/create/createPlusRows/createRowsAdditional.js");
 @@include("./table/create/createHeader.js");
