@@ -47,7 +47,7 @@ function calck(bd) {
       2. Зольность на рабочию массу ТКО: ${ashContent.toFixed(2)} %
     </div>
     <div>
-      3. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж
+      3. Теплота сгорания на рабочую массу: ${heat.toFixed(3)} мДж
     </div>
   </div>
   `;
