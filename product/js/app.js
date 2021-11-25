@@ -261,7 +261,9 @@ function calck(bd) {
   });
   const main = document.getElementById("main");
   main.innerHTML = `
-  <div id="piechart_3d" style="width: 100%; height: 400px; cursor: pointer"></div> 
+  <div class="chart"> 
+   <canvas id="myChart" width="400" height="400"></canvas>
+   </div>
   <div class="container-calculations">
     <div>
       1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %
@@ -270,7 +272,7 @@ function calck(bd) {
       2. Зольность на рабочию массу ТКО: ${ashContent.toFixed(2)} %
     </div>
     <div>
-      3. Удельная теплота сгорания ТКО: ${heat.toFixed(3)} мДж
+      3. Теплота сгорания на рабочую массу: ${heat.toFixed(3)} мДж
     </div>
   </div>
   `;
@@ -278,28 +280,46 @@ function calck(bd) {
   main.scrollIntoView();
 };;
 function charts(bd, fullMassa) {
-  let jsonData = {
-    "cols": [
-      { "id": "", "label": "Название", "type": "string" },
-      { "id": "", "label": "Количество", "type": "number" }
-    ],
-    "rows": []
+  const ctx = document.getElementById('myChart').getContext('2d');
+  let elementMassa = [],
+    elementName = [];
+  bd.forEach(element => {
+    elementMassa.push(element.massa);
+    elementName.push(element.name)
+  });
+  let colorBack = []
+  for (let i = 0; i < elementName.length; i++) {
+    colorBack.push(randColor());
   }
-  bd.forEach(e => {
-    jsonData.rows.push({ "c": [{ "v": [e.name, e.massa + "%"] }, { "v": e.massa }] });
-  })
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = new google.visualization.DataTable(jsonData);
-    var options = {
-      title: 'Содержание ' + fullMassa.toFixed(0) + "%",
-      is3D: true,
-    };
+  const myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: elementName,
+      datasets: [{
+        data: elementMassa,
+        backgroundColor: colorBack,
+        borderColor: colorBack,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true
+    }
+  });
+}
+function randColor() {
+  /*СОЗДАЕМ ПЕРЕМЕННЫЕ
+  elem - элемент которому будем менять задний фон
+  code_color - получаем элемент в который будет выводить код цвета
+  r,g,b - отвечают за кодировку и вместе выводят цвет
+  color - в нее записываем полную строку значения цвета
+  */
+  let r = Math.floor(Math.random() * (256)),
+    g = Math.floor(Math.random() * (256)),
+    b = Math.floor(Math.random() * (256)),
+    color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
-  }
+  return color
 };
 function windowHumidityAshCsontent(inputData) {
   if (inputData) {

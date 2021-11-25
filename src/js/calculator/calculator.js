@@ -38,7 +38,9 @@ function calck(bd) {
   });
   const main = document.getElementById("main");
   main.innerHTML = `
-  <div id="piechart_3d" style="width: 100%; height: 400px; cursor: pointer"></div> 
+  <div class="chart"> 
+   <canvas id="myChart" width="400" height="400"></canvas>
+   </div>
   <div class="container-calculations">
     <div>
       1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %
