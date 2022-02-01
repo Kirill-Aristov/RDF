@@ -452,8 +452,7 @@ input::-webkit-calendar-picker-indicator {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 auto;
-  padding: 0 50px;
+  padding: 50px 50px 0;
 }
 
 .checkbox {
@@ -554,7 +553,7 @@ input::-webkit-calendar-picker-indicator {
 }
 .nav {
   position: fixed;
-  background-color: #3f0bde;
+  background-color: #1266C9;
   padding: 0 80px;
   width: 100%;
   height: 35px;
@@ -613,7 +612,7 @@ input::-webkit-calendar-picker-indicator {
 .nav .registration .btnModal {
   margin: 0 10px;
   padding: 10px;
-  color: rgba(63, 11, 222, 0.8);
+  color: #1266C9;
   font-size: 16px;
   font-weight: 700;
   font-family: Arial;
@@ -626,7 +625,7 @@ input::-webkit-calendar-picker-indicator {
 }
 .nav .registration .btnModal:hover {
   border: 2px solid #fff;
-  background-color: rgba(63, 11, 222, 0.8);
+  background-color: #1266C9;
   color: #fff;
 }
 
@@ -768,7 +767,7 @@ input::-webkit-calendar-picker-indicator {
   font-family: Arial;
   font-weight: 700;
   color: #fff;
-  background-color: rgba(63, 11, 222, 0.8);
+  background-color: #1266C9;
   border-radius: 5px;
   padding: 7px 10px;
 }
@@ -880,8 +879,8 @@ td {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: rgba(63, 11, 222, 0.8);
-  border: 6px solid #653ce5;
+  background-color: #1266C9;
+  border: 6px solid #1266C9;
 }
 
 td input {
@@ -909,13 +908,13 @@ td:nth-child(1) {
 }
 
 th:nth-child(even) {
-  background-color: rgba(63, 11, 222, 0.8);
+  background-color: #1266C9;
   border-right: 1px solid #fff;
   border-left: 1px solid #fff;
 }
 
 th:nth-child(odd) {
-  background-color: rgba(63, 11, 222, 0.8);
+  background-color: #1266C9;
   border-right: 1px solid #fff;
   border-left: 1px solid #fff;
 }
@@ -960,7 +959,7 @@ th:nth-child(odd) {
 
 @media (max-width: 825px) {
   td {
-    border: 4px solid #653ce5;
+    border: 4px solid #1266C9;
   }
 
   td input {
@@ -1136,7 +1135,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #3f0bde;
+  background-color: #1266C9;
   /* цвет плашки */
 }
 
@@ -1145,13 +1144,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .container {
-  max-width: 100%;
   position: relative;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0;
 }
 
 .choice {
@@ -1159,7 +1154,10 @@ body::-webkit-scrollbar-thumb {
 }
 
 .main {
-  margin-top: 30px;
+  padding-top: 30px;
+}
+.main-container {
+  padding-bottom: 50px;
 }
 
 .container-calculations {
@@ -1175,27 +1173,10 @@ body::-webkit-scrollbar-thumb {
   margin: 5px 10px;
 }
 
-.main-container {
-  margin: 50px 30px;
-  height: 100%;
-}
-
 @media (max-width: 825px) {
-  .main-container {
-    margin: 50px 0;
-  }
-
-  .chart {
-    width: 600px;
-  }
-
   .container-calculations {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
   }
 }

@@ -15,19 +15,18 @@ body::-webkit-scrollbar-thumb {
   position: relative;
 }
 .container {
-  max-width: 100%;
   position: relative;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0;
 }
 .choice {
   margin: 50px 0 30px;
 }
 .main {
-  margin-top: 30px;
+  padding-top: 30px;
+  &-container {
+    padding-bottom: 50px;
+  }
 }
 .container-calculations {
   display: flex;
@@ -37,19 +36,8 @@ body::-webkit-scrollbar-thumb {
   margin: 5px 10px;
 }
 
-.main-container {
-  margin: 50px 30px;
-  height: 100%;
-}
 @media (max-width: 825px) {
-  .main-container {
-    margin: 50px 0;
-  }
-  .chart {
-    width: 600px;
-  }
   .container-calculations {
     justify-content: center;
-    flex-direction: column;
   }
 }

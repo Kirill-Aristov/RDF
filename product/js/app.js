@@ -331,7 +331,7 @@ function calck(bd) {
   const main = document.querySelector(".main");
   main.innerHTML = `
   <div class="chart"> 
-   <canvas id="myChart" style="padding: 10px;" width="${width / 1.05} " height="${height/1.35}"></canvas>
+   <canvas id="myChart" style="padding: 10px;" width="${width / 1.05} " height="${height / 1.35}"></canvas>
    </div >
   <div class="container-calculations">
     <div>
