@@ -1,226 +1,295 @@
-const table = document.getElementById('empTable'); //таблица
-const tableBody = document.getElementById("bodyTable"); // тело таблицы;
+// localStorage
+class LocalStorageUtils {
+  constructor(saveData) {
+    this.dataName = "optionalAutocomplete";
+    this.saveData = saveData;
+  }
+  getStorage(dataName) {
+    let storageData = localStorage.getItem(dataName)
+    return JSON.parse(storageData)
+  }
+
+  setStorage(dataName, saveData) {
+    localStorage.setItem(dataName, JSON.stringify(saveData))
+  }
+}
+const localStorageUtils = new LocalStorageUtils();;
+
+class SettigsStorage {
+  constructor() {
+    this.div = document.createElement("div");
+  }
+  startSheckStorageSettigs() {
+    if (localStorage.getItem("optionalAutocomplete") == null) {
+      let optionalData = {
+        name: "прочее(остаток)",
+        humidity: "100",
+        ashContent: "0",
+        heat: "0",
+      }
+      localStorageUtils.setStorage("optionalAutocomplete", optionalData)
+    }
+  }
+  settigsWindow(div, massa) {
+    let settigsData = localStorageUtils.getStorage("optionalAutocomplete");
+    div.innerHTML = `
+    <h2> Настройка дополнительного автозаполнения недостающего содержания</h2>
+    <div class="settings-window">
+      <div class="settings-window__text">
+      Название
+      </div>
+        <input class="settings-window__input" type="text" value="${settigsData.name}">
+      <div class="settings-window__text">
+      Влажность, %
+      </div>
+        <input class="settings-window__input" type="number" value="${settigsData.humidity}">
+      <div class="settings-window__text">
+      Зольность на сухую массу, %
+      </div>
+        <input class="settings-window__input" type="number" value="${settigsData.ashContent}">
+      <div class="settings-window__text">
+      Теплота сгорания на сухую беззольную массу, мДж/кг
+      </div>
+        <input class="settings-window__input" type="number" value="${settigsData.heat}">
+    </div>
+    <div class="settings-block">
+      <button class="settings-block__btn back" type="button">Назад</button>
+      <button class="settings-block__btn save" type="button">Сохранить</button>
+    </div>`
+    document.querySelector(".back").addEventListener("click", () => {
+      errorMassa.lessMassa(massa)
+    })
+    document.querySelector(".save").addEventListener("click", () => {
+      const dataSettigs = document.querySelectorAll(".settings-window__input");
+      settigsData = {
+        name: dataSettigs[0].value,
+        humidity: dataSettigs[1].value,
+        ashContent: dataSettigs[2].value,
+        heat: dataSettigs[3].value,
+      };
+      localStorageUtils.setStorage("optionalAutocomplete", settigsData);
+      errorMassa.lessMassa(massa);
+    })
+  }
+}
+const settigsStorage = new SettigsStorage();
+settigsStorage.startSheckStorageSettigs();;
+//
+
+const blockTable = document.querySelector('.table'); //блок таблицы
+const table = document.querySelector('.empTable'); //таблица
+const bodyTable = document.querySelector(".bodyTable"); // тело таблицы
+const container = document.querySelector(".main-container")
+;
+//проверка мобильних устройсв
 const screenWidth = window.innerWidth
 if (screenWidth < 600) {
   alert("пожалуйста переведите экран смартфона в горизонтальное положение\nданный сайт не поддерживается на разрешениях ниже 600px")
 };
-function checkNameRows(item) {
-  baseAutoComplite.forEach((nameElement) => {
-    if (nameElement.HeaderName == item) {
-      return lenghtСolumn(nameElement)
-    };
-  });
-};
-function lenghtСolumn(nameElement, rowsId) {
-  let tr = bodyTable.insertRow(rowsId);
-  tr.innerHTML += `
-  ${tableCellRemove()}
-  ${tableCellId()}
-  ${tableCellName(nameElement)}
-  ${tableCellInput()}
-  ${tableCellInput()}
-  ${tableCellInput()}
-  ${tableCellInput()}
-  `
-  setTimeout(() => {
-    autoCompliteCell(tr)
-  }, 0);
-  return numberRows();
-};
-function tableCellRemove() {
-  return `
-  <td>
-  <input
-    class="clearBtn"
-    type="button"
-    tabindex="-1"
-    onclick="removeRows(this.parentNode.parentNode.rowIndex)">
-  </td>
-  `
-};
-function tableCellId() {
-  return `
-  <td>
-  <div id="number_id"></div>
-  </td>
-  `
-};
-function tableCellName(nameElement) {
-
-  return `
-  <td>
-  <input 
-    class="input__name"
-    type="text"
-    list="list_name"
-    value="${nameElement ? nameElement.name : ""}">
-  </td>
-  `
-};
-function tableCellInput() {
-  return `
-  <td>
-  <input class="input__data" type="number">
-  </td>
-  `
-};
-
-
-
-;
-function createRowsAdditional(element) {
-  lenghtСolumn("", element)
-};
-document.querySelector("#btn-row").addEventListener("click", () => {
-  lenghtСolumn("", 0)
-});
-document.querySelectorAll(".dropdown-item").forEach(item => {
+//
+//создание строк в таблицы
+document.querySelectorAll(".btn-control__menu-item").forEach(item => {
   item.addEventListener("click", () => {
     if (!item.classList.contains("strike")) {
-      CreateHeader(item.textContent)
-      disableHeaderSelect(item)
+      disableSelect.disable(item.textContent);
+      createTable.CreateHeader(item.textContent);
+      createTable.chekNameHeader(item.textContent);
+      numberRows();
     }
   });
 })
-function CreateHeader(item) {
-  let tr = tableBody.insertRow(-1);
-  tr.innerHTML += `
-  ${CreateRemoveHeaderTable()}
-  ${CreateHeaderTable(item)}
-  ${CreateBtnRowsPlus()}
-  `
-  checkNameRows(item); //проверка выбранного именни
-}
-function CreateHeaderTable(item) {
-  return `
-  <td colspan="6">
-  <input 
-    id="headingTable"
-    value="${item == "Пустой заголовок" ? "Введите название" : item}"
-  >
-  </td>
-        `
-};
-function CreateRemoveHeaderTable() {
-  return `
-  <td>
-  <input
-    type="button"
-    class="clearBtn"
-    onclick="removeHeaderRows(this.parentNode.parentNode)"
-    tabindex="-1">
-  </td>
-  `
-};
-function CreateBtnRowsPlus() {
-  return `
-  <td>
-  <button 
-    class="rows-btn__plus"
-    type="button"
-    onclick="createRowsAdditional(this.parentNode.parentNode.rowIndex)">
-    Добавить строку
-  </button>
-  </td>
-  `
-}
-
-
-
-;
-function numberRows() {
-  let numberRows = document.querySelectorAll("#number_id")
-  for (let index = 0; index < (numberRows.length + 1); index++) {
-    if (numberRows[index] != undefined) {
-      numberRows[index].textContent = index + 1
-    }
+class CreateTable {
+  constructor(item, rowsId) {
+    this.item = item;
+    this.rowsId = rowsId
   }
-};
-function removeRows(getId) {
-  bodyTable.deleteRow(getId - 1);
-  numberRows()
-};
-;
-function removeHeaderRows(getId) {
-  swutchedHeaderSelect(getId.childNodes[3].childNodes[1].value)
-  let dataIdRows = [];// мастоположение всех заголовков индексы
-  let getIdIndex = getId.rowIndex;//индекс выбранной строки
-  let closestRight;//ближайшее наибольшее число
-  document.querySelectorAll("#headingTable").forEach((tableHeader) => {
-    dataIdRows.push(tableHeader.parentNode.parentNode.rowIndex);// мастоположение всех заголовков индексы
-  });
-  for (var i = 0; i < dataIdRows.length; i++) { //опряделяет ближайшее наибольшее число
-    if (dataIdRows[i] > getIdIndex && (closestRight === undefined || closestRight > dataIdRows[i])) {
-      closestRight = dataIdRows[i];//ближайшее наибольшее число
-    }
-  };
-  if (closestRight === undefined) { //есть ли ближайшее наибольшее число
-    let bodyTableLength = bodyTable.childNodes.length; //длина всей таблицы
-    for (let index = 0; index <= bodyTableLength; index++) {
-      if (getIdIndex > bodyTableLength - index) {
-        return
-      }
-      removeRows(bodyTableLength - index)
-    };
-  } else {
-    for (let index = 0; index <= (closestRight - getIdIndex); index++) {
-      if (closestRight - index == getIdIndex) {
-        return
-      }
-      removeRows(closestRight - index - 1)
-    };
-  };
-};;
-function disableHeaderSelect(nameElement) {
-  if (nameElement.textContent === "Пустой заголовок") {
-    return
-  } else {
-    nameElement.classList.add("strike")
-    checkHeaderSeleck()
-  }
-}
-function swutchedHeaderSelect(nameElement) {
-  document.querySelectorAll(".dropdown-item").forEach(item => {
-    if (nameElement == item.textContent) {
-      item.classList.remove("strike")
-    }
-  })
-}
-function checkHeaderSeleck() {
-  let prevName;
-  let postName;
-  document.querySelectorAll("#headingTable").forEach(item => {
-    item.addEventListener("click", () => {
-      prevName = item.value
-    })
-    item.addEventListener("change", () => {
-      postName = item.value
-      if (prevName != postName) {
-        swutchedHeaderSelect(prevName)
+  chekNameHeader(item) {
+    baseAutoComplite.forEach((nameElement) => {
+      if (nameElement.HeaderName === item) {
+        createTable.createRowsTable(nameElement)
       }
     })
-  })
-};
-document.getElementById("btn-payment").addEventListener("click", () => {
-  let database = [];
-  const table = document.getElementById("empTable");
-  for (let i = 1; row = table.rows[i]; i++) {
-    if (row.cells[2].querySelector('.input__name') !== null) {
-      if (row.cells[2].querySelector('.input__name').value !== "") {
-        database.push({
-          id: row.cells[1].innerText,
-          name: row.cells[2].querySelector('.input__name').value,
-          massa: Number(row.cells[3].querySelector('.input__data').value.replace(/,/g, ".")),//содержание
-          W: Number(row.cells[4].querySelector('.input__data').value.replace(/,/g, ".")),//влажность
-          A: Number(row.cells[5].querySelector('.input__data').value.replace(/,/g, ".")),//зольность
-          Q: Number(row.cells[6].querySelector('.input__data').value.replace(/,/g, "."))//теплота сгорания на сух массу
-        });
-      }
+  }
+  CreateHeader(item) {
+    const tr = bodyTable.insertRow(-1)
+    tr.innerHTML += `
+      <td>
+        <input type="button" class="clearBtn clearBtn-Header">
+      </td>
+      <td colspan="6">
+        <input class="headingTable" value="${item == "Пустой заголовок" ? "Введите название" : item}">
+      </td>
+      <td>
+        <button class="rows-btn__plus" type="button">
+          Добавить строку
+        </button>
+      </td>
+                  `
+  }
+  createRowsTable(nameElement, rowsId) {
+    if (!checkBox.classList.contains("check-active") && nameElement) {
+      nameElement.massa = ""
+      nameElement.humidity = ""
+      nameElement.ashContent = ""
+      nameElement.heat = ""
     }
+    let tr = bodyTable.insertRow(rowsId);
+    tr.innerHTML += `
+      <td>
+        <input class="clearBtn clearBtn-Rows" type="button">
+      </td>
+      <td>
+        <div class="number_id"></div>
+      </td>
+      <td>
+        <input class="input__name" type="text" list="list_name" value="${nameElement ? nameElement.name : ""}">
+      </td>
+      <td>
+        <input class="input__data content" type="number" value="${nameElement ? nameElement.massa : ""}">
+      </td>
+      <td>
+        <input class="input__data humidity" type="number" value="${nameElement ? nameElement.humidity : ""}">
+      </td>
+      <td>
+        <input class="input__data ashContent" type="number" value="${nameElement ? nameElement.ashContent : ""}">
+      </td>
+      <td>
+        <input class="input__data heatСombustion" type="number" value="${nameElement ? nameElement.heat : ""}">
+      </td>
+                        `
+    tr.classList.add("rows-active")
   };
-  errorCheck(database);
+}
+const createTable = new CreateTable();
+
+bodyTable.addEventListener("click", (element) => {
+  if (element.target.closest(".rows-btn__plus")) {
+    let targetElementId = element.target.parentNode.parentNode.rowIndex;
+    createTable.createRowsTable("", targetElementId)
+    numberRows();
+  }
 });
-;
+document.querySelector(".btn-rows__plus").addEventListener("click", () => {
+  createTable.createRowsTable("", 0)
+  numberRows();
+});
+//
+//нумерация строк
+function numberRows() {
+  let numberId = document.querySelectorAll(".number_id")
+  for (let index = 0; index < numberId.length; index++) {
+    numberId[index].textContent = index + 1
+  }
+};
+//
+//удаление строк в таблице
+bodyTable.addEventListener("click", (element) => {
+  if (element.target.closest(".clearBtn-Header")) {
+    removeTable.removeHeader(element.target.parentNode.parentNode.rowIndex)
+    disableSelect.unlock(element.target.parentNode.parentNode)
+  }
+  if (element.target.closest(".clearBtn-Rows")) {
+    removeTable.removeRows(element.target.parentNode.parentNode.rowIndex)
+  }
+});
+
+class RemoveTable extends CreateTable {
+  removeRows(rowsId) {
+    bodyTable.deleteRow(rowsId - 1);
+    numberRows();
+  }
+  removeHeader(rowsId) {
+    let arrayIdRows = [];// мастоположение всех заголовков индексы
+    document.querySelectorAll(".headingTable").forEach((tableHeader) => {
+      arrayIdRows.push(tableHeader.parentNode.parentNode.rowIndex);// мастоположение всех заголовков индексы
+    });
+    let firstArray = arrayNumber(arrayIdRows, rowsId);
+    let lastArray = maxFromTheOrigin(arrayIdRows, rowsId);
+    let index = firstArray;
+    while (firstArray <= lastArray) {
+      bodyTable.deleteRow(index - 1)
+      firstArray++;
+    };
+    numberRows()
+  }
+}
+const removeTable = new RemoveTable();
+
+
+function arrayNumber(arrayIdRows, getIdIndex) {
+  let left = 0;
+  let right = arrayIdRows.length - 1;
+  let mid;
+  while (left <= right) {
+    mid = Math.round((right - left) / 2) + left;
+    if (getIdIndex === arrayIdRows[mid]) {
+      return getIdIndex;
+    } else if (getIdIndex < arrayIdRows[mid]) {
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    };
+  };
+  return -1;
+}
+function maxFromTheOrigin(arrayIdRows, getIdIndex) {
+  let closestRight = Math.min(...arrayIdRows.filter(i => i > getIdIndex));//ближайшее наибольшее число
+  if (closestRight == Infinity) {
+    return closestRight = bodyTable.childNodes.length;
+  }
+  return closestRight - 1;
+};
+//
+//отключение заголовков
+class DisableSelect {
+
+  disable(item) {
+    document.querySelectorAll(".btn-control__menu-item").forEach(element => {
+      if (element.textContent == "Пустой заголовок") {
+        return
+      }
+      if (element.textContent == item) {
+        element.classList.add("strike")
+        // this.checkDisable()
+      }
+    });
+  }
+  unlock(item) {
+    let activeItem = item.querySelector(".headingTable").value;
+    document.querySelectorAll(".btn-control__menu-item").forEach(element => {
+      if (element.textContent == activeItem) {
+        element.classList.remove("strike")
+      }
+    });
+  }
+  checkDisable() {
+  }
+}
+const disableSelect = new DisableSelect();;
+//
+//Расчеты
+document.querySelector(".payment").addEventListener("click", () => {
+  const database = [];
+  let rowsId = document.querySelectorAll(".rows-active");
+  let number = document.querySelectorAll(".number_id"),
+    name = document.querySelectorAll(".input__name"),
+    content = document.querySelectorAll(".content"),
+    humidity = document.querySelectorAll(".humidity"),
+    ashContent = document.querySelectorAll(".ashContent"),
+    heatСombustion = document.querySelectorAll(".heatСombustion");
+  for (let line = 0; line < rowsId.length; line++) {
+    database.push({
+      numberСolumn: number[line].textContent,
+      nameСolumn: name[line].value,
+      massa: Number(content[line].value.replace(/,/g, ".")),
+      humidityСolumn: Number(humidity[line].value.replace(/,/g, ".")),
+      ashContentСolumn: Number(ashContent[line].value.replace(/,/g, ".")),
+      heatСombustionСolumn: Number(heatСombustion[line].value.replace(/,/g, ".")),
+    });
+  };
+
+  sheckMassa.massaErrorCheck(database);
+});;
 
 function calck(bd) {
   const reducerPlus = (accumulator, currentValue) => accumulator + currentValue;
@@ -239,31 +308,31 @@ function calck(bd) {
   //Теплота сгорания переменные
   let heat = 0; // Теплота сгорания 
   let leftHeat = []; //первая часть уравнения
-  let leftPlusHeat = 0; //сложенеие левого массива
   /////////////////////////////////////////////////
   bd.forEach(element => {
     //грфик построенния на содержание
     fullMassa += element.massa;
     //Расчет общей влажности //////////////////
-    massTimesMoisture.push(element.massa * element.W);
+    massTimesMoisture.push(element.massa * element.humidityСolumn);
     humidity = massTimesMoisture.reduce(reducerPlus);
     /////////////////////////////////////
     //Расчёт общей Зольности //////////////////////
-    leftAshContentTop.push(element.massa * element.A * (100 - element.W));
-    leftAshContentBottom.push(element.massa * (100 - element.W));
+    leftAshContentTop.push(element.massa * element.ashContentСolumn * (100 - element.humidityСolumn));
+    leftAshContentBottom.push(element.massa * (100 - element.humidityСolumn));
     ashContent = (leftAshContentTop.reduce(reducerPlus) / leftAshContentBottom.reduce(reducerPlus)) * (1 - (humidity / 100 / 100));
     ////////////////////////////////////////////////////////////
     //Удельная теплота сгорания 
-    leftHeat.push(element.massa * (1 - element.W / 100) * (1 - element.A / 100) * element.Q);
-    leftPlusHeat = leftHeat.reduce(reducerPlus);
-    heat = (leftPlusHeat - 0.02442 * humidity) / 100;
+    leftHeat.push(element.massa * (1 - element.humidityСolumn / 100) * (1 - element.ashContentСolumn / 100) * element.heatСombustionСolumn);
+    heat = (leftHeat.reduce(reducerPlus) - 0.02442 * humidity) / 100;
     ////////////////////////////////////////////////////////
   });
-  const main = document.getElementById("main");
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const main = document.querySelector(".main");
   main.innerHTML = `
   <div class="chart"> 
-   <canvas id="myChart" width="400" height="400"></canvas>
-   </div>
+   <canvas id="myChart" style="padding: 10px;" width="${width / 1.05} " height="${height/1.35}"></canvas>
+   </div >
   <div class="container-calculations">
     <div>
       1. Общая влажность ТКО: ${(humidity / 100).toFixed(2)} %
@@ -275,7 +344,7 @@ function calck(bd) {
       3. Теплота сгорания на рабочую массу: ${heat.toFixed(3)} мДж
     </div>
   </div>
-  `;
+`;
   charts(bd, fullMassa);
   main.scrollIntoView();
 };;
@@ -285,7 +354,7 @@ function charts(bd, fullMassa) {
     elementName = [];
   bd.forEach(element => {
     elementMassa.push(element.massa);
-    elementName.push(element.name)
+    elementName.push(element.nameСolumn)
   });
   let colorBack = []
   for (let i = 0; i < elementName.length; i++) {
@@ -303,207 +372,165 @@ function charts(bd, fullMassa) {
       }]
     },
     options: {
-      responsive: true
+      maintainAspectRatio: false,
+      responsive: false,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: "#000",
+            font: {
+              family: "Arial",
+              size: 14,
+            }
+          }
+        }
+      }
     }
   });
-}
-function randColor() {
-  /*СОЗДАЕМ ПЕРЕМЕННЫЕ
-  elem - элемент которому будем менять задний фон
-  code_color - получаем элемент в который будет выводить код цвета
-  r,g,b - отвечают за кодировку и вместе выводят цвет
-  color - в нее записываем полную строку значения цвета
-  */
-  let r = Math.floor(Math.random() * (256)),
-    g = Math.floor(Math.random() * (256)),
-    b = Math.floor(Math.random() * (256)),
-    color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+  function randColor() {
+    /*СОЗДАЕМ ПЕРЕМЕННЫЕ
+    elem - элемент которому будем менять задний фон
+    code_color - получаем элемент в который будет выводить код цвета
+    r,g,b - отвечают за кодировку и вместе выводят цвет
+    color - в нее записываем полную строку значения цвета
+    */
+    let r = Math.floor(Math.random() * (256)),
+      g = Math.floor(Math.random() * (256)),
+      b = Math.floor(Math.random() * (256)),
+      color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
 
-  return color
-};
-function windowHumidityAshCsontent(inputData) {
-  if (inputData) {
-    removeErorr();
-    let topPosition = inputData.parentNode.offsetTop;
-    let leftPosition = inputData.parentNode.offsetLeft;
-    const span = document.createElement("span");
-    span.setAttribute("id", "active")
-    span.style.top = topPosition + "px"
-    span.style.left = 93 + leftPosition + "px"
-    const text = "Не может превышать 100%";
-    span.innerHTML = `
-      <div class="alert alert-danger" role="alert">
-         ${text}
-      </div>
-      `
-    tableBody.appendChild(span);
-    span.scrollIntoView()
-    span.addEventListener("click", () => {
-      span.remove()
-    });
-    return false
-  } else {
-    return true
+    return color
   }
 };
+//
+//Проверка ошибок
+bodyTable.addEventListener("change", (element) => {
+  if (element.target.closest(".humidity")) {//проверка на превышения содержания ВЛАЖНОСТИ
+    let textHumidity = "Влажность компонента не должна превышать 100%";
+    windowError.windowErrorPosition(element.target, textHumidity);
+  }
+  if (element.target.closest(".ashContent")) { //проверка на превышения содержания ЗОЛЬНОСТИ
+    let textAshContent = "Зольность компонента на сухую массу не должна превышать 100%";
+    windowError.windowErrorPosition(element.target, textAshContent);
+  }
+});
 
-function massaWindowErorr(fullMassa) {
-  const div = document.createElement("div");
-  div.setAttribute("class", "container-window");
-  div.style.top = tableBody.offsetTop + "px";
-  div.innerHTML = `
-    <div class="container-window__text">
-    Содержание должно быть равным 100%
-     <p>ваше содержание = ${fullMassa / 1000}%</p>
-    заполнить недостающие содежаниее "прочее(остаток)"
-      <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
-    <div class="container-window__btn">
-      <input class="window__btn" type="button" value="Да"></input>
-      <input class="window__btn" type="button" value="Нет"></input>
-    </div>
-    </div>
-    `;
-  tableBody.appendChild(div);
-  const windowBtn = document.querySelectorAll(".window__btn");
-  windowBtn.forEach(e => {
-    e.addEventListener("click", () => {
-      (e.value == "Нет") ?
-        div.remove()
-        :
-        addRowsWindow(fullMassa);
-      div.remove();
-    });
-  });
-}
-function addRowsWindow(fullMassa) {
-  lenghtСolumn();
-  const inputName = document.querySelectorAll(".input__name");
-  lastItem(inputName, 1, "прочее(остаток)");
-  const inputData = document.querySelectorAll(".input__data")
-  setTimeout(() => {
-    lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
-  }, 0);
-};
-function lastItem(last, id, attribute) {
-  let lastValue = last[last.length - id];
-  lastValue.value = attribute;
-  otherAutoDilling(lastValue);
-};;
-function errorCheck(database) {
-  let inputData;
-  document.querySelectorAll(".input__data").forEach(element => {
+class WindowError {
+  constructor(element, text, position) {
+    this.element = element;
+    this.text = text;
+    this.position = position;
+  }
+  windowErrorPosition(element, text) {
     if (element.value > 100) {
-      inputData = element
+      this.position = element.getBoundingClientRect();
+      console.log(this.position)
+      const div = document.createElement("div");
+      div.classList.add("error");
+      //высота от верха страницы - высота блока ошибки
+      div.style.top = Math.round(this.position.top - this.position.height - 10) + "px";
+      //растояние от левого края + длина исходного блока
+      div.style.left = Math.round(this.position.left + this.position.width) + "px";
+      div.textContent = text;
+      document.body.appendChild(div)
+      let opacityNum = 1
+      setTimeout(sitInterval, 2500, opacityNum)
     }
-  })
-  if (checkFullmassaErorr(database) && windowHumidityAshCsontent(inputData)) {
-    removeErorr();
-    calck(database);
   }
 }
-;
-function removeErorr() {
-  const spanActive = document.querySelectorAll("#active");
-  for (let i = 0; i < spanActive.length; i++) {
-    spanActive[i].remove();
-  };
-};;
-function windowHumidityAshCsontent(inputData) {
-  if (inputData) {
-    removeErorr();
-    let topPosition = inputData.parentNode.offsetTop;
-    let leftPosition = inputData.parentNode.offsetLeft;
-    const span = document.createElement("span");
-    span.setAttribute("id", "active")
-    span.style.top = topPosition + "px"
-    span.style.left = 93 + leftPosition + "px"
-    const text = "Не может превышать 100%";
-    span.innerHTML = `
-      <div class="alert alert-danger" role="alert">
-         ${text}
-      </div>
-      `
-    tableBody.appendChild(span);
-    span.scrollIntoView()
-    span.addEventListener("click", () => {
-      span.remove()
-    });
-    return false
+const windowError = new WindowError
+
+function sitInterval(opacityNum) {
+  const div = document.querySelector(".error")
+  if (opacityNum > 0) {
+    div.style.opacity = opacityNum
+    setTimeout(sitInterval, 50, opacityNum - 0.1)
   } else {
-    return true
+    div.remove()
   }
 };
 
-function massaWindowErorr(fullMassa) {
-  const div = document.createElement("div");
-  div.setAttribute("class", "container-window");
-  div.style.top = tableBody.offsetTop + "px";
-  div.innerHTML = `
-    <div class="container-window__text">
-    Содержание должно быть равным 100%
-     <p>ваше содержание = ${fullMassa / 1000}%</p>
-    заполнить недостающие содежаниее "прочее(остаток)"
-      <p>"прочее(остаток)" = ${(100 * 1000 - fullMassa) / 1000}%</p>
-    <div class="container-window__btn">
-      <input class="window__btn" type="button" value="Да"></input>
-      <input class="window__btn" type="button" value="Нет"></input>
-    </div>
-    </div>
-    `;
-  tableBody.appendChild(div);
-  const windowBtn = document.querySelectorAll(".window__btn");
-  windowBtn.forEach(e => {
-    e.addEventListener("click", () => {
-      (e.value == "Нет") ?
-        div.remove()
-        :
-        addRowsWindow(fullMassa);
-      div.remove();
+class SheckMassa {
+  constructor(database) {
+    this.database = database;
+  };
+  massaErrorCheck(database) {
+    let massa = 0;
+    database.forEach(index => {
+      massa += (index.massa * 1000);
     });
-  });
+    if (massa / 1000 > 100) {
+      errorMassa.exceedMassa(massa / 1000);
+    } else if (massa / 1000 < 100) {
+      errorMassa.lessMassa(massa / 1000);
+    } else {
+      calck(database);
+    };
+  }
+};
+const sheckMassa = new SheckMassa();
+
+class ErrorMassa extends SettigsStorage {
+  super(massa) {
+    this.massa = massa
+  }
+  lessMassa(massa) {
+    let optionalData = localStorageUtils.getStorage("optionalAutocomplete");
+    this.div.classList.add("error-container");
+    this.div.innerHTML = `
+    <div class="error-container__text">
+      Общее содержание компонентов должно быть равно 100%
+      <p>Ваше содержание = ${massa}%</p>
+      <p>Заполнить автоматический недостающие содержание компонентом "${optionalData.name}"
+      </p>
+    </div>
+    <div>
+      <button class="error-settings__btn">Настроить автозаполнение
+      </button>
+    </div>
+    <div>
+      <div class="error-container__btn">
+      <button class="window-error__btn" value="нет">Нет</button>
+      <button class="window-error__btn" value="да">Да</button>
+    </div>
+    `
+    document.body.appendChild(this.div)
+    buttonControl.windowError(this.div, massa)
+  }
+  exceedMassa(massa) {
+    const divError = document.createElement("div")
+    divError.classList.add("error")
+    divError.classList.add("error-massa")
+    divError.textContent = `содержание не должно превышать 100% \n ваше содержание = ${massa}`
+    table.appendChild(divError)
+    let opacityNum = 1
+    setTimeout(sitInterval, 2500, opacityNum)
+  }
 }
-function addRowsWindow(fullMassa) {
-  lenghtСolumn();
-  const inputName = document.querySelectorAll(".input__name");
-  lastItem(inputName, 1, "прочее(остаток)");
-  const inputData = document.querySelectorAll(".input__data")
-  setTimeout(() => {
-    lastItem(inputData, 4, (100 * 1000 - fullMassa) / 1000);
-  }, 0);
-};
-function lastItem(last, id, attribute) {
-  let lastValue = last[last.length - id];
-  lastValue.value = attribute;
-  otherAutoDilling(lastValue);
-};;
-function checkFullmassaErorr(database) {
-  //содержание
-  const reducer = (previousValue, currentValue) => previousValue + currentValue;
-  let m = [];
-  database.forEach(element => {
-    m.push(element.massa * 1000)
-  });
-  let fullMassa = m.reduce(reducer) / 1000
-  const table = document.getElementById("table");
-  if (fullMassa < 100) {
-    massaWindowErorr(fullMassa * 1000);
-    return false
-  }
-  if (fullMassa > 100) {
-    removeErorr();
-    const span = document.createElement("span");
-    span.setAttribute("class", "massa_error");
-    span.innerText = "Содержание не должно превышать 100%" + "\n" + "содержание = " + fullMassa + "%";
-    span.style.top = (table.offsetTop - 65) + "px";
-    table.appendChild(span);
-    span.addEventListener("click", () => {
-      table.removeChild(span);
+const errorMassa = new ErrorMassa();
+class ButtonControl extends ErrorMassa {
+  windowError(div, massa) {
+    document.querySelector(".error-settings__btn").addEventListener("click", () => {
+      settigsStorage.settigsWindow(div, massa)
     });
-    return false
+    document.querySelectorAll(".window-error__btn").forEach(target => {
+      target.addEventListener("click", (element) => {
+        if (element.target.value === "нет") {
+          div.remove();
+        } else {
+          createTable.createRowsTable(localStorageUtils.getStorage("optionalAutocomplete"), 0);
+          document.querySelector(".content").value = (100 * 100 - (massa * 100)) / 100;
+          numberRows();
+          div.remove();
+        }
+      })
+    })
   }
-  return true
-};
-;
+}
+const buttonControl = new ButtonControl();;
+//
+//
 const baseAutoComplite = [
   {
     HeaderName: "Органические отходы",
@@ -825,168 +852,193 @@ const baseAutoComplite = [
     humidity: 100,
     ashContent: 0,
     heat: 20.1,
-  },
-  {
-    name: "прочее(остаток)",
-    humidity: 100,
-    ashContent: 0,
-    heat: 0,
-  },
-  // {
-  //   nameThree: "органические отходы",
-  //   massa: 23.63,
-  //   humidity: 77.2,
-  //   ashContent: 17.5,
-  //   heat: 18.2,
-  // },
-  // {
-  //   nameThree: "макулатура",
-  //   massa: 11.31,
-  //   humidity: 25.6,
-  //   ashContent: 15.3,
-  //   heat: 16.9,
-  // },
-  // {
-  //   nameThree: "полимеры",
-  //   massa: 16.71,
-  //   humidity: 25.6,
-  //   ashContent: 6.9,
-  //   heat: 27.4,
-  // },
-  // {
-  //   nameThree: "стекло",
-  //   massa: 7.65,
-  //   humidity: 3.5,
-  //   ashContent: 100,
-  //   heat: 0,
-  // },
-  // {
-  //   nameThree: "металлы",
-  //   massa: 1.4,
-  //   humidity: 3.5,
-  //   ashContent: 100,
-  //   heat: 0,
-  // },
-  // {
-  //   nameThree: "текстиль",
-  //   massa: 2.92,
-  //   humidity: 29.7,
-  //   ashContent: 5.2,
-  //   heat: 22.6,
-  // },
-  // {
-  //   nameThree: "дерево",
-  //   massa: 1.08,
-  //   humidity: 17.7,
-  //   ashContent: 4.9,
-  //   heat: 18.9,
-  // },
-  // {
-  //   nameThree: "комбинированные материалы",
-  //   massa: 1.67,
-  //   humidity: 11.9,
-  //   ashContent: 32.4,
-  //   heat: 30,
-  // },
-  // {
-  //   nameThree: "опасные материалы",
-  //   massa: 0.45,
-  //   humidity: 3.5,
-  //   ashContent: 50,
-  //   heat: 20.1,
-  // },
-  // {
-  //   nameThree: "инертные материалы",
-  //   massa: 4.95,
-  //   humidity: 7,
-  //   ashContent: 100,
-  //   heat: 0,
-  // },
-  // {
-  //   nameThree: "прочие материалы",
-  //   massa: 9.11,
-  //   humidity: 35.9,
-  //   ashContent: 27.3,
-  //   heat: 30,
-  // },
-  // {
-  //   nameThree: "отсев",
-  //   massa: 18.69,
-  //   humidity: 55.7,
-  //   ashContent: 55.8,
-  //   heat: 20.1,
-  // },
+  },]
+const baseNameThree = [{
+  nameThree: "органические отходы",
+  name: "органические отходы",
+  massa: 23.63,
+  humidity: 77.2,
+  ashContent: 17.5,
+  heat: 18.2,
+},
+{
+  nameThree: "макулатура",
+  name: "макулатура",
+  massa: 11.31,
+  humidity: 25.6,
+  ashContent: 15.3,
+  heat: 16.9,
+},
+{
+  nameThree: "полимеры",
+  name: "полимеры",
+  massa: 16.71,
+  humidity: 25.6,
+  ashContent: 6.9,
+  heat: 27.4,
+},
+{
+  nameThree: "стекло",
+  name: "стекло",
+  massa: 7.65,
+  humidity: 3.5,
+  ashContent: 100,
+  heat: 0,
+},
+{
+  nameThree: "металлы",
+  name: "металлы",
+  massa: 1.4,
+  humidity: 3.5,
+  ashContent: 100,
+  heat: 0,
+},
+{
+  nameThree: "текстиль",
+  name: "текстиль",
+  massa: 2.92,
+  humidity: 29.7,
+  ashContent: 5.2,
+  heat: 22.6,
+},
+{
+  nameThree: "дерево",
+  name: "дерево",
+  massa: 1.08,
+  humidity: 17.7,
+  ashContent: 4.9,
+  heat: 18.9,
+},
+{
+  nameThree: "комбинированные материалы",
+  name: "комбинированные материалы",
+  massa: 1.67,
+  humidity: 11.9,
+  ashContent: 32.4,
+  heat: 30,
+},
+{
+  nameThree: "опасные материалы",
+  name: "опасные материалы",
+  massa: 0.45,
+  humidity: 3.5,
+  ashContent: 50,
+  heat: 20.1,
+},
+{
+  nameThree: "инертные материалы",
+  name: "инертные материалы",
+  massa: 4.95,
+  humidity: 7,
+  ashContent: 100,
+  heat: 0,
+},
+{
+  nameThree: "прочие материалы",
+  name: "прочие материалы",
+  massa: 9.11,
+  humidity: 35.9,
+  ashContent: 27.3,
+  heat: 30,
+},
+{
+  nameThree: "отсев",
+  name: "отсев",
+  massa: 18.69,
+  humidity: 55.7,
+  ashContent: 55.8,
+  heat: 20.1,
+},
 ];
 
 ;
-function autoCompliteCell(input) {
-  if (checkBox.classList.contains("check-active")) {
-    const valueName = document.querySelectorAll(".input__name");
-    for (let i = 0; i < valueName.length; i++) {
-      valueName[i].removeEventListener("change", otherAutoDilling);
-      valueName[i].addEventListener("change", () => {
-        otherAutoDilling(valueName[i]);
+// 
+document.querySelectorAll(".ready-table").forEach(element => {
+  element.addEventListener("click", () => readyTable.dataValue(element))
+})
+class ReadyTable {
+  constructor() {
+    this.dataReady = [];
+    this.newData = [];
+  }
+  dataValue(element) {
+    if (element.dataset.value == 40) {
+      baseAutoComplite.forEach(element => {
+        this.dataReady.push(element.HeaderName);
       });
-    };
-  }
-  if (input && checkBox.classList.contains("check-active")) {
-    otherAutoDilling(input.childNodes[5].childNodes[1]);
-  }
-};
-function otherAutoDilling(valueName) {
-  for (let i = 0; i < baseAutoComplite.length; i++) {
-    if (baseAutoComplite[i].name == valueName.value.toLowerCase()) {
-      idRows(valueName.parentNode.parentNode, baseAutoComplite[i])
+      this.newData = [...new Set(this.dataReady)].filter((x) => {
+        return x !== undefined;
+      });
+      this.newData.forEach(item => {
+        createTable.CreateHeader(item);
+        createTable.chekNameHeader(item);
+      });
+      numberRows();
     }
-  };
-};
-function idRows(id, { heat, ashContent, humidity, massa }) {
-  id.childNodes[7].querySelector("input").value = massa; //клетка массы
-  id.childNodes[9].querySelector("input").value = humidity;//клетка влажности
-  id.childNodes[11].querySelector("input").value = ashContent;//клетка зольности
-  id.childNodes[13].querySelector("input").value = heat;//клетка теплоты сгорания
-};
+    if (element.dataset.value == 13) {
+      createTable.CreateHeader("Упрощенный компонентный состав");
+      baseNameThree.forEach(element => {
+        createTable.createRowsTable(element);
+      });
+      numberRows();
+    }
+  }
+}
+const readyTable = new ReadyTable();;
 
+
+//компонеты кнопок и дополнений
+const header = document.querySelector(".nav")
+const burger = document.querySelector(".burger")
+burger.addEventListener("click", () => {
+  if (!burger.classList.contains("active")) {
+    burger.classList.add("active");
+    header.classList.add("active");
+  } else {
+    burger.classList.remove("active");
+    header.classList.remove("active");
+  };
+});
+  container.addEventListener("click", (element) => {
+    if (element.target !== header) {
+      burger.classList.remove("active");
+      header.classList.remove("active");
+    }
+  })
 ;
 const checkBox = document.querySelector(".checkbox-box__slider");
 checkBox.addEventListener("click", () => {
   if (!checkBox.classList.contains("check-active")) {
     checkBox.classList.add("check-active");
-    autoComplete();
   } else {
     checkBox.classList.remove("check-active");
-    autoCompleteRemove();
   };
 });
-const checkBoxText = document.querySelector(".checkbox-box__text");
-function autoComplete() {
-  checkBoxText.textContent = "Автозаполнение справочными данными включено";
-  document.querySelectorAll(".input__name").forEach((e) => {
-    e.addEventListener("change", otherAutoDilling);
-  });
-};
-function autoCompleteRemove() {
-  checkBoxText.textContent = "Автозаполнение справочными данными выключено";
-  document.querySelectorAll(".input__name").forEach((e) => {
-    e.removeEventListener("change", otherAutoDilling);
-  });
-};;
-document.querySelectorAll(".dropdown-item__ready").forEach(e => {
-  e.addEventListener("click", () => {
-    let data = [];
-    let newData;
-    if (e.dataset.value == 40) {
-      baseAutoComplite.forEach(element => {
-        data.push(element.HeaderName)
-      })
-      newData = [...new Set(data)].filter((x) => {
-        return x !== undefined;
-      })
-      newData.forEach(item => {
-        CreateHeader(item)
-      })
-    }
-  })
-})
 ;
-
+const readyMenu = document.querySelector(".ready")
+const listMenu = document.querySelector(".list")
+const listBtn = document.querySelector(".btn-list")
+listBtn.addEventListener("click", () => {
+  if (!listMenu.classList.contains("show")) {
+    listMenu.classList.add("show");
+  } else {
+    listMenu.classList.remove("show");
+  }
+})
+const readyBtn = document.querySelector(".btn-ready")
+readyBtn.addEventListener("click", () => {
+  if (!readyMenu.classList.contains("show")) {
+    readyMenu.classList.add("show");
+  } else {
+    readyMenu.classList.remove("show");
+  }
+})
+document.body.addEventListener("click", (element) => {
+  if (element.target !== listBtn) {
+    listMenu.classList.add("show");
+  }
+  if (element.target !== readyBtn) {
+    readyMenu.classList.add("show");
+  }
+});
+//

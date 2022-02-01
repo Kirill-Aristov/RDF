@@ -1,56 +1,39 @@
 <div class="container-button">
-  <div id="readyTables">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false">
-        Готовые таблицы
-      </button>
-      <ul class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton1">
-        <li><a class="dropdown-item__ready"
-             data-value="40"
-             href="#">Полный компонетный состав (40 компонента)</a></li>
-        <!-- <li><a class="dropdown-item__ready"
-             data-value="13"
-             href="#">Не полный компонетный состав(13 компонентов)</a></li> -->
-      </ul>
-    </div>
-  </div>
-  <button id="btn-payment"
-          type="button"
-          value="Расчет">
-    Расчет
-  </button>
-  <div class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle"
-       role="button"
-       id="dropdownMenuLink"
-       data-bs-toggle="dropdown"
-       aria-expanded="false">
-      Добавить заголовок
-    </a>
-    <ul class="dropdown-menu"
-        aria-labelledby="dropdownMenuLink">
-      <li><a class="dropdown-item">Органические отходы</a></li>
-      <li><a class="dropdown-item">Полимеры</a></li>
-      <li><a class="dropdown-item">Дерево</a></li>
-      <li><a class="dropdown-item">Макулатура</a></li>
-      <li><a class="dropdown-item">Текстиль</a></li>
-      <li><a class="dropdown-item">Металлы</a></li>
-      <li><a class="dropdown-item">Стекло</a></li>
-      <li><a class="dropdown-item">Опасные материалы</a></li>
-      <li><a class="dropdown-item">Инертные материалы</a></li>
-      <li><a class="dropdown-item">Отсев</a></li>
-      <li><a class="dropdown-item">Прочие материалы</a></li>
-      <li><a class="dropdown-item">Комбинированные материалы</a></li>
-      <li><a class="dropdown-item">Пустой заголовок</a></li>
+  <div class="container-button__control">
+    <button class="btn-control btn-control__arrow btn-ready"
+            type="button">Готовые таблицы</button>
+    <ul class="btn-control__menu ready show">
+      <li><a href="#" class="ready-table"
+           data-value="40">Полный компонетный состав (40 компонентов)</a></li>
+      <li><a href="#" class="ready-table"
+           data-value="13">Упрощенный компонетный состав (13 компонентов)</a></li>
     </ul>
   </div>
-  <button id="btn-row"
-          type="button"
-          value="Добавить строку">Добавить строку
-  </button>
+  <div>
+    <button class="btn-control payment"
+            type="button">Расчет</button>
+  </div>
+  <div class="container-button__control">
+    <button class="btn-control btn-control__arrow btn-list"
+            type="button">Добавить заголовок</button>
+    <ul class="btn-control__menu list show">
+      <li><a class="btn-control__menu-item">Органические отходы</a></li>
+      <li><a class="btn-control__menu-item">Полимеры</a></li>
+      <li><a class="btn-control__menu-item">Дерево</a></li>
+      <li><a class="btn-control__menu-item">Макулатура</a></li>
+      <li><a class="btn-control__menu-item">Текстиль</a></li>
+      <li><a class="btn-control__menu-item">Металлы</a></li>
+      <li><a class="btn-control__menu-item">Стекло</a></li>
+      <li><a class="btn-control__menu-item">Опасные материалы</a></li>
+      <li><a class="btn-control__menu-item">Инертные материалы</a></li>
+      <li><a class="btn-control__menu-item">Отсев</a></li>
+      <li><a class="btn-control__menu-item">Прочие материалы</a></li>
+      <li><a class="btn-control__menu-item">Комбинированные материалы</a></li>
+      <li><a class="btn-control__menu-item">Пустой заголовок</a></li>
+    </ul>
+  </div>
+  <div>
+    <button class="btn-control btn-rows__plus"
+            type="button">Добавить строку</button>
+  </div>
 </div>

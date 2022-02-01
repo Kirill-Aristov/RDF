@@ -4,7 +4,7 @@ function charts(bd, fullMassa) {
     elementName = [];
   bd.forEach(element => {
     elementMassa.push(element.massa);
-    elementName.push(element.name)
+    elementName.push(element.nameСolumn)
   });
   let colorBack = []
   for (let i = 0; i < elementName.length; i++) {
@@ -22,21 +22,34 @@ function charts(bd, fullMassa) {
       }]
     },
     options: {
-      responsive: true
+      maintainAspectRatio: false,
+      responsive: false,
+      plugins: {
+        legend: {
+          display: true,
+          labels: {
+            color: "#000",
+            font: {
+              family: "Arial",
+              size: 14,
+            }
+          }
+        }
+      }
     }
   });
-}
-function randColor() {
-  /*СОЗДАЕМ ПЕРЕМЕННЫЕ
-  elem - элемент которому будем менять задний фон
-  code_color - получаем элемент в который будет выводить код цвета
-  r,g,b - отвечают за кодировку и вместе выводят цвет
-  color - в нее записываем полную строку значения цвета
-  */
-  let r = Math.floor(Math.random() * (256)),
-    g = Math.floor(Math.random() * (256)),
-    b = Math.floor(Math.random() * (256)),
-    color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+  function randColor() {
+    /*СОЗДАЕМ ПЕРЕМЕННЫЕ
+    elem - элемент которому будем менять задний фон
+    code_color - получаем элемент в который будет выводить код цвета
+    r,g,b - отвечают за кодировку и вместе выводят цвет
+    color - в нее записываем полную строку значения цвета
+    */
+    let r = Math.floor(Math.random() * (256)),
+      g = Math.floor(Math.random() * (256)),
+      b = Math.floor(Math.random() * (256)),
+      color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
 
-  return color
+    return color
+  }
 }

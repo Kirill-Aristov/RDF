@@ -1,0 +1,85 @@
+.burger {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  display: block;
+  span {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    background-color: $colorWhile;
+    width: 30px;
+    height: 4px;
+    border-radius: $borderRadius;
+    transition: all 0.5s;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 0;
+    background-color: $colorWhile;
+    width: 30px;
+    height: 4px;
+    border-radius: $borderRadius;
+    transition: all 0.5s;
+    transform: rotate(0deg);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    right: 0;
+    background-color: $colorWhile;
+    width: 30px;
+    height: 4px;
+    border-radius: $borderRadius;
+    transition: all 0.5s;
+    transform: rotate(0deg);
+  }
+  &-menu {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 30px;
+    &__links {
+    }
+    &__link {
+      padding: 5px 0;
+      a {
+        color: $colorTextWhile;
+        font-family: $fontFamali;
+        font-size: $fontSizeNormal;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          transition: 0.5s all;
+          background-color: $colorWhile;
+        }
+        &:hover::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.burger.active {
+  span {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  &::after {
+    transform: rotate(135deg);
+    top: 15px;
+  }
+  &::before {
+    transform: rotate(-135deg);
+    top: 15px;
+  }
+}

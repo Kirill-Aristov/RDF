@@ -1,22 +1,40 @@
+// localStorage
+@@include("./localstorage/localStorage.js");
+@@include("./localstorage/settigsStorage/settigsStorage.js");
+//
+
 @@include("./Const/const.js");
+//проверка мобильних устройсв
 @@include("./checkWidth.js");
-@@include("./table/create/createRows.js");
-@@include("./table/create/createPlusRows/createRowsAdditional.js");
-@@include("./table/create/createHeader.js");
+//
+//создание строк в таблицы
+@@include("./table/create/CreateTable.js");
+//
+//нумерация строк
 @@include("./table/numberRows.js");
-@@include("./table/removeRows/removeRows.js");
-@@include("./table/removeRows/removeHeaderRows.js");
-@@include("./table/disableSelect/HeadrSelect.js");
+//
+//удаление строк в таблице
+@@include("./table/removeRows/RemoveTable.js");
+//
+//отключение заголовков
+@@include("./table/disableSelect/disableSelect.js");
+//
+//Расчеты
 @@include("./calculator/collectDataFromTable.js");
 @@include("./calculator/calculator.js");
 @@include("./calculator/charts.js");
-@@include("./error/windowErorr.js");
-@@include("./error/errorChecking.js");
-@@include("./error/removeErorr.js");
-@@include("./error/windowErorr.js");
-@@include("./error/massaErorr.js");
-@@include("./autoFill/AutoComplitedBD.js");
-@@include("./autoFill/autoComplitedCell.js");
-@@include("./autoFill/checkBox/checkerAutoComplit.js");
-@@include("./readyTable.js");
+//
+//Проверка ошибок
+@@include("./error/windowError.js");
+@@include("./error/massaCheck/massaChecking.js");
+//
+//
+@@include("./autoFilling/AutoComplitedBD.js");
+// @@include("./readyTable/readyTable.js");
 
+
+//компонеты кнопок и дополнений
+@@include("./components/burger.js");
+@@include("./components/checkbox.js");
+@@include("./components/dropMenu.js");
+//
