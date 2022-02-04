@@ -53,8 +53,8 @@ class SettigsStorage {
         <input class="settings-window__input" type="number" value="${settigsData.heat}">
     </div>
     <div class="settings-block">
-      <button class="settings-block__btn back" type="button">Назад</button>
-      <button class="settings-block__btn save" type="button">Сохранить</button>
+      <button type="button" class="settings-block__btn back" type="button">Назад</button>
+      <button type="button" class="settings-block__btn save" type="button">Сохранить</button>
     </div>`
     document.querySelector(".back").addEventListener("click", () => {
       errorMassa.lessMassa(massa)
@@ -116,7 +116,7 @@ class CreateTable {
       <td>
         <input type="button" class="clearBtn clearBtn-Header">
       </td>
-      <td colspan="6">
+      <td colspan="5">
         <input class="headingTable" value="${item == "Пустой заголовок" ? "Введите название" : item}">
       </td>
       <td>
@@ -486,13 +486,13 @@ class ErrorMassa extends SettigsStorage {
       </p>
     </div>
     <div>
-      <button class="error-settings__btn">Настроить автозаполнение
+      <button type="button" class="error-settings__btn">Настроить автозаполнение
       </button>
     </div>
     <div>
       <div class="error-container__btn">
-      <button class="window-error__btn" value="нет">Нет</button>
-      <button class="window-error__btn" value="да">Да</button>
+      <button type="button" class="window-error__btn" value="нет">Нет</button>
+      <button type="button" class="window-error__btn" value="да">Да</button>
     </div>
     `
     document.body.appendChild(this.div)

@@ -3,7 +3,7 @@
   width: 100%;
   display: block;
   align-items: center;
-  padding: 50px 50px 0;
+  padding: 65px 50px 0;
 }
 .checkbox {
   display: inline-flex;
@@ -55,9 +55,6 @@
   transform: translateX(26px);
 }
 @media (max-width: 825px) {
-  .help-container {
-    padding: 0 30px;
-  }
   .checkbox-box {
     position: relative;
     display: inline-block;

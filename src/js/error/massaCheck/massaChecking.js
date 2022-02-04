@@ -34,13 +34,13 @@ class ErrorMassa extends SettigsStorage {
       </p>
     </div>
     <div>
-      <button class="error-settings__btn">Настроить автозаполнение
+      <button type="button" class="error-settings__btn">Настроить автозаполнение
       </button>
     </div>
     <div>
       <div class="error-container__btn">
-      <button class="window-error__btn" value="нет">Нет</button>
-      <button class="window-error__btn" value="да">Да</button>
+      <button type="button" class="window-error__btn" value="нет">Нет</button>
+      <button type="button" class="window-error__btn" value="да">Да</button>
     </div>
     `
     document.body.appendChild(this.div)

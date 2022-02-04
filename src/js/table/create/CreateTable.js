@@ -26,7 +26,7 @@ class CreateTable {
       <td>
         <input type="button" class="clearBtn clearBtn-Header">
       </td>
-      <td colspan="6">
+      <td colspan="5">
         <input class="headingTable" value="${item == "Пустой заголовок" ? "Введите название" : item}">
       </td>
       <td>

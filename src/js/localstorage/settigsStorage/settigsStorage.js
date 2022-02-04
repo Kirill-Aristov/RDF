@@ -37,8 +37,8 @@ class SettigsStorage {
         <input class="settings-window__input" type="number" value="${settigsData.heat}">
     </div>
     <div class="settings-block">
-      <button class="settings-block__btn back" type="button">Назад</button>
-      <button class="settings-block__btn save" type="button">Сохранить</button>
+      <button type="button" class="settings-block__btn back" type="button">Назад</button>
+      <button type="button" class="settings-block__btn save" type="button">Сохранить</button>
     </div>`
     document.querySelector(".back").addEventListener("click", () => {
       errorMassa.lessMassa(massa)

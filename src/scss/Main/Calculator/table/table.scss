@@ -52,7 +52,6 @@ th {
   border-top-right-radius: 10px;
 }
 td:nth-child(1) {
-  width: 20px;
   background-color: transparent;
   border: none;
 }
@@ -64,8 +63,6 @@ th:nth-child(even) {
 }
 th:nth-child(odd) {
   background-color: $tableHeaderColor;
-  border-right: 1px solid #fff;
-  border-left: 1px solid #fff;
 }
 
 .input__name {
@@ -77,6 +74,7 @@ th:nth-child(odd) {
 }
 
 .number_id {
+  display: inline-block;
   font-size: $fontSizeNormal;
   font-weight: 700;
   color: $colorWhile;
@@ -103,22 +101,24 @@ th:nth-child(odd) {
   width: 65px;
 }
 
-@media (max-width: 825px) {
+@media (max-width: 710px) {
   td {
-    border: 4px solid #1266C9;
+    border: 2px solid #1266c9;
+    border-top: 4px solid #1266c9;
+    border-bottom: 4px solid #1266c9;
   }
   td input {
-    font-size: $fontSizeMini;
-    width: 70px;
+    font-size: calc($fontSizeMini - 2px);
+    width: 65px;
   }
   th {
-    font-size: $fontSizeMini;
+    font-size: calc($fontSizeMini - 2px);
   }
   .rows-btn__plus {
     font-size: 10px;
     width: 40px;
   }
   .input__name {
-    width: 150px;
+    width: 130px;
   }
 }
