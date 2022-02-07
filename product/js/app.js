@@ -502,7 +502,7 @@ class ErrorMassa extends SettigsStorage {
     const divError = document.createElement("div")
     divError.classList.add("error")
     divError.classList.add("error-massa")
-    divError.textContent = `содержание не должно превышать 100% \n ваше содержание = ${massa}`
+    divError.textContent = `содержание не должно превышать 100% \n ваше содержание = ${massa} %`
     table.appendChild(divError)
     let opacityNum = 1
     setTimeout(sitInterval, 2500, opacityNum)
@@ -520,7 +520,7 @@ class ButtonControl extends ErrorMassa {
           div.remove();
         } else {
           createTable.createRowsTable(localStorageUtils.getStorage("optionalAutocomplete"), 0);
-          document.querySelector(".content").value = (100 * 100 - (massa * 100)) / 100;
+          document.querySelector(".content").value = (100*1000 - (massa * 1000)) / 1000;
           numberRows();
           div.remove();
         }
@@ -1006,12 +1006,15 @@ burger.addEventListener("click", () => {
     }
   })
 ;
+let textCheckBox = document.querySelector(".checkbox-box__text");
 const checkBox = document.querySelector(".checkbox-box__slider");
 checkBox.addEventListener("click", () => {
   if (!checkBox.classList.contains("check-active")) {
     checkBox.classList.add("check-active");
+    textCheckBox.textContent = "Автозаполнение справочными данными включено"
   } else {
     checkBox.classList.remove("check-active");
+    textCheckBox.textContent = "Автозаполнение справочными данными выключено"
   };
 });
 ;

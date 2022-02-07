@@ -25,6 +25,7 @@ body::-webkit-scrollbar-thumb {
 .main {
   padding-top: 30px;
   &-container {
+    min-height: 100%;
     padding-bottom: 50px;
   }
 }
