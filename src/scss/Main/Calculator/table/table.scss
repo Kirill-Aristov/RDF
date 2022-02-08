@@ -105,7 +105,9 @@ th:nth-child(odd) {
   font-family: $fontFamali;
   font-weight: 400;
 }
-
+.rows-active {
+  position: relative;
+}
 @media (max-width: 710px) {
   td {
     border: 2px solid #1266c9;

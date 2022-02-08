@@ -31,8 +31,9 @@
 //
 @@include("./autoFilling/AutoComplitedBD.js");
 // @@include("./readyTable/readyTable.js");
-
-
+//общие компоненты
+@@include("./common/SetInterval.js");
+//
 //компонеты кнопок и дополнений
 @@include("./components/burger.js");
 @@include("./components/checkbox.js");

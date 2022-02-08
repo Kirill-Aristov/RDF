@@ -958,6 +958,10 @@ th:nth-child(odd) {
   font-weight: 400;
 }
 
+.rows-active {
+  position: relative;
+}
+
 @media (max-width: 710px) {
   td {
     border: 2px solid #1266c9;
@@ -985,7 +989,7 @@ th:nth-child(odd) {
 .error {
   display: block;
   position: absolute;
-  top: 0;
+  top: -105%;
   left: 0;
   z-index: 10;
   width: 215px;
@@ -1006,7 +1010,7 @@ th:nth-child(odd) {
   opacity: 1;
 }
 .error-massa {
-  top: -1.15%;
+  top: -1.5%;
   left: 50%;
 }
 
@@ -1133,7 +1137,6 @@ h2 {
 
 @media (max-width: 710px) {
   .error-massa {
-    top: -1.25%;
     left: 45%;
   }
 }
@@ -1180,6 +1183,15 @@ body::-webkit-scrollbar-thumb {
   font-size: 20px;
   font-family: Arial;
   margin: 5px 10px;
+}
+
+.chart {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @media (max-width: 825px) {

@@ -1,4 +1,5 @@
 
+
 class SheckMassa {
   constructor(database) {
     this.database = database;
@@ -53,7 +54,7 @@ class ErrorMassa extends SettigsStorage {
     divError.textContent = `содержание не должно превышать 100% \n ваше содержание = ${massa} %`
     table.appendChild(divError)
     let opacityNum = 1
-    setTimeout(sitInterval, 2500, opacityNum)
+     setTimeout(SetInterval, 2500, opacityNum)
   }
 }
 const errorMassa = new ErrorMassa();

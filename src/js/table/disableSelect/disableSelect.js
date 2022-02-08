@@ -1,5 +1,4 @@
 class DisableSelect {
-
   disable(item) {
     document.querySelectorAll(".btn-control__menu-item").forEach(element => {
       if (element.textContent == "Пустой заголовок") {

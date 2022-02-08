@@ -1,21 +1,28 @@
 function charts(bd, fullMassa) {
   const ctx = document.getElementById('myChart').getContext('2d');
-  let elementMassa = [],
-    elementName = [];
+  let sortElement = [],
+    nameElement = [],
+    massaElement = [];
   bd.forEach(element => {
-    elementMassa.push(element.massa);
-    elementName.push(element.nameСolumn)
+    sortElement.push([element.massa, element.nameСolumn]);
+  });
+  sortElement.sort((a, b) => {
+    return b[0] - a[0];
+  });
+  sortElement.forEach(item => {
+    massaElement.push(item[0]);
+    nameElement.push(item[1]);
   });
   let colorBack = []
-  for (let i = 0; i < elementName.length; i++) {
+  for (let i = 0; i < nameElement.length; i++) {
     colorBack.push(randColor());
   }
   const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: elementName,
+      labels: nameElement,
       datasets: [{
-        data: elementMassa,
+        data: massaElement,
         backgroundColor: colorBack,
         borderColor: colorBack,
         borderWidth: 1
@@ -39,12 +46,6 @@ function charts(bd, fullMassa) {
     }
   });
   function randColor() {
-    /*СОЗДАЕМ ПЕРЕМЕННЫЕ
-    elem - элемент которому будем менять задний фон
-    code_color - получаем элемент в который будет выводить код цвета
-    r,g,b - отвечают за кодировку и вместе выводят цвет
-    color - в нее записываем полную строку значения цвета
-    */
     let r = Math.floor(Math.random() * (256)),
       g = Math.floor(Math.random() * (256)),
       b = Math.floor(Math.random() * (256)),

@@ -36,7 +36,10 @@ body::-webkit-scrollbar-thumb {
   font-family: $fontFamali;
   margin: 5px 10px;
 }
-
+.chart {
+  display: flex;
+  justify-content: center;
+}
 @media (max-width: 825px) {
   .container-calculations {
     justify-content: center;

@@ -242,7 +242,6 @@ function maxFromTheOrigin(arrayIdRows, getIdIndex) {
 //
 //отключение заголовков
 class DisableSelect {
-
   disable(item) {
     document.querySelectorAll(".btn-control__menu-item").forEach(element => {
       if (element.textContent == "Пустой заголовок") {
@@ -331,7 +330,7 @@ function calck(bd) {
   const main = document.querySelector(".main");
   main.innerHTML = `
   <div class="chart"> 
-   <canvas id="myChart" style="padding: 10px;" width="${width / 1.05} " height="${height / 1.35}"></canvas>
+   <canvas id="myChart" style="padding: 10px;" width="${width / 1.35} " height="${height}"></canvas>
    </div >
   <div class="container-calculations">
     <div>
@@ -350,22 +349,29 @@ function calck(bd) {
 };;
 function charts(bd, fullMassa) {
   const ctx = document.getElementById('myChart').getContext('2d');
-  let elementMassa = [],
-    elementName = [];
+  let sortElement = [],
+    nameElement = [],
+    massaElement = [];
   bd.forEach(element => {
-    elementMassa.push(element.massa);
-    elementName.push(element.nameСolumn)
+    sortElement.push([element.massa, element.nameСolumn]);
+  });
+  sortElement.sort((a, b) => {
+    return b[0] - a[0];
+  });
+  sortElement.forEach(item => {
+    massaElement.push(item[0]);
+    nameElement.push(item[1]);
   });
   let colorBack = []
-  for (let i = 0; i < elementName.length; i++) {
+  for (let i = 0; i < nameElement.length; i++) {
     colorBack.push(randColor());
   }
   const myChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
-      labels: elementName,
+      labels: nameElement,
       datasets: [{
-        data: elementMassa,
+        data: massaElement,
         backgroundColor: colorBack,
         borderColor: colorBack,
         borderWidth: 1
@@ -389,12 +395,6 @@ function charts(bd, fullMassa) {
     }
   });
   function randColor() {
-    /*СОЗДАЕМ ПЕРЕМЕННЫЕ
-    elem - элемент которому будем менять задний фон
-    code_color - получаем элемент в который будет выводить код цвета
-    r,g,b - отвечают за кодировку и вместе выводят цвет
-    color - в нее записываем полную строку значения цвета
-    */
     let r = Math.floor(Math.random() * (256)),
       g = Math.floor(Math.random() * (256)),
       b = Math.floor(Math.random() * (256)),
@@ -405,7 +405,8 @@ function charts(bd, fullMassa) {
 };
 //
 //Проверка ошибок
-bodyTable.addEventListener("change", (element) => {
+
+bodyTable.addEventListener("input", (element) => {
   if (element.target.closest(".humidity")) {//проверка на превышения содержания ВЛАЖНОСТИ
     let textHumidity = "Влажность компонента не должна превышать 100%";
     windowError.windowErrorPosition(element.target, textHumidity);
@@ -424,32 +425,21 @@ class WindowError {
   }
   windowErrorPosition(element, text) {
     if (element.value > 100) {
-      this.position = element.getBoundingClientRect();
-      console.log(this.position)
+      this.position = element.parentNode.offsetLeft;
+      let rowsPosition = element.parentNode.parentNode.closest(".rows-active")
       const div = document.createElement("div");
       div.classList.add("error");
-      //высота от верха страницы - высота блока ошибки
-      div.style.top = Math.round(this.position.top - this.position.height - 10) + "px";
-      //растояние от левого края + длина исходного блока
-      div.style.left = Math.round(this.position.left + this.position.width) + "px";
+      //растояние от левого блока + длина блока
+      div.style.left = this.position + 70 + "px";
       div.textContent = text;
-      document.body.appendChild(div)
+      rowsPosition.appendChild(div)
       let opacityNum = 1
-      setTimeout(sitInterval, 2500, opacityNum)
+      setTimeout(SetInterval, 2500, opacityNum)
     }
   }
 }
-const windowError = new WindowError
+const windowError = new WindowError;
 
-function sitInterval(opacityNum) {
-  const div = document.querySelector(".error")
-  if (opacityNum > 0) {
-    div.style.opacity = opacityNum
-    setTimeout(sitInterval, 50, opacityNum - 0.1)
-  } else {
-    div.remove()
-  }
-};
 
 class SheckMassa {
   constructor(database) {
@@ -505,7 +495,7 @@ class ErrorMassa extends SettigsStorage {
     divError.textContent = `содержание не должно превышать 100% \n ваше содержание = ${massa} %`
     table.appendChild(divError)
     let opacityNum = 1
-    setTimeout(sitInterval, 2500, opacityNum)
+     setTimeout(SetInterval, 2500, opacityNum)
   }
 }
 const errorMassa = new ErrorMassa();
@@ -985,8 +975,17 @@ class ReadyTable {
   }
 }
 const readyTable = new ReadyTable();;
-
-
+//общие компоненты
+ function SetInterval(opacityNum) {
+  const div = document.querySelector(".error")
+  if (opacityNum > 0) {
+    div.style.opacity = opacityNum
+    setTimeout(SetInterval, 50, opacityNum - 0.1)
+  } else {
+    div.remove()
+  }
+};
+//
 //компонеты кнопок и дополнений
 const header = document.querySelector(".nav")
 const burger = document.querySelector(".burger")
